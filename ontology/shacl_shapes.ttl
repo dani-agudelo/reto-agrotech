@@ -1,7 +1,8 @@
 # Formas SHACL para el inventario de biocontrol.
 # Validan la caja de instancias (data/instancias.ttl), no las reglas SWRL.
-# El estado "propuesto" de ClayOMICS y MAGNETIME es válido: la forma exige
-# el enlace y el estado, y no exige que el resultado sea un dato medido.
+# La humedad es opcional: un ensayo puede reportarla sin convertirla en umbral.
+# tieneCondicion también es opcional cuando la fuente no trae ventana de uso.
+# El estado del enlace puede ser documentado, contexto, propuesto o publicado.
 
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix bio: <http://agrotech.ucaldas.edu.co/ontologias/biocontrol#> .
@@ -23,7 +24,6 @@ bio:RelacionShape a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path bio:tieneCondicion ;
-        sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:class bio:CondicionUso ;
     ] ;
@@ -67,13 +67,11 @@ bio:CondicionShape a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path bio:humedadMin ;
-        sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:datatype xsd:decimal ;
     ] ;
     sh:property [
         sh:path bio:humedadMax ;
-        sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:datatype xsd:decimal ;
     ] .
@@ -100,5 +98,28 @@ bio:EnlaceExternoShape a sh:NodeShape ;
     sh:property [
         sh:path bio:estadoEnlace ;
         sh:minCount 1 ;
-        sh:in ( "propuesto"^^xsd:string "publicado"^^xsd:string ) ;
+        sh:in (
+            "documentado"^^xsd:string
+            "contexto"^^xsd:string
+            "propuesto"^^xsd:string
+            "publicado"^^xsd:string
+        ) ;
+    ] .
+
+bio:ExperimentoEnlaceShape a sh:NodeShape ;
+    sh:targetClass bio:Experimento ;
+    sh:property [
+        sh:path bio:articuladoCon ;
+        sh:minCount 1 ;
+        sh:class bio:PlataformaExterna ;
+    ] ;
+    sh:property [
+        sh:path bio:estadoEnlace ;
+        sh:minCount 1 ;
+        sh:in (
+            "documentado"^^xsd:string
+            "contexto"^^xsd:string
+            "propuesto"^^xsd:string
+            "publicado"^^xsd:string
+        ) ;
     ] .

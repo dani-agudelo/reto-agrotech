@@ -11,6 +11,57 @@
   <rdfs:comment xml:lang="es">Ontología de biocontrol de plagas de cítricos. Prototipo académico AgroTech, Universidad de Caldas. No es una prescripción agronómica.</rdfs:comment>
 </owl:Ontology>
 
+<owl:ObjectProperty rdf:about="#tieneRestriccion">
+  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
+  <rdfs:range rdf:resource="#Restriccion"/>
+  <rdfs:label xml:lang="es">tieneRestriccion</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#involucraAgente">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
+  <rdfs:range rdf:resource="#AgenteBiocontrol"/>
+  <rdfs:label xml:lang="es">involucraAgente</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#involucraPlaga">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
+  <rdfs:range rdf:resource="#Plaga"/>
+  <rdfs:label xml:lang="es">involucraPlaga</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#respaldadoPor">
+  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
+  <rdfs:range rdf:resource="#FuenteEvidencia"/>
+  <rdfs:label xml:lang="es">respaldadoPor</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#esControladaPor">
+  <rdfs:domain rdf:resource="#Plaga"/>
+  <rdfs:range rdf:resource="#AgenteBiocontrol"/>
+  <rdfs:label xml:lang="es">esControladaPor</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#articuladoCon">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="#PlataformaExterna"/>
+  <rdfs:label xml:lang="es">articuladoCon</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#documentadoEn">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="#FuenteEvidencia"/>
+  <rdfs:label xml:lang="es">documentadoEn</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#tieneCondicion">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
+  <rdfs:range rdf:resource="#CondicionUso"/>
+  <rdfs:label xml:lang="es">tieneCondicion</rdfs:label>
+</owl:ObjectProperty>
+
 <owl:ObjectProperty rdf:about="#afectaA">
   <rdfs:domain rdf:resource="#Plaga"/>
   <rdfs:range rdf:resource="#Cultivo"/>
@@ -23,44 +74,11 @@
   <rdfs:label xml:lang="es">contextualizadoPor</rdfs:label>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#esControladaPor">
-  <rdfs:domain rdf:resource="#Plaga"/>
-  <rdfs:range rdf:resource="#AgenteBiocontrol"/>
-  <rdfs:label xml:lang="es">esControladaPor</rdfs:label>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="#involucraPlaga">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
-  <rdfs:range rdf:resource="#Plaga"/>
-  <rdfs:label xml:lang="es">involucraPlaga</rdfs:label>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="#involucraAgente">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
-  <rdfs:range rdf:resource="#AgenteBiocontrol"/>
-  <rdfs:label xml:lang="es">involucraAgente</rdfs:label>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="#tieneCondicion">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
-  <rdfs:range rdf:resource="#CondicionUso"/>
-  <rdfs:label xml:lang="es">tieneCondicion</rdfs:label>
-</owl:ObjectProperty>
-
 <owl:ObjectProperty rdf:about="#fuentePrincipal">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
   <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
   <rdfs:range rdf:resource="#FuenteEvidencia"/>
   <rdfs:label xml:lang="es">fuentePrincipal</rdfs:label>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="#respaldadoPor">
-  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
-  <rdfs:range rdf:resource="#FuenteEvidencia"/>
-  <rdfs:label xml:lang="es">respaldadoPor</rdfs:label>
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#justificadoPor">
@@ -69,39 +87,27 @@
   <rdfs:label xml:lang="es">justificadoPor</rdfs:label>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#tieneRestriccion">
-  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
-  <rdfs:range rdf:resource="#Restriccion"/>
-  <rdfs:label xml:lang="es">tieneRestriccion</rdfs:label>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="#potencialmenteRecomendadoPara">
-  <rdfs:domain rdf:resource="#AgenteBiocontrol"/>
-  <rdfs:range rdf:resource="#Plaga"/>
-  <rdfs:label xml:lang="es">potencialmenteRecomendadoPara</rdfs:label>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="#articuladoCon">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:range rdf:resource="#PlataformaExterna"/>
-  <rdfs:label xml:lang="es">articuladoCon</rdfs:label>
-</owl:ObjectProperty>
-
 <owl:ObjectProperty rdf:about="#verificadoPor">
   <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
   <rdfs:range rdf:resource="#AnalisisQuimico"/>
   <rdfs:label xml:lang="es">verificadoPor</rdfs:label>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#tieneExperimento">
-  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
-  <rdfs:range rdf:resource="#Experimento"/>
-  <rdfs:label xml:lang="es">tieneExperimento</rdfs:label>
+<owl:ObjectProperty rdf:about="#altamenteRecomendadoPara">
+  <rdfs:domain rdf:resource="#AgenteBiocontrol"/>
+  <rdfs:range rdf:resource="#Plaga"/>
+  <rdfs:label xml:lang="es">altamenteRecomendadoPara</rdfs:label>
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#trazadoPor">
   <rdfs:range rdf:resource="#FuenteEvidencia"/>
   <rdfs:label xml:lang="es">trazadoPor</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#tieneLagunaEn">
+  <rdfs:domain rdf:resource="#Plaga"/>
+  <rdfs:range rdf:resource="#Cultivo"/>
+  <rdfs:label xml:lang="es">tieneLagunaEn</rdfs:label>
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#consultaPlaga">
@@ -111,45 +117,32 @@
   <rdfs:label xml:lang="es">consultaPlaga</rdfs:label>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#altamenteRecomendadoPara">
+<owl:ObjectProperty rdf:about="#potencialmenteRecomendadoPara">
   <rdfs:domain rdf:resource="#AgenteBiocontrol"/>
   <rdfs:range rdf:resource="#Plaga"/>
-  <rdfs:label xml:lang="es">altamenteRecomendadoPara</rdfs:label>
+  <rdfs:label xml:lang="es">potencialmenteRecomendadoPara</rdfs:label>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#tieneLagunaEn">
-  <rdfs:domain rdf:resource="#Plaga"/>
-  <rdfs:range rdf:resource="#Cultivo"/>
-  <rdfs:label xml:lang="es">tieneLagunaEn</rdfs:label>
+<owl:ObjectProperty rdf:about="#tieneExperimento">
+  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
+  <rdfs:range rdf:resource="#Experimento"/>
+  <rdfs:label xml:lang="es">tieneExperimento</rdfs:label>
 </owl:ObjectProperty>
 
-<owl:DatatypeProperty rdf:about="#humedadMax">
+<owl:DatatypeProperty rdf:about="#variableRespuesta">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:label xml:lang="es">humedadMax</rdfs:label>
+  <rdfs:label xml:lang="es">variableRespuesta</rdfs:label>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#tipoAgente">
+<owl:DatatypeProperty rdf:about="#estadoVentanaHumedad">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:label xml:lang="es">tipoAgente</rdfs:label>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  <rdfs:label xml:lang="es">estadoVentanaHumedad</rdfs:label>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#rangoMin">
+<owl:DatatypeProperty rdf:about="#iniciativa">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:label xml:lang="es">rangoMin</rdfs:label>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#humedadMin">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:label xml:lang="es">humedadMin</rdfs:label>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#humedadActual">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:label xml:lang="es">humedadActual</rdfs:label>
+  <rdfs:label xml:lang="es">iniciativa</rdfs:label>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#tipoPlataforma">
@@ -157,56 +150,14 @@
   <rdfs:label xml:lang="es">tipoPlataforma</rdfs:label>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#tipoFuente">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:label xml:lang="es">tipoFuente</rdfs:label>
-</owl:DatatypeProperty>
-
 <owl:DatatypeProperty rdf:about="#rangoValido">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
   <rdfs:label xml:lang="es">rangoValido</rdfs:label>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#tieneNivelEvidencia">
+<owl:DatatypeProperty rdf:about="#condicionExperimental">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  <rdfs:label xml:lang="es">tieneNivelEvidencia</rdfs:label>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#rolFuente">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:label xml:lang="es">rolFuente</rdfs:label>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#nombreComun">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:label xml:lang="es">nombreComun</rdfs:label>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#variableRespuesta">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:label xml:lang="es">variableRespuesta</rdfs:label>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#autores">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:label xml:lang="es">autores</rdfs:label>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#temperaturaActual">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:label xml:lang="es">temperaturaActual</rdfs:label>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#citaCorta">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:label xml:lang="es">citaCorta</rdfs:label>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#titulo">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:label xml:lang="es">titulo</rdfs:label>
+  <rdfs:label xml:lang="es">condicionExperimental</rdfs:label>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#anio">
@@ -215,21 +166,15 @@
   <rdfs:label xml:lang="es">anio</rdfs:label>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#temperaturaMin">
+<owl:DatatypeProperty rdf:about="#nombreCientifico">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:label xml:lang="es">temperaturaMin</rdfs:label>
+  <rdfs:label xml:lang="es">nombreCientifico</rdfs:label>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#resultado">
+<owl:DatatypeProperty rdf:about="#nivelConfiabilidad">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:label xml:lang="es">resultado</rdfs:label>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#rangoMax">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:label xml:lang="es">rangoMax</rdfs:label>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  <rdfs:label xml:lang="es">nivelConfiabilidad</rdfs:label>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#descripcion">
@@ -237,10 +182,10 @@
   <rdfs:label xml:lang="es">descripcion</rdfs:label>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#temperaturaMax">
+<owl:DatatypeProperty rdf:about="#temperaturaMin">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-  <rdfs:label xml:lang="es">temperaturaMax</rdfs:label>
+  <rdfs:label xml:lang="es">temperaturaMin</rdfs:label>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#notas">
@@ -248,14 +193,46 @@
   <rdfs:label xml:lang="es">notas</rdfs:label>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#descripcionCondicion">
+<owl:DatatypeProperty rdf:about="#informacionExtraida">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:label xml:lang="es">descripcionCondicion</rdfs:label>
+  <rdfs:label xml:lang="es">informacionExtraida</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#humedadMax">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:label xml:lang="es">humedadMax</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#citaCorta">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">citaCorta</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#nombreComun">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">nombreComun</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#rangoMin">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:label xml:lang="es">rangoMin</rdfs:label>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#url">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
   <rdfs:label xml:lang="es">url</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#fechaConsulta">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">fechaConsulta</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#autores">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">autores</rdfs:label>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#estadoEnlace">
@@ -264,23 +241,15 @@
   <rdfs:label xml:lang="es">estadoEnlace</rdfs:label>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#nombreCientifico">
+<owl:DatatypeProperty rdf:about="#naturaleza">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:label xml:lang="es">nombreCientifico</rdfs:label>
+  <rdfs:label xml:lang="es">naturaleza</rdfs:label>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#condicionExperimental">
+<owl:DatatypeProperty rdf:about="#rangoMax">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:label xml:lang="es">condicionExperimental</rdfs:label>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#doi">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-  <rdfs:label xml:lang="es">doi</rdfs:label>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#declaraPractica">
-  <rdfs:label xml:lang="es">declaraPractica</rdfs:label>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:label xml:lang="es">rangoMax</rdfs:label>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#etiqueta">
@@ -288,9 +257,61 @@
   <rdfs:label xml:lang="es">etiqueta</rdfs:label>
 </owl:DatatypeProperty>
 
+<owl:DatatypeProperty rdf:about="#temperaturaMax">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:label xml:lang="es">temperaturaMax</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#humedadActual">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:label xml:lang="es">humedadActual</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#descripcionCondicion">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">descripcionCondicion</rdfs:label>
+</owl:DatatypeProperty>
+
 <owl:DatatypeProperty rdf:about="#codigoPractica">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
   <rdfs:label xml:lang="es">codigoPractica</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#acceso">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">acceso</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tipoFuente">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">tipoFuente</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#resultado">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">resultado</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneNivelEvidencia">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  <rdfs:label xml:lang="es">tieneNivelEvidencia</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#declaraPractica">
+  <rdfs:label xml:lang="es">declaraPractica</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#titulo">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">titulo</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#alcance">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">alcance</rdfs:label>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#criterioNivel">
@@ -298,29 +319,31 @@
   <rdfs:label xml:lang="es">criterioNivel</rdfs:label>
 </owl:DatatypeProperty>
 
-<owl:Class rdf:about="#FuenteEvidencia">
-  <rdfs:label xml:lang="es">FuenteEvidencia</rdfs:label>
-  <rdfs:comment xml:lang="es">Publicación, tesis o nota que respalda o contextualiza un hecho.</rdfs:comment>
-</owl:Class>
+<owl:DatatypeProperty rdf:about="#humedadMin">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:label xml:lang="es">humedadMin</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#temperaturaActual">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:label xml:lang="es">temperaturaActual</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tipoAgente">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">tipoAgente</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#doi">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">doi</rdfs:label>
+</owl:DatatypeProperty>
 
 <owl:Class rdf:about="#RelacionBiocontrol">
   <rdfs:label xml:lang="es">RelacionBiocontrol</rdfs:label>
   <rdfs:comment xml:lang="es">Relación reificada entre plaga, agente, condición, evidencia y restricciones.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#Plaga">
-  <rdfs:label xml:lang="es">Plaga</rdfs:label>
-  <rdfs:comment xml:lang="es">Organismo que afecta al menos un cultivo del inventario.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#AgenteBiocontrol">
-  <rdfs:label xml:lang="es">AgenteBiocontrol</rdfs:label>
-  <rdfs:comment xml:lang="es">Enemigo natural o microorganismo de control documentado.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#CondicionUso">
-  <rdfs:label xml:lang="es">CondicionUso</rdfs:label>
-  <rdfs:comment xml:lang="es">Ventana operativa de temperatura y humedad de una relación.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Restriccion">
@@ -328,19 +351,19 @@
   <rdfs:comment xml:lang="es">Práctica agronómica que compromete el uso de un agente.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#AnalisisQuimico">
-  <rdfs:label xml:lang="es">AnalisisQuimico</rdfs:label>
-  <rdfs:comment xml:lang="es">Análisis químico, medido o propuesto, articulado con una plataforma.</rdfs:comment>
+<owl:Class rdf:about="#AgenteBiocontrol">
+  <rdfs:label xml:lang="es">AgenteBiocontrol</rdfs:label>
+  <rdfs:comment xml:lang="es">Enemigo natural o microorganismo de control documentado.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#Experimento">
-  <rdfs:label xml:lang="es">Experimento</rdfs:label>
-  <rdfs:comment xml:lang="es">Experimento, medido o propuesto, articulado con una plataforma.</rdfs:comment>
+<owl:Class rdf:about="#FuenteEvidencia">
+  <rdfs:label xml:lang="es">FuenteEvidencia</rdfs:label>
+  <rdfs:comment xml:lang="es">Publicación, tesis o nota que respalda o contextualiza un hecho.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#Consulta">
-  <rdfs:label xml:lang="es">Consulta</rdfs:label>
-  <rdfs:comment xml:lang="es">Hechos temporales de una pregunta: plaga, clima y prácticas.</rdfs:comment>
+<owl:Class rdf:about="#Plaga">
+  <rdfs:label xml:lang="es">Plaga</rdfs:label>
+  <rdfs:comment xml:lang="es">Organismo que afecta al menos un cultivo del inventario.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#PlagaSinAgenteDocumentado">
@@ -349,14 +372,9 @@
   <rdfs:comment xml:lang="es">Cierre de mundo local: la plaga no tiene agente en esta base.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#Cultivo">
-  <rdfs:label xml:lang="es">Cultivo</rdfs:label>
-  <rdfs:comment xml:lang="es">Cultivo de cítricos hospedero de la plaga.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#RestriccionActiva">
-  <rdfs:label xml:lang="es">RestriccionActiva</rdfs:label>
-  <rdfs:comment xml:lang="es">Estado inferido cuando una práctica de la consulta coincide con una restricción.</rdfs:comment>
+<owl:Class rdf:about="#Experimento">
+  <rdfs:label xml:lang="es">Experimento</rdfs:label>
+  <rdfs:comment xml:lang="es">Experimento, medido o propuesto, articulado con una plataforma.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#PlataformaExterna">
@@ -364,72 +382,138 @@
   <rdfs:comment xml:lang="es">Plataforma de la Universidad de Caldas enlazada por interoperabilidad.</rdfs:comment>
 </owl:Class>
 
-<FuenteEvidencia rdf:about="#F13">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F13 - Universidad de Caldas (ClayOMICS)</rdfs:label>
-  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F13 - Universidad de Caldas (ClayOMICS)</citaCorta>
+<owl:Class rdf:about="#CondicionUso">
+  <rdfs:label xml:lang="es">CondicionUso</rdfs:label>
+  <rdfs:comment xml:lang="es">Ventana de temperatura documentada. La humedad solo decide si la fuente la marca como umbral.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#RestriccionActiva">
+  <rdfs:label xml:lang="es">RestriccionActiva</rdfs:label>
+  <rdfs:comment xml:lang="es">Estado inferido cuando una práctica de la consulta coincide con una restricción.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#AnalisisQuimico">
+  <rdfs:label xml:lang="es">AnalisisQuimico</rdfs:label>
+  <rdfs:comment xml:lang="es">Análisis químico, medido o propuesto, articulado con una plataforma.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Cultivo">
+  <rdfs:label xml:lang="es">Cultivo</rdfs:label>
+  <rdfs:comment xml:lang="es">Cultivo de cítricos hospedero de la plaga.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Consulta">
+  <rdfs:label xml:lang="es">Consulta</rdfs:label>
+  <rdfs:comment xml:lang="es">Hechos temporales de una pregunta: plaga, clima y prácticas.</rdfs:comment>
+</owl:Class>
+
+<FuenteEvidencia rdf:about="#F16">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F16 - Universidad de Caldas (2022)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F16 - Universidad de Caldas (2022)</citaCorta>
   <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Universidad de Caldas</autores>
-  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Spin-off ClayOMICS de la Universidad de Caldas obtiene su registro de marca</titulo>
-  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nota_institucional</tipoFuente>
-  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">interoperabilidad</rolFuente>
-  <notas xml:lang="es">ClayOMICS ofrece análisis de datos químicos. La nota no reporta un ensayo de biocontrol ni un perfil de Hirsutella.</notas>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Spin Off ClayOMICs de la Universidad de Caldas obtiene su registro de marca</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Noticia institucional</tipoFuente>
+  <iniciativa rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ClayOMICS</iniciativa>
+  <nivelConfiabilidad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Media</nivelConfiabilidad>
+  <naturaleza rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Contexto institucional</naturaleza>
+  <acceso rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abierto (web institucional)</acceso>
+  <fechaConsulta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11/nov/2026</fechaConsulta>
+  <informacionExtraida xml:lang="es">ClayOMICS ofrece análisis de datos químicos mediante técnicas de medición, separación e identificación. Surge del grupo de Cromatografía y Técnicas Afines y obtuvo registro de marca ante la SIC en 2022.</informacionExtraida>
+  <alcance xml:lang="es">Sirve para la existencia y el alcance de los servicios, no como evidencia científica. La fecha exacta de publicación de la nota queda por completar.</alcance>
+  <notas xml:lang="es">Sirve para la existencia y el alcance de los servicios, no como evidencia científica. La fecha exacta de publicación de la nota queda por completar.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2022</anio>
   <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.ucaldas.edu.co/portal/spin-off-clayomics-de-la-universidad-de-caldas-obtiene-su-registro-de-marca/</url>
 </FuenteEvidencia>
 
-<RelacionBiocontrol rdf:about="#Relacion_DC_Diaphorencyrtus">
+<Experimento rdf:about="#Experimento_magnetico_tomate_pregrado">
+  <articuladoCon rdf:resource="#MAGNETIME"/>
+  <documentadoEn rdf:resource="#F15"/>
+  <rdfs:label xml:lang="es">Desarrollo vegetativo de tomate tras tratamiento magnético de la semilla</rdfs:label>
+  <etiqueta xml:lang="es">Desarrollo vegetativo de tomate tras tratamiento magnético de la semilla</etiqueta>
+  <estadoEnlace rdf:datatype="http://www.w3.org/2001/XMLSchema#string">documentado</estadoEnlace>
+  <variableRespuesta xml:lang="es">área foliar y altura</variableRespuesta>
+  <condicionExperimental xml:lang="es">Campo magnético estático no homogéneo sobre semillas de tomate.</condicionExperimental>
+  <resultado xml:lang="es">21 % más área foliar y 9 % más altura que el control (F15, trabajo de grado). Cultivo: tomate.</resultado>
+</Experimento>
+
+<PlataformaExterna rdf:about="#MAGNETIME">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MAGNETIME</rdfs:label>
+  <etiqueta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MAGNETIME</etiqueta>
+  <tipoPlataforma rdf:datatype="http://www.w3.org/2001/XMLSchema#string">magnetobiologia</tipoPlataforma>
+  <descripcion xml:lang="es">Línea de tratamiento magnético de semillas. Las fuentes del inventario son de tomate y soja, no de cítricos ni de control de plagas.</descripcion>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://repositorio.ucaldas.edu.co/handle/ucaldas/22551</url>
+</PlataformaExterna>
+
+<FuenteEvidencia rdf:about="#F15">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F15 - Villa Carmona et al. (2023)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F15 - Villa Carmona et al. (2023)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Villa Carmona, E.; Torres Osorio, J. I.; Zamorano-Montañez, C.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Análisis del desarrollo vegetativo de plantas de Solanum lycopersicum L. generadas de semillas tratadas magnéticamente</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tesis de pregrado</tipoFuente>
+  <iniciativa rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MAGNETIME</iniciativa>
+  <nivelConfiabilidad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Media</nivelConfiabilidad>
+  <naturaleza rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hecho documentado (tesis)</naturaleza>
+  <acceso rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abierto (openAccess)</acceso>
+  <fechaConsulta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11/nov/2026</fechaConsulta>
+  <informacionExtraida xml:lang="es">Semillas de tomate tratadas con campo magnético estático no homogéneo: plantas con 21 % más área foliar y 9 % más altura que el control.</informacionExtraida>
+  <alcance xml:lang="es">Trabajo de grado, sin revisión por pares. Cultivo: tomate. Ingeniería Agronómica, Universidad de Caldas.</alcance>
+  <notas xml:lang="es">Trabajo de grado, sin revisión por pares. Cultivo: tomate. Ingeniería Agronómica, Universidad de Caldas.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2023</anio>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://repositorio.ucaldas.edu.co/handle/ucaldas/19679</url>
+</FuenteEvidencia>
+
+<RelacionBiocontrol rdf:about="#Relacion_DC_Beauveria">
   <involucraPlaga rdf:resource="#Diaphorina_citri"/>
-  <involucraAgente rdf:resource="#Diaphorencyrtus_sp"/>
-  <tieneCondicion rdf:resource="#Condicion_Diaphorencyrtus"/>
-  <fuentePrincipal rdf:resource="#F05"/>
-  <respaldadoPor rdf:resource="#F05"/>
-  <respaldadoPor rdf:resource="#F04"/>
-  <tieneRestriccion rdf:resource="#Restriccion_piretroide"/>
-  <tieneRestriccion rdf:resource="#Restriccion_neonicotinoide"/>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relacion_DC_Diaphorencyrtus</rdfs:label>
-  <tieneNivelEvidencia rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Media</tieneNivelEvidencia>
-  <variableRespuesta xml:lang="es">parasitismo de ninfas de Diaphorina citri</variableRespuesta>
-  <resultado xml:lang="es">Parasitismo de 0,3 % a 1,0 % en Palmira, frente a 1,5 %–24,2 % de Tamarixia en el mismo estudio (F05).</resultado>
-  <condicionExperimental xml:lang="es">Conteos de momias y emergencia de adultos en un huerto de Agrosavia, Palmira, en 2020 y 2021 (F05).</condicionExperimental>
-  <criterioNivel xml:lang="es">Media: la especie está confirmada en Colombia, pero las tasas de campo son bajas frente a Tamarixia (F05). La regla R2 agrega precaución.</criterioNivel>
+  <involucraAgente rdf:resource="#Beauveria_bassiana"/>
+  <fuentePrincipal rdf:resource="#F11"/>
+  <respaldadoPor rdf:resource="#F11"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relacion_DC_Beauveria</rdfs:label>
+  <tieneNivelEvidencia rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</tieneNivelEvidencia>
+  <variableRespuesta xml:lang="es">mortalidad de ninfas de Diaphorina citri</variableRespuesta>
+  <resultado xml:lang="es">Sin efecto sobre huevos. Mortalidad de ninfas entre 21 y 58 % según la cepa, a 1×10^8 conidios/mL (F11).</resultado>
+  <condicionExperimental xml:lang="es">Laboratorio, cepas mexicanas Bb-Dc y Bb-Rhy.</condicionExperimental>
+  <criterioNivel xml:lang="es">Alta para ese bioensayo. La limitación se anota aparte: no es una cepa de la Universidad de Caldas y no se extrapola a Caldas.</criterioNivel>
 </RelacionBiocontrol>
 
 <Plaga rdf:about="#Diaphorina_citri">
-  <afectaA rdf:resource="#Citrus_sinensis"/>
-  <afectaA rdf:resource="#Citrus_reticulata"/>
+  <afectaA rdf:resource="#Citricos"/>
   <contextualizadoPor rdf:resource="#F01"/>
   <contextualizadoPor rdf:resource="#F02"/>
-  <contextualizadoPor rdf:resource="#F11"/>
+  <contextualizadoPor rdf:resource="#F05"/>
   <esControladaPor rdf:resource="#Tamarixia_radiata"/>
   <esControladaPor rdf:resource="#Diaphorencyrtus_sp"/>
   <esControladaPor rdf:resource="#Hirsutella_citriformis"/>
+  <esControladaPor rdf:resource="#Beauveria_bassiana"/>
   <rdfs:label xml:lang="es">psílido asiático de los cítricos</rdfs:label>
   <nombreComun xml:lang="es">psílido asiático de los cítricos</nombreComun>
   <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Diaphorina citri</nombreCientifico>
-  <descripcion xml:lang="es">Vector del Huanglongbing (HLB). En Caldas se documentó a Tamarixia radiata alimentándose y parasitando sus ninfas.</descripcion>
+  <descripcion xml:lang="es">Psílido de los cítricos. En el inventario tiene parasitoides, un hongo entomopatógeno y un ensayo con Beauveria. El caldo sulfocálcico (F05) se evaluó sobre la plaga, no como restricción de los enemigos naturales.</descripcion>
 </Plaga>
 
-<Cultivo rdf:about="#Citrus_sinensis">
-  <rdfs:label xml:lang="es">naranja dulce</rdfs:label>
-  <nombreComun xml:lang="es">naranja dulce</nombreComun>
-  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Citrus sinensis</nombreCientifico>
-  <descripcion xml:lang="es">Cultivo de cítricos usado como hospedero en el inventario semilla.</descripcion>
-</Cultivo>
-
-<Cultivo rdf:about="#Citrus_reticulata">
-  <rdfs:label xml:lang="es">mandarina</rdfs:label>
-  <nombreComun xml:lang="es">mandarina</nombreComun>
-  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Citrus reticulata</nombreCientifico>
-  <descripcion xml:lang="es">Cultivo de cítricos usado como hospedero en el inventario semilla.</descripcion>
+<Cultivo rdf:about="#Citricos">
+  <rdfs:label xml:lang="es">cítricos</rdfs:label>
+  <nombreComun xml:lang="es">cítricos</nombreComun>
+  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Citrus spp.</nombreCientifico>
+  <descripcion xml:lang="es">Hospedero citado de forma genérica en los registros de Diaphorina citri y sus parasitoides en Caldas (F01, F02). La ficha no fija la especie.</descripcion>
 </Cultivo>
 
 <FuenteEvidencia rdf:about="#F01">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F01 - Bové (2006)</rdfs:label>
-  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F01 - Bové (2006)</citaCorta>
-  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bové, J. M.</autores>
-  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Huanglongbing: a destructive, newly-emerging, century-old disease of citrus</titulo>
-  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">articulo</tipoFuente>
-  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">contexto</rolFuente>
-  <notas xml:lang="es">Journal of Plant Pathology, 88(1), 7-37. Revisión del patosistema HLB. No evalúa la eficacia de un agente de biocontrol.</notas>
-  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2006</anio>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F01 - Arias-Ortega et al. (2016)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F01 - Arias-Ortega et al. (2016)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Arias-Ortega, P. L.; Restrepo-García, A. M.; Soto-Giraldo, A.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Primer registro de Diaphorencyrtus sp. (Hymenoptera: Encyrtidae) en Colombia</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Artículo científico (registro)</tipoFuente>
+  <iniciativa rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biocontroladores</iniciativa>
+  <nivelConfiabilidad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</nivelConfiabilidad>
+  <naturaleza rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hecho (presencia); hipótesis (control)</naturaleza>
+  <acceso rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abierto · CC BY 4.0</acceso>
+  <fechaConsulta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11/nov/2026</fechaConsulta>
+  <informacionExtraida xml:lang="es">Primer registro en Colombia de Diaphorencyrtus sp., parasitoide de ninfas de Diaphorina citri, capturado a mano en brotes de cítricos en Manizales.</informacionExtraida>
+  <alcance xml:lang="es">Documenta presencia. No mide parasitismo ni condiciones de uso; el efecto de control queda como hipótesis.</alcance>
+  <notas xml:lang="es">Documenta presencia. No mide parasitismo ni condiciones de uso; el efecto de control queda como hipótesis.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2016</anio>
+  <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.17151/bccm.2016.20.1.12</doi>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.17151/bccm.2016.20.1.12</url>
 </FuenteEvidencia>
 
 <FuenteEvidencia rdf:about="#F02">
@@ -437,24 +521,37 @@
   <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F02 - Restrepo-García et al. (2016)</citaCorta>
   <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Restrepo-García, A. M.; Arias-Ortega, P. L.; Soto-Giraldo, A.</autores>
   <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Primer reporte de Tamarixia radiata (Waterston) (Hymenoptera: Eulophidae) en el departamento de Caldas, Colombia</titulo>
-  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">articulo</tipoFuente>
-  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_relacion</rolFuente>
-  <notas xml:lang="es">Boletín Científico Centro de Museos Museo de Historia Natural, Universidad de Caldas, 20(1), 204-210. Presencia y acción parasítica de Tamarixia radiata sobre ninfas de Diaphorina citri en Caldas.</notas>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Artículo científico (registro)</tipoFuente>
+  <iniciativa rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biocontroladores</iniciativa>
+  <nivelConfiabilidad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</nivelConfiabilidad>
+  <naturaleza rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hecho documentado</naturaleza>
+  <acceso rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abierto (licencia no verificada)</acceso>
+  <fechaConsulta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11/nov/2026</fechaConsulta>
+  <informacionExtraida xml:lang="es">Tamarixia radiata está presente en Caldas y parasita ninfas de Diaphorina citri en brotes colectados entre enero y abril de 2016.</informacionExtraida>
+  <alcance xml:lang="es">Documenta presencia y parasitismo en Caldas. No reporta rangos agroclimáticos ni dosis de liberación. Boletín Científico Centro de Museos, 20(1), 204-210.</alcance>
+  <notas xml:lang="es">Documenta presencia y parasitismo en Caldas. No reporta rangos agroclimáticos ni dosis de liberación. Boletín Científico Centro de Museos, 20(1), 204-210.</notas>
   <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2016</anio>
   <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.17151/bccm.2016.20.1.15</doi>
   <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.17151/bccm.2016.20.1.15</url>
 </FuenteEvidencia>
 
-<FuenteEvidencia rdf:about="#F11">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F11 - ICA (2017)</rdfs:label>
-  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F11 - ICA (2017)</citaCorta>
-  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Instituto Colombiano Agropecuario</autores>
-  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Demostración de método: liberación de controladores biológicos para Diaphorina citri</titulo>
-  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nota_institucional</tipoFuente>
-  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">contexto</rolFuente>
-  <notas xml:lang="es">Jornada de campo en el Atlántico, 6 de diciembre de 2017, con Tamarixia y hongos entomopatógenos. No es un ensayo publicado.</notas>
+<FuenteEvidencia rdf:about="#F05">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F05 - Restrepo-García y Soto-Giraldo (2017)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F05 - Restrepo-García y Soto-Giraldo (2017)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Restrepo-García, A. M.; Soto-Giraldo, A.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Control alternativo de Diaphorina citri Kuwayama (Hemiptera: Liviidae) utilizando caldo sulfocálcico</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Artículo científico (laboratorio)</tipoFuente>
+  <iniciativa rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biocontroladores</iniciativa>
+  <nivelConfiabilidad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</nivelConfiabilidad>
+  <naturaleza rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hecho documentado (laboratorio)</naturaleza>
+  <acceso rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abierto (licencia no verificada)</acceso>
+  <fechaConsulta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11/nov/2026</fechaConsulta>
+  <informacionExtraida xml:lang="es">Toxicidad letal y subletal del caldo sulfocálcico sobre Diaphorina citri en el Centro de Investigación y Cría de Enemigos Naturales de la Universidad de Caldas.</informacionExtraida>
+  <alcance xml:lang="es">Ensayo de laboratorio sobre la plaga. No se codifica como restricción de enemigos naturales: el inventario pide verificar ese efecto antes de usarlo en R4. Boletín Científico Centro de Museos, 21(2), 51-60.</alcance>
+  <notas xml:lang="es">Ensayo de laboratorio sobre la plaga. No se codifica como restricción de enemigos naturales: el inventario pide verificar ese efecto antes de usarlo en R4. Boletín Científico Centro de Museos, 21(2), 51-60.</notas>
   <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2017</anio>
-  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.ica.gov.co/noticias/agricola/el-ica-y-corpoica-realizaron-demostracion-de-metod</url>
+  <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.17151/bccm.2017.21.2.4</doi>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.17151/bccm.2017.21.2.4</url>
 </FuenteEvidencia>
 
 <AgenteBiocontrol rdf:about="#Tamarixia_radiata">
@@ -462,15 +559,15 @@
   <nombreComun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tamarixia radiata</nombreComun>
   <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tamarixia radiata</nombreCientifico>
   <tipoAgente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">parasitoide</tipoAgente>
-  <descripcion xml:lang="es">Ectoparasitoide de ninfas de Diaphorina citri. Es el enemigo natural con evidencia convergente en este inventario.</descripcion>
+  <descripcion xml:lang="es">Ectoparasitoide de ninfas de Diaphorina citri. Presencia y parasitismo en Caldas (F02); desarrollo entre 15 y 35 °C en laboratorio, con mejor viabilidad a 25 °C (F08).</descripcion>
 </AgenteBiocontrol>
 
 <AgenteBiocontrol rdf:about="#Diaphorencyrtus_sp">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Diaphorencyrtus aligarhensis</rdfs:label>
-  <nombreComun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Diaphorencyrtus aligarhensis</nombreComun>
-  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Diaphorencyrtus aligarhensis</nombreCientifico>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Diaphorencyrtus sp.</rdfs:label>
+  <nombreComun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Diaphorencyrtus sp.</nombreComun>
+  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Diaphorencyrtus sp.</nombreCientifico>
   <tipoAgente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">parasitoide</tipoAgente>
-  <descripcion xml:lang="es">Endoparasitoide de Diaphorina citri. El identificador conserva Diaphorencyrtus_sp, como en reportes tempranos; Kondo et al. (2022) asignan el registro colombiano a D. aligarhensis.</descripcion>
+  <descripcion xml:lang="es">Parasitoide de ninfas de Diaphorina citri. F01 es un registro de presencia en Manizales; el control queda como hipótesis porque no mide parasitismo ni condiciones de uso.</descripcion>
 </AgenteBiocontrol>
 
 <AgenteBiocontrol rdf:about="#Hirsutella_citriformis">
@@ -478,75 +575,96 @@
   <nombreComun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hirsutella citriformis</nombreComun>
   <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hirsutella citriformis</nombreCientifico>
   <tipoAgente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hongo_entomopatogeno</tipoAgente>
-  <descripcion xml:lang="es">Hongo entomopatógeno aislado en la Granja Montelindo de la Universidad de Caldas y patógeno de Diaphorina citri en bioensayo de laboratorio.</descripcion>
+  <descripcion xml:lang="es">Hongo entomopatógeno aislado en la Granja Montelindo. En laboratorio causó 98 % de mortalidad acumulada de Diaphorina citri (F07). Es la cepa colombiana documentada; el inventario no trae una cepa local de Beauveria llamada UC10.</descripcion>
 </AgenteBiocontrol>
 
-<CondicionUso rdf:about="#Condicion_Diaphorencyrtus">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">22–32 °C; 50–90 % HR</rdfs:label>
-  <temperaturaMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">22.0</temperaturaMin>
-  <temperaturaMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">32.0</temperaturaMax>
-  <humedadMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">50.0</humedadMin>
-  <humedadMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">90.0</humedadMax>
-  <rangoMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">22.0</rangoMin>
-  <rangoMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">32.0</rangoMax>
-  <rangoValido rdf:datatype="http://www.w3.org/2001/XMLSchema#string">22–32 °C; 50–90 % HR</rangoValido>
-  <descripcionCondicion xml:lang="es">Ventana operativa más amplia. McFarland y Hoy (2001, F04) compararon supervivencia adulta a 25 °C y 30 °C; Kondo et al. (2022, F05) confirman la especie en campo sin publicar una curva térmica propia.</descripcionCondicion>
-</CondicionUso>
+<AgenteBiocontrol rdf:about="#Beauveria_bassiana">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Beauveria bassiana</rdfs:label>
+  <nombreComun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Beauveria bassiana</nombreComun>
+  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Beauveria bassiana</nombreCientifico>
+  <tipoAgente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hongo_entomopatogeno</tipoAgente>
+  <descripcion xml:lang="es">Cepas mexicanas Bb-Dc y Bb-Rhy, patógenas de ninfas de Diaphorina citri en laboratorio (F11). No corresponden a una cepa validada en la Universidad de Caldas.</descripcion>
+</AgenteBiocontrol>
 
-<FuenteEvidencia rdf:about="#F05">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F05 - Kondo et al. (2022)</rdfs:label>
-  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F05 - Kondo et al. (2022)</citaCorta>
-  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Kondo, T.; Woolley, J. B.; Arciniegas, K. T.; Campos-Patiño, Y.</autores>
-  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">First report in Colombia and diagnosis of Diaphorencyrtus aligarhensis (Hymenoptera: Encyrtidae), a parasitoid wasp of Diaphorina citri</titulo>
-  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">articulo</tipoFuente>
-  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_relacion</rolFuente>
-  <notas xml:lang="es">Caldasia, 44(3), 541-552. Primer reporte confirmado de la especie en Colombia (Palmira). Parasitismo de 0,3 % a 1,0 %, frente a 1,5 %–24,2 % de Tamarixia en el mismo estudio. Una aspersión de imidacloprid interrumpió el seguimiento.</notas>
-  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2022</anio>
-  <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.15446/caldasia.v44n3.95918</doi>
-  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.15446/caldasia.v44n3.95918</url>
+<FuenteEvidencia rdf:about="#F11">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F11 - Cruz-Cruz et al. (2020)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F11 - Cruz-Cruz et al. (2020)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cruz-Cruz, D.; Gómez-Ruiz, J.; Barrera, J. F.; Sánchez-Peña, S. R.; Valle-Mora, J. F.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pathogenicity of Beauveria bassiana against immature stages of Diaphorina citri under laboratory conditions</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Artículo científico (laboratorio)</tipoFuente>
+  <iniciativa rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biocontroladores</iniciativa>
+  <nivelConfiabilidad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</nivelConfiabilidad>
+  <naturaleza rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hecho documentado (laboratorio)</naturaleza>
+  <acceso rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Resumen abierto; texto completo por suscripción</acceso>
+  <fechaConsulta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11/nov/2026</fechaConsulta>
+  <informacionExtraida xml:lang="es">Cepas de Beauveria bassiana a 1×10^8 conidios/mL: sin efecto sobre huevos; mortalidad de ninfas entre 21 y 58 % según la cepa. CL50 en ninfas IV-V de 8,34×10^6 (Bb-Dc) y 1×10^7 (Bb-Rhy) conidios/mL.</informacionExtraida>
+  <alcance xml:lang="es">Cepas mexicanas en laboratorio. No valida una cepa local «UC10» ni aplica directamente a Caldas. Southwestern Entomologist, 45(3), 609-620.</alcance>
+  <notas xml:lang="es">Cepas mexicanas en laboratorio. No valida una cepa local «UC10» ni aplica directamente a Caldas. Southwestern Entomologist, 45(3), 609-620.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2020</anio>
+  <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.3958/059.045.0303</doi>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.3958/059.045.0303</url>
 </FuenteEvidencia>
 
-<FuenteEvidencia rdf:about="#F04">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F04 - McFarland y Hoy (2001)</rdfs:label>
-  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F04 - McFarland y Hoy (2001)</citaCorta>
-  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">McFarland, C. D.; Hoy, M. A.</autores>
-  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Survival of Diaphorina citri, and its two parasitoids Tamarixia radiata and Diaphorencyrtus aligarhensis, under different relative humidities and temperature regimes</titulo>
-  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">articulo</tipoFuente>
-  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_relacion</rolFuente>
-  <notas xml:lang="es">Florida Entomologist, 84(2), 227-233. Supervivencia adulta a 25 °C y 30 °C con humedades relativas de 7 %, 33 %, 53 %, 75 % y 97 %.</notas>
-  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2001</anio>
-  <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.2307/3496171</doi>
-  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.2307/3496171</url>
+<RelacionBiocontrol rdf:about="#Relacion_DC_Hirsutella">
+  <involucraPlaga rdf:resource="#Diaphorina_citri"/>
+  <involucraAgente rdf:resource="#Hirsutella_citriformis"/>
+  <fuentePrincipal rdf:resource="#F07"/>
+  <respaldadoPor rdf:resource="#F07"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relacion_DC_Hirsutella</rdfs:label>
+  <tieneNivelEvidencia rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</tieneNivelEvidencia>
+  <variableRespuesta xml:lang="es">mortalidad acumulada de Diaphorina citri</variableRespuesta>
+  <resultado xml:lang="es">98 % de mortalidad acumulada con conidios y 3 % en el control (F07).</resultado>
+  <condicionExperimental xml:lang="es">Bioensayo de laboratorio con la cepa de Montelindo. La incubación publicada como 25 ± 20 °C no se convierte en rango de campo.</condicionExperimental>
+  <criterioNivel xml:lang="es">Alta para la patogenicidad de laboratorio. Sin ventana agroclimática ni ensayo de campo, así que no compite con Tamarixia en la regla climática.</criterioNivel>
+</RelacionBiocontrol>
+
+<FuenteEvidencia rdf:about="#F07">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F07 - Restrepo-García et al. (2024)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F07 - Restrepo-García et al. (2024)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Restrepo-García, A. M.; Pérez-González, O.; Soto-Giraldo, A.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Primer aislamiento de Hirsutella citriformis en Colombia y evaluación de su patogenicidad</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Artículo científico (laboratorio)</tipoFuente>
+  <iniciativa rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biocontroladores</iniciativa>
+  <nivelConfiabilidad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</nivelConfiabilidad>
+  <naturaleza rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hecho documentado (laboratorio)</naturaleza>
+  <acceso rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abierto (licencia no verificada)</acceso>
+  <fechaConsulta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11/nov/2026</fechaConsulta>
+  <informacionExtraida xml:lang="es">Cepa de la Granja Montelindo: mortalidad acumulada de Diaphorina citri de 98 % con conidios y 3 % en el control, en bioensayo de laboratorio.</informacionExtraida>
+  <alcance xml:lang="es">El artículo reporta incubación a 25 ± 20 °C, probable error tipográfico, y no reporta humedad relativa. No se deriva un rango agroclimático ni hay ensayo de campo. Boletín Científico Centro de Museos, 28(2), 181-190.</alcance>
+  <notas xml:lang="es">El artículo reporta incubación a 25 ± 20 °C, probable error tipográfico, y no reporta humedad relativa. No se deriva un rango agroclimático ni hay ensayo de campo. Boletín Científico Centro de Museos, 28(2), 181-190.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2024</anio>
+  <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.17151/bccm.2024.28.2.9</doi>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.17151/bccm.2024.28.2.9</url>
 </FuenteEvidencia>
 
-<Restriccion rdf:about="#Restriccion_piretroide">
-  <justificadoPor rdf:resource="#F06"/>
-  <justificadoPor rdf:resource="#F02"/>
-  <rdfs:label xml:lang="es">Incompatibilidad con piretroides</rdfs:label>
-  <etiqueta xml:lang="es">Incompatibilidad con piretroides</etiqueta>
-  <codigoPractica rdf:datatype="http://www.w3.org/2001/XMLSchema#string">aplicacion_piretroide</codigoPractica>
-  <descripcion xml:lang="es">Un insecticida piretroide de amplio espectro en la ventana de liberación deprime a los parasitoides. No conviene liberarlos mientras la práctica esté vigente.</descripcion>
-</Restriccion>
+<Experimento rdf:about="#Experimento_magnetico_soja">
+  <articuladoCon rdf:resource="#MAGNETIME"/>
+  <documentadoEn rdf:resource="#F14"/>
+  <rdfs:label xml:lang="es">Campo magnético estático en germinación de soja</rdfs:label>
+  <etiqueta xml:lang="es">Campo magnético estático en germinación de soja</etiqueta>
+  <estadoEnlace rdf:datatype="http://www.w3.org/2001/XMLSchema#string">documentado</estadoEnlace>
+  <variableRespuesta xml:lang="es">tiempo medio de germinación y absorción de agua</variableRespuesta>
+  <condicionExperimental xml:lang="es">Semillas de soja a 125 y 300 mT durante 10, 20 y 60 min.</condicionExperimental>
+  <resultado xml:lang="es">300 mT por 10 min redujo más el tiempo medio de germinación. La absorción de agua no cambió de forma significativa (F14). Especie: soja.</resultado>
+</Experimento>
 
-<FuenteEvidencia rdf:about="#F06">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F06 - Alemán et al. (2007)</rdfs:label>
-  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F06 - Alemán et al. (2007)</citaCorta>
-  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alemán, J.; Baños, H.; Ravelo, J.</autores>
-  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Diaphorina citri y la enfermedad huanglongbing: una combinación destructiva para la producción citrícola</titulo>
-  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">articulo</tipoFuente>
-  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_restriccion</rolFuente>
-  <notas xml:lang="es">Revista Protección Vegetal, 22(3), 154-165. Citado por Restrepo-García et al. (2016) al señalar que el control químico puede eliminar enemigos naturales.</notas>
-  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2007</anio>
+<FuenteEvidencia rdf:about="#F14">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F14 - Torres-Osorio et al. (2015)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F14 - Torres-Osorio et al. (2015)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Torres-Osorio, J. I.; Aranzazu-Osorio, J. E.; Carbonell-Padrino, M. V.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Efecto del campo magnético estático homogéneo en la germinación y absorción de agua en semillas de soja</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Artículo científico (laboratorio)</tipoFuente>
+  <iniciativa rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MAGNETIME</iniciativa>
+  <nivelConfiabilidad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</nivelConfiabilidad>
+  <naturaleza rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hecho documentado (laboratorio)</naturaleza>
+  <acceso rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abierto · CC BY</acceso>
+  <fechaConsulta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11/nov/2026</fechaConsulta>
+  <informacionExtraida xml:lang="es">Soja expuesta a 125 y 300 mT durante 10, 20 y 60 min. El electroimán superó a los imanes. 300 mT por 10 min redujo más el tiempo medio de germinación. La absorción de agua no mostró diferencias significativas.</informacionExtraida>
+  <alcance xml:lang="es">Especie: soja. No hay evidencia en cítricos ni en control de plagas. Tecno Lógicas, 18(35), 11-20.</alcance>
+  <notas xml:lang="es">Especie: soja. No hay evidencia en cítricos ni en control de plagas. Tecno Lógicas, 18(35), 11-20.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2015</anio>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.redalyc.org/pdf/3442/344243102002.pdf</url>
 </FuenteEvidencia>
-
-<Restriccion rdf:about="#Restriccion_neonicotinoide">
-  <justificadoPor rdf:resource="#F05"/>
-  <justificadoPor rdf:resource="#F06"/>
-  <rdfs:label xml:lang="es">Incompatibilidad con neonicotinoides</rdfs:label>
-  <etiqueta xml:lang="es">Incompatibilidad con neonicotinoides</etiqueta>
-  <codigoPractica rdf:datatype="http://www.w3.org/2001/XMLSchema#string">aplicacion_neonicotinoide</codigoPractica>
-  <descripcion xml:lang="es">Los neonicotinoides, por ejemplo imidacloprid, interfieren con los parasitoides. En Palmira una aspersión de imidacloprid interrumpió el seguimiento de parasitismo (F05).</descripcion>
-</Restriccion>
 
 <RelacionBiocontrol rdf:about="#Relacion_DC_Tamarixia">
   <involucraPlaga rdf:resource="#Diaphorina_citri"/>
@@ -554,255 +672,334 @@
   <tieneCondicion rdf:resource="#Condicion_Tamarixia"/>
   <fuentePrincipal rdf:resource="#F02"/>
   <respaldadoPor rdf:resource="#F02"/>
-  <respaldadoPor rdf:resource="#F03"/>
-  <respaldadoPor rdf:resource="#F04"/>
-  <respaldadoPor rdf:resource="#F10"/>
-  <respaldadoPor rdf:resource="#F16"/>
-  <tieneRestriccion rdf:resource="#Restriccion_piretroide"/>
-  <tieneRestriccion rdf:resource="#Restriccion_neonicotinoide"/>
+  <respaldadoPor rdf:resource="#F08"/>
+  <respaldadoPor rdf:resource="#F09"/>
+  <tieneRestriccion rdf:resource="#Restriccion_botanicos"/>
+  <tieneRestriccion rdf:resource="#Restriccion_extractos"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relacion_DC_Tamarixia</rdfs:label>
   <tieneNivelEvidencia rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</tieneNivelEvidencia>
-  <variableRespuesta xml:lang="es">parasitismo de ninfas de Diaphorina citri</variableRespuesta>
-  <resultado xml:lang="es">Presencia y acción parasítica documentadas en Caldas (F02). El inventario no codifica un porcentaje único de eficacia de campo.</resultado>
-  <condicionExperimental xml:lang="es">Observación de momias y emergencia del parasitoide sobre brotes de cítricos en el Centro de Investigación y Cría de Enemigos Naturales de la Universidad de Caldas, entre enero y abril de 2016 (F02).</condicionExperimental>
-  <criterioNivel xml:lang="es">Alta por convergencia: reporte local de presencia y acción parasítica (F02), revisión biológica (F03), supervivencia bajo regímenes de temperatura y humedad (F04) y rutas de acceso en Colombia (F10). No es un metaanálisis de eficacia de campo.</criterioNivel>
+  <variableRespuesta xml:lang="es">parasitismo de ninfas y viabilidad del desarrollo de Tamarixia radiata</variableRespuesta>
+  <resultado xml:lang="es">Presencia y parasitismo en Caldas (F02). En laboratorio hay desarrollo entre 15 y 35 °C y la mayor viabilidad a 25 °C (F08). F09 amplía el estudio térmico a promedios de 12 a 38 °C.</resultado>
+  <condicionExperimental xml:lang="es">Colecta de brotes en Caldas, enero a abril de 2016 (F02). Tabla de vida a cinco temperaturas constantes y 70 ± 10 % HR (F08).</condicionExperimental>
+  <criterioNivel xml:lang="es">Alta porque F02, F08 y F09 documentan la relación. La ventana de decisión es 15-35 °C. No se usa 20-30 °C ni 60-85 % HR como umbral: el inventario los marca como parcial o sin fuente.</criterioNivel>
 </RelacionBiocontrol>
 
 <CondicionUso rdf:about="#Condicion_Tamarixia">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">20–30 °C; 60–85 % HR</rdfs:label>
-  <temperaturaMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">20.0</temperaturaMin>
-  <temperaturaMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">30.0</temperaturaMax>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">15–35 °C; HR de ensayo 60–80 % (no decide)</rdfs:label>
+  <temperaturaMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">15.0</temperaturaMin>
+  <temperaturaMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">35.0</temperaturaMax>
   <humedadMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">60.0</humedadMin>
-  <humedadMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">85.0</humedadMax>
-  <rangoMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">20.0</rangoMin>
-  <rangoMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">30.0</rangoMax>
-  <rangoValido rdf:datatype="http://www.w3.org/2001/XMLSchema#string">20–30 °C; 60–85 % HR</rangoValido>
-  <descripcionCondicion xml:lang="es">Ventana operativa del prototipo. Cubre el óptimo de laboratorio cercano a 25 °C y los regímenes de 25 °C y 30 °C de McFarland y Hoy (2001, F04). La humedad 60-85 % excluye los extremos secos del ensayo (7 % y 33 %) y la saturación (97 %). No es la tabla de un único experimento.</descripcionCondicion>
-</CondicionUso>
-
-<FuenteEvidencia rdf:about="#F03">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F03 - Chen y Stansly (2014)</rdfs:label>
-  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F03 - Chen y Stansly (2014)</citaCorta>
-  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Chen, X.; Stansly, P. A.</autores>
-  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biology of Tamarixia radiata (Hymenoptera: Eulophidae), parasitoid of the citrus greening disease vector Diaphorina citri (Hemiptera: Psyllidae): a mini review</titulo>
-  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">articulo</tipoFuente>
-  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_relacion</rolFuente>
-  <notas xml:lang="es">Florida Entomologist, 97(4), 1404-1412. Revisión biológica del parasitoide.</notas>
-  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2014</anio>
-</FuenteEvidencia>
-
-<FuenteEvidencia rdf:about="#F10">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F10 - AgroSavia (s. f.)</rdfs:label>
-  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F10 - AgroSavia (s. f.)</citaCorta>
-  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AgroSavia</autores>
-  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rutas de acceso al parasitoide Tamarixia radiata</titulo>
-  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">recomendacion_tecnologica</tipoFuente>
-  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_relacion</rolFuente>
-  <notas xml:lang="es">Oferta tecnológica: incremento in situ, traspatios y reservorios. No es un artículo de eficacia y no aporta un porcentaje de control.</notas>
-  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.agrosavia.co/productos-y-servicios/oferta-tecnologica/linea-agricola/frutales/recomendaciones-protocolos-y-metodologias/758-rutas-de-acceso-al-parasitoide-tamarixia-radiata</url>
-</FuenteEvidencia>
-
-<FuenteEvidencia rdf:about="#F16">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F16 - Universidad de Caldas (Biocontroladores)</rdfs:label>
-  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F16 - Universidad de Caldas (Biocontroladores)</citaCorta>
-  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Universidad de Caldas</autores>
-  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biocontroladores, spin-off de la Universidad de Caldas</titulo>
-  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nota_institucional</tipoFuente>
-  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">contexto</rolFuente>
-  <notas xml:lang="es">La nota menciona a Tamarixia radiata entre los desarrollos del spin-off. El prototipo no transcribe cifras de eficacia.</notas>
-  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.ucaldas.edu.co/portal/biocontraladores-spin-off-de-la-universidad-de-caldas-en-pro-de-la-agricultura/</url>
-</FuenteEvidencia>
-
-<RelacionBiocontrol rdf:about="#Relacion_DC_Hirsutella">
-  <involucraPlaga rdf:resource="#Diaphorina_citri"/>
-  <involucraAgente rdf:resource="#Hirsutella_citriformis"/>
-  <tieneCondicion rdf:resource="#Condicion_Hirsutella"/>
-  <fuentePrincipal rdf:resource="#F08"/>
-  <respaldadoPor rdf:resource="#F08"/>
-  <respaldadoPor rdf:resource="#F07"/>
-  <respaldadoPor rdf:resource="#F09"/>
-  <respaldadoPor rdf:resource="#F12"/>
-  <tieneRestriccion rdf:resource="#Restriccion_cuprico"/>
-  <tieneRestriccion rdf:resource="#Restriccion_azufre"/>
-  <verificadoPor rdf:resource="#Analisis_exudados_Hirsutella"/>
-  <tieneExperimento rdf:resource="#Experimento_campo_magnetico_conidios"/>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relacion_DC_Hirsutella</rdfs:label>
-  <tieneNivelEvidencia rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Media</tieneNivelEvidencia>
-  <variableRespuesta xml:lang="es">mortalidad acumulada de adultos de Diaphorina citri</variableRespuesta>
-  <resultado xml:lang="es">Mortalidad acumulada de 98 % con conidios de H. citriformis y 3 % en el control; sinnemas a los 7 días post-mortem (F08).</resultado>
-  <condicionExperimental xml:lang="es">Bioensayo de contacto directo entre adultos de D. citri y cultivos esporulados; caracterización morfológica, morfométrica y del gen ribosomal 28S (F08).</condicionExperimental>
-  <criterioNivel xml:lang="es">Media: hay patogenicidad alta en laboratorio (F08) y una ventana ambiental descrita en la revisión (F07), pero el inventario no incluye un programa comercial de campo. Por eso no se asigna Alta y, si la ventana se cumple, se activa R2.</criterioNivel>
-</RelacionBiocontrol>
-
-<CondicionUso rdf:about="#Condicion_Hirsutella">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">23–28 °C; 80–98 % HR</rdfs:label>
-  <temperaturaMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">23.0</temperaturaMin>
-  <temperaturaMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">28.0</temperaturaMax>
-  <humedadMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">80.0</humedadMin>
-  <humedadMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">98.0</humedadMax>
-  <rangoMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">23.0</rangoMin>
-  <rangoMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">28.0</rangoMax>
-  <rangoValido rdf:datatype="http://www.w3.org/2001/XMLSchema#string">23–28 °C; 80–98 % HR</rangoValido>
-  <descripcionCondicion xml:lang="es">Ventana de la revisión de Pérez-González et al. (2022, F07): desarrollo óptimo cerca de 25 °C y epizootias con humedad relativa superior al 80 %, con registros de campo entre 25 °C y 28 °C. El bioensayo de 2024 (F08) demuestra patogenicidad en laboratorio, no esta ventana en Caldas.</descripcionCondicion>
+  <humedadMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">80.0</humedadMax>
+  <estadoVentanaHumedad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ensayo</estadoVentanaHumedad>
+  <rangoMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">15.0</rangoMin>
+  <rangoMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">35.0</rangoMax>
+  <rangoValido rdf:datatype="http://www.w3.org/2001/XMLSchema#string">15–35 °C; HR de ensayo 60–80 % (no decide)</rangoValido>
+  <descripcionCondicion xml:lang="es">Ventana térmica documentada por la tabla de vida de F08: desarrollo a 15, 20, 25, 30 y 35 °C, con mayor viabilidad y tasa reproductiva neta a 25 °C. F09 estudia promedios de 12 a 38 °C y no se usa como umbral de liberación. La humedad 70 ± 10 % (60-80 %) es la condición de ensayo de F08; el inventario la marca como no equivalente a un rango de viabilidad, así que no decide la recomendación.</descripcionCondicion>
 </CondicionUso>
 
 <FuenteEvidencia rdf:about="#F08">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F08 - Restrepo-García et al. (2024)</rdfs:label>
-  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F08 - Restrepo-García et al. (2024)</citaCorta>
-  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Restrepo-García, A. M.; Pérez-González, O.; Soto-Giraldo, A.</autores>
-  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Primer aislamiento de Hirsutella citriformis en Colombia y evaluación de su patogenicidad</titulo>
-  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">articulo</tipoFuente>
-  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_relacion</rolFuente>
-  <notas xml:lang="es">Boletín Científico Centro de Museos, 28(2), 181-190. Cepa de la Granja Montelindo. Mortalidad acumulada de 98 % en bioensayo de contacto y 3 % en el control; similitud del 98,86 % en el gen 28S.</notas>
-  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2024</anio>
-  <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.17151/bccm.2024.28.2.9</doi>
-  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.17151/bccm.2024.28.2.9</url>
-</FuenteEvidencia>
-
-<FuenteEvidencia rdf:about="#F07">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F07 - Pérez-González et al. (2022)</rdfs:label>
-  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F07 - Pérez-González et al. (2022)</citaCorta>
-  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pérez-González, O.; Gómez-Flores, R.; Tamez-Guerra, P.</autores>
-  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Insight into biological control potential of Hirsutella citriformis against Asian citrus psyllid as a vector of citrus Huanglongbing disease in America</titulo>
-  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">articulo</tipoFuente>
-  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_relacion</rolFuente>
-  <notas xml:lang="es">Journal of Fungi, 8(6), 573. Revisión: desarrollo óptimo cerca de 25 °C, epizootias con humedad relativa superior al 80 % y precaución frente a cobre, aceite y azufre a dosis altas. El papel de los exudados sigue poco caracterizado.</notas>
-  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2022</anio>
-  <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.3390/jof8060573</doi>
-  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.3390/jof8060573</url>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F08 - Gómez-Torres et al. (2012)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F08 - Gómez-Torres et al. (2012)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gómez-Torres, M. L.; Nava, D. E. et al.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Life table of Tamarixia radiata (Hymenoptera: Eulophidae) on Diaphorina citri (Hemiptera: Psyllidae) at different temperatures</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Artículo científico (laboratorio)</tipoFuente>
+  <iniciativa rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biocontroladores</iniciativa>
+  <nivelConfiabilidad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</nivelConfiabilidad>
+  <naturaleza rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hecho documentado (laboratorio)</naturaleza>
+  <acceso rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Resumen abierto; texto completo posiblemente restringido</acceso>
+  <fechaConsulta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11/nov/2026</fechaConsulta>
+  <informacionExtraida xml:lang="es">Tabla de vida a 15, 20, 25, 30 y 35 °C, con 70 ± 10 % de humedad relativa. Hubo desarrollo en todas esas temperaturas y la mayor viabilidad y tasa reproductiva neta ocurrió a 25 °C.</informacionExtraida>
+  <alcance xml:lang="es">Población brasileña en laboratorio. La viabilidad es de desarrollo, no de una liberación en campo. La humedad es condición de ensayo, no un umbral de uso. Journal of Economic Entomology, 105(2). Páginas por completar al citar.</alcance>
+  <notas xml:lang="es">Población brasileña en laboratorio. La viabilidad es de desarrollo, no de una liberación en campo. La humedad es condición de ensayo, no un umbral de uso. Journal of Economic Entomology, 105(2). Páginas por completar al citar.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2012</anio>
+  <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.1603/EC11280</doi>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.1603/EC11280</url>
 </FuenteEvidencia>
 
 <FuenteEvidencia rdf:about="#F09">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F09 - Casique-Valdes et al. (2011)</rdfs:label>
-  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F09 - Casique-Valdes et al. (2011)</citaCorta>
-  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Casique-Valdes, R.; Reyes-Martinez, A. Y.; Sanchez-Peña, S. R.; Bidochka, M. J.; Lopez-Arroyo, J. I.</autores>
-  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pathogenicity of Hirsutella citriformis to Diaphorina citri and Bactericera cockerelli</titulo>
-  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">articulo</tipoFuente>
-  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_relacion</rolFuente>
-  <notas xml:lang="es">Florida Entomologist, 94(3), 703-705. Patogenicidad del hongo sobre el psílido.</notas>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F09 - McCalla et al. (2019)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F09 - McCalla et al. (2019)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">McCalla, K. A.; Keçeci, M.; Milosavljevic, I.; Ratkowsky, D. A.; Hoddle, M. S.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The influence of temperature variation on life history parameters and thermal performance curves of Tamarixia radiata, a parasitoid of the Asian citrus psyllid</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Artículo científico (laboratorio)</tipoFuente>
+  <iniciativa rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biocontroladores</iniciativa>
+  <nivelConfiabilidad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</nivelConfiabilidad>
+  <naturaleza rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hecho documentado (laboratorio)</naturaleza>
+  <acceso rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Resumen abierto; texto completo posiblemente restringido</acceso>
+  <fechaConsulta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11/nov/2026</fechaConsulta>
+  <informacionExtraida xml:lang="es">Temperaturas constantes y fluctuantes, con promedios de 12 a 38 °C, afectan el desarrollo y la longevidad de Tamarixia radiata.</informacionExtraida>
+  <alcance xml:lang="es">Población de Pakistán liberada en California, en laboratorio. Complementa a F08 con un rango térmico más amplio, pero no fija un umbral de liberación. Journal of Economic Entomology, 112(4), 1560-1574.</alcance>
+  <notas xml:lang="es">Población de Pakistán liberada en California, en laboratorio. Complementa a F08 con un rango térmico más amplio, pero no fija un umbral de liberación. Journal of Economic Entomology, 112(4), 1560-1574.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2019</anio>
+  <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.1093/jee/toz067</doi>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.1093/jee/toz067</url>
+</FuenteEvidencia>
+
+<Restriccion rdf:about="#Restriccion_botanicos">
+  <justificadoPor rdf:resource="#F10"/>
+  <rdfs:label xml:lang="es">Mortalidad por insecticidas botánicos</rdfs:label>
+  <etiqueta xml:lang="es">Mortalidad por insecticidas botánicos</etiqueta>
+  <codigoPractica rdf:datatype="http://www.w3.org/2001/XMLSchema#string">aplicacion_insecticida_botanico</codigoPractica>
+  <descripcion xml:lang="es">Biodie y NeemPHC causaron mortalidad de Tamarixia radiata por residualidad (12,7 % y 12,3 %) y por ingestión (33,3 % y 28,7 %) en laboratorio (F10). No hay fuente en el inventario para una carencia tras clorpirifos.</descripcion>
+</Restriccion>
+
+<FuenteEvidencia rdf:about="#F10">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F10 - Monsreal-Ceballos et al. (2017)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F10 - Monsreal-Ceballos et al. (2017)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Monsreal-Ceballos, R. J.; Ruíz-Sánchez, E.; Sánchez-Borja, M. et al.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Efectos de insecticidas botánicos comerciales en Tamarixia radiata, un ectoparasitoide de Diaphorina citri</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Artículo científico (laboratorio)</tipoFuente>
+  <iniciativa rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biocontroladores</iniciativa>
+  <nivelConfiabilidad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</nivelConfiabilidad>
+  <naturaleza rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hecho documentado (laboratorio)</naturaleza>
+  <acceso rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abierto (Dialnet; licencia no verificada)</acceso>
+  <fechaConsulta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11/nov/2026</fechaConsulta>
+  <informacionExtraida xml:lang="es">Mortalidad de Tamarixia radiata por residualidad de 12,7 % (Biodie) y 12,3 % (NeemPHC), y por ingestión de 33,3 % y 28,7 %. Bioensayo a 25 ± 5 °C y 60 ± 10 % HR.</informacionExtraida>
+  <alcance xml:lang="es">Evalúa insecticidas botánicos, no organofosforados como el clorpirifos. Estudio hecho en México. La carencia de 21 días tras clorpirifos no tiene fuente en este inventario. Ecosistemas y Recursos Agropecuarios, 4(12), 589-596.</alcance>
+  <notas xml:lang="es">Evalúa insecticidas botánicos, no organofosforados como el clorpirifos. Estudio hecho en México. La carencia de 21 días tras clorpirifos no tiene fuente en este inventario. Ecosistemas y Recursos Agropecuarios, 4(12), 589-596.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2017</anio>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://dialnet.unirioja.es/descarga/articulo/6343377.pdf</url>
+</FuenteEvidencia>
+
+<Restriccion rdf:about="#Restriccion_extractos">
+  <justificadoPor rdf:resource="#F06"/>
+  <rdfs:label xml:lang="es">Interacción con extractos vegetales</rdfs:label>
+  <etiqueta xml:lang="es">Interacción con extractos vegetales</etiqueta>
+  <codigoPractica rdf:datatype="http://www.w3.org/2001/XMLSchema#string">aplicacion_extractos_vegetales</codigoPractica>
+  <descripcion xml:lang="es">F06 evaluó extractos de Murraya paniculata, cocotero, clavo y guayaba sobre Diaphorina citri y Tamarixia radiata. La ficha no trae los valores por extracto; la alerta pide revisarlos antes de liberar, no afirma una dosis incompatible.</descripcion>
+</Restriccion>
+
+<FuenteEvidencia rdf:about="#F06">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F06 - Barros-Barrios et al. (2024)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F06 - Barros-Barrios et al. (2024)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Barros-Barrios, M. M.; Restrepo-García, A. M.; Narváez-Solarte, W.; Soto-Giraldo, A.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Efecto de extractos vegetales compuestos sobre Diaphorina citri (Hemiptera: Liviidae) y su parasitoide Tamarixia radiata (Hymenoptera: Eulophidae)</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Artículo científico (laboratorio)</tipoFuente>
+  <iniciativa rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biocontroladores</iniciativa>
+  <nivelConfiabilidad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</nivelConfiabilidad>
+  <naturaleza rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hecho documentado (laboratorio)</naturaleza>
+  <acceso rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abierto (licencia no verificada)</acceso>
+  <fechaConsulta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11/nov/2026</fechaConsulta>
+  <informacionExtraida xml:lang="es">Efecto de extractos de Murraya paniculata, Cocos nucifera, Syzygium aromaticum y Psidium guajava sobre Diaphorina citri y Tamarixia radiata, en olfatometría.</informacionExtraida>
+  <alcance xml:lang="es">Condiciones controladas. Los valores cuantitativos por extracto no están en la ficha; la restricción advierte la interacción, no una prohibición numérica. Boletín Científico Centro de Museos, 28(1), 125-138.</alcance>
+  <notas xml:lang="es">Condiciones controladas. Los valores cuantitativos por extracto no están en la ficha; la restricción advierte la interacción, no una prohibición numérica. Boletín Científico Centro de Museos, 28(1), 125-138.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2024</anio>
+  <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.17151/bccm.2024.28.1.7</doi>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.17151/bccm.2024.28.1.7</url>
+</FuenteEvidencia>
+
+<RelacionBiocontrol rdf:about="#Relacion_Compsus_Trigonospila">
+  <involucraPlaga rdf:resource="#Compsus_sp"/>
+  <involucraAgente rdf:resource="#Trigonospila_unicaldasi"/>
+  <fuentePrincipal rdf:resource="#F04"/>
+  <respaldadoPor rdf:resource="#F04"/>
+  <respaldadoPor rdf:resource="#F03"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relacion_Compsus_Trigonospila</rdfs:label>
+  <tieneNivelEvidencia rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</tieneNivelEvidencia>
+  <variableRespuesta xml:lang="es">parasitismo de adultos de Compsus</variableRespuesta>
+  <resultado xml:lang="es">Parasitismo de adultos en limón, con la especie descrita en 2017 (F04) y un estudio morfológico previo del género (F03).</resultado>
+  <condicionExperimental xml:lang="es">Colecta en Maltería (2250 msnm) y holotipo en la Granja Tesorito (2280 m).</condicionExperimental>
+  <criterioNivel xml:lang="es">Alta para el hecho del parasitismo. No hay condiciones de uso ni protocolo de liberación, así que no se activa una recomendación climática.</criterioNivel>
+</RelacionBiocontrol>
+
+<Plaga rdf:about="#Compsus_sp">
+  <afectaA rdf:resource="#Citrus_limon"/>
+  <contextualizadoPor rdf:resource="#F03"/>
+  <contextualizadoPor rdf:resource="#F04"/>
+  <esControladaPor rdf:resource="#Trigonospila_unicaldasi"/>
+  <rdfs:label xml:lang="es">picudo de los cítricos</rdfs:label>
+  <nombreComun xml:lang="es">picudo de los cítricos</nombreComun>
+  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Compsus sp.</nombreCientifico>
+  <descripcion xml:lang="es">Picudo recolectado en Maltería y en limón de la Granja Tesorito. F03 lo trata como Compsus viridilineatus y F04 como Compsus sp.</descripcion>
+</Plaga>
+
+<Cultivo rdf:about="#Citrus_limon">
+  <rdfs:label xml:lang="es">limón</rdfs:label>
+  <nombreComun xml:lang="es">limón</nombreComun>
+  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Citrus limon</nombreCientifico>
+  <descripcion xml:lang="es">Hospedero del holotipo de Trigonospila unicaldasi en la Granja Tesorito (F04).</descripcion>
+</Cultivo>
+
+<FuenteEvidencia rdf:about="#F03">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F03 - Soto y Ocampo (2011)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F03 - Soto y Ocampo (2011)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Soto G., A.; Ocampo S., A.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Estudio preliminar de Trigonospila sp. (Diptera: Tachinidae), parasitoide de Compsus viridilineatus (Coleoptera: Curculionidae)</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Artículo científico (descripción)</tipoFuente>
+  <iniciativa rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biocontroladores</iniciativa>
+  <nivelConfiabilidad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</nivelConfiabilidad>
+  <naturaleza rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hecho documentado</naturaleza>
+  <acceso rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abierto (licencia no verificada)</acceso>
+  <fechaConsulta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11/nov/2026</fechaConsulta>
+  <informacionExtraida xml:lang="es">Descripción morfológica de larvas, pupas y adultos de Trigonospila sp., parasitoide de adultos del picudo. Adultos de Compsus recolectados en Maltería, Manizales (2250 msnm).</informacionExtraida>
+  <alcance xml:lang="es">Estudio preliminar morfológico, sin eficacia de campo. Volumen y páginas por completar al citar.</alcance>
+  <notas xml:lang="es">Estudio preliminar morfológico, sin eficacia de campo. Volumen y páginas por completar al citar.</notas>
   <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2011</anio>
-  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.jstor.org/stable/41336460</url>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://revistasojs.ucaldas.edu.co/index.php/boletincientifico/article/view/4434</url>
 </FuenteEvidencia>
 
-<FuenteEvidencia rdf:about="#F12">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F12 - Hernández Arredondo y Rosero Álvarez (2025)</rdfs:label>
-  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F12 - Hernández Arredondo y Rosero Álvarez (2025)</citaCorta>
-  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hernández Arredondo, C.; Rosero Álvarez, N. V.</autores>
-  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Aislamiento y multiplicación de cepas nativas de Hirsutella citriformis Speare como controlador biológico de Diaphorina citri</titulo>
-  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">tesis</tipoFuente>
-  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_relacion</rolFuente>
-  <notas xml:lang="es">Trabajo de grado, Ingeniería Agronómica, Universidad de Caldas. Asesores: Alberto Soto Giraldo y Ana María Restrepo García. Aislamiento y medios de cultivo; el propio trabajo pide validación de campo.</notas>
+<FuenteEvidencia rdf:about="#F04">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F04 - Vinasco et al. (2017)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F04 - Vinasco et al. (2017)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vinasco, N.; Vallejo, L. F.; Soto, A.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">New species of the genus Trigonospila Pokorny (Diptera: Tachinidae) parasitises adult Compsus sp. Schoenherr (Coleoptera: Curculionidae) in Colombia</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Artículo científico (descripción de especie)</tipoFuente>
+  <iniciativa rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biocontroladores</iniciativa>
+  <nivelConfiabilidad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</nivelConfiabilidad>
+  <naturaleza rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hecho documentado</naturaleza>
+  <acceso rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abierto (licencia no verificada)</acceso>
+  <fechaConsulta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11/nov/2026</fechaConsulta>
+  <informacionExtraida xml:lang="es">Descripción de Trigonospila unicaldasi. Holotipo en la Granja Tesorito, Valle de Maltería, Manizales (2280 m), sobre adultos de Compsus sp. en limón.</informacionExtraida>
+  <alcance xml:lang="es">Descripción taxonómica y registro de parasitismo. No ofrece condiciones de uso ni protocolo de liberación. Boletín Científico Centro de Museos, 21(2), 207-219.</alcance>
+  <notas xml:lang="es">Descripción taxonómica y registro de parasitismo. No ofrece condiciones de uso ni protocolo de liberación. Boletín Científico Centro de Museos, 21(2), 207-219.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2017</anio>
+  <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.17151/bccm.2017.21.2.14</doi>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.17151/bccm.2017.21.2.14</url>
+</FuenteEvidencia>
+
+<AgenteBiocontrol rdf:about="#Trigonospila_unicaldasi">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Trigonospila unicaldasi</rdfs:label>
+  <nombreComun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Trigonospila unicaldasi</nombreComun>
+  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Trigonospila unicaldasi</nombreCientifico>
+  <tipoAgente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">parasitoide</tipoAgente>
+  <descripcion xml:lang="es">Parasitoide de adultos de Compsus. F03 describió el género en Maltería; F04 describió la especie con holotipo en la Granja Tesorito.</descripcion>
+</AgenteBiocontrol>
+
+<Experimento rdf:about="#Experimento_magnetico_tomate_comercial">
+  <articuladoCon rdf:resource="#MAGNETIME"/>
+  <documentadoEn rdf:resource="#F13"/>
+  <rdfs:label xml:lang="es">Tratamiento magnético de semilla de tomate a escala comercial</rdfs:label>
+  <etiqueta xml:lang="es">Tratamiento magnético de semilla de tomate a escala comercial</etiqueta>
+  <estadoEnlace rdf:datatype="http://www.w3.org/2001/XMLSchema#string">documentado</estadoEnlace>
+  <variableRespuesta xml:lang="es">rendimiento y floración de Solanum lycopersicum</variableRespuesta>
+  <condicionExperimental xml:lang="es">Sistema productivo comercial de tomate. Tesis de doctorado, autor por verificar en la ficha.</condicionExperimental>
+  <resultado xml:lang="es">El rendimiento aumentó y la floración no cambió (F13, confiabilidad media). No hay validación en cítricos.</resultado>
+</Experimento>
+
+<FuenteEvidencia rdf:about="#F13">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F13 - Repositorio UCaldas (2025)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F13 - Repositorio UCaldas (2025)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Autor por verificar en la ficha del repositorio</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Efecto del tratamiento magnético de semillas sobre un sistema productivo de Solanum lycopersicum L., a escala comercial</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tesis de doctorado</tipoFuente>
+  <iniciativa rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MAGNETIME</iniciativa>
+  <nivelConfiabilidad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Media</nivelConfiabilidad>
+  <naturaleza rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hecho documentado (tesis)</naturaleza>
+  <acceso rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abierto · CC BY-NC-ND 4.0</acceso>
+  <fechaConsulta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11/nov/2026</fechaConsulta>
+  <informacionExtraida xml:lang="es">Tratamiento magnético de semillas de tomate a escala comercial: revisión sistemática, optimización de parámetros, crecimiento, floración y rendimiento. El rendimiento aumentó y la floración no cambió.</informacionExtraida>
+  <alcance xml:lang="es">Tesis, no artículo revisado por pares. Cultivo: tomate. No hay validación en cítricos. Es la evidencia que el caso integrador señala como faltante para trasladar MAGNETIME al cultivo.</alcance>
+  <notas xml:lang="es">Tesis, no artículo revisado por pares. Cultivo: tomate. No hay validación en cítricos. Es la evidencia que el caso integrador señala como faltante para trasladar MAGNETIME al cultivo.</notas>
   <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2025</anio>
-  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://repositorio.ucaldas.edu.co/entities/publication/75c38aef-0b76-4171-8a69-e3a3f06c53f1</url>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://repositorio.ucaldas.edu.co/handle/ucaldas/22551</url>
 </FuenteEvidencia>
 
-<Restriccion rdf:about="#Restriccion_cuprico">
-  <justificadoPor rdf:resource="#F07"/>
-  <rdfs:label xml:lang="es">Incompatibilidad con fungicida cúprico</rdfs:label>
-  <etiqueta xml:lang="es">Incompatibilidad con fungicida cúprico</etiqueta>
-  <codigoPractica rdf:datatype="http://www.w3.org/2001/XMLSchema#string">aplicacion_fungicida_cuprico</codigoPractica>
-  <descripcion xml:lang="es">Los fungicidas cúpricos comprometen a Hirsutella citriformis. La revisión desaconseja aplicar cobre a dosis altas junto con el hongo (F07).</descripcion>
-</Restriccion>
-
-<Restriccion rdf:about="#Restriccion_azufre">
-  <justificadoPor rdf:resource="#F07"/>
-  <rdfs:label xml:lang="es">Incompatibilidad con azufre</rdfs:label>
-  <etiqueta xml:lang="es">Incompatibilidad con azufre</etiqueta>
-  <codigoPractica rdf:datatype="http://www.w3.org/2001/XMLSchema#string">aplicacion_azufre</codigoPractica>
-  <descripcion xml:lang="es">El azufre elemental a dosis altas afecta al hongo entomopatógeno (F07).</descripcion>
-</Restriccion>
-
-<AnalisisQuimico rdf:about="#Analisis_exudados_Hirsutella">
+<AnalisisQuimico rdf:about="#Analisis_xenometabolomica">
   <articuladoCon rdf:resource="#ClayOMICS"/>
-  <rdfs:label xml:lang="es">Perfil químico propuesto de exudados de Hirsutella citriformis</rdfs:label>
-  <etiqueta xml:lang="es">Perfil químico propuesto de exudados de Hirsutella citriformis</etiqueta>
-  <estadoEnlace rdf:datatype="http://www.w3.org/2001/XMLSchema#string">propuesto</estadoEnlace>
-  <variableRespuesta xml:lang="es">exudados con actividad biológica y compatibilidad de soportes de formulación</variableRespuesta>
-  <condicionExperimental xml:lang="es">No hay un protocolo ejecutado en este prototipo. La revisión F07 indica que el papel de los exudados del hongo está poco caracterizado.</condicionExperimental>
-  <resultado xml:lang="es">Enlace de interoperabilidad propuesto con ClayOMICS (F13). El prototipo no afirma un resultado medido por esa plataforma.</resultado>
+  <documentadoEn rdf:resource="#F17"/>
+  <rdfs:label xml:lang="es">Revisión de técnicas analíticas para biomarcadores de toxicidad</rdfs:label>
+  <etiqueta xml:lang="es">Revisión de técnicas analíticas para biomarcadores de toxicidad</etiqueta>
+  <estadoEnlace rdf:datatype="http://www.w3.org/2001/XMLSchema#string">contexto</estadoEnlace>
+  <variableRespuesta xml:lang="es">técnica analítica, analito y matriz</variableRespuesta>
+  <condicionExperimental xml:lang="es">Revisión del tema. No es un análisis encargado a ClayOMICS ni un perfil de una cepa.</condicionExperimental>
+  <resultado xml:lang="es">F17 reseña GC-MS, LC-MS, UHPLC-QTOF-MS, RMN e ICP-MS frente a plaguicidas, metales y micotoxinas. Sirve de puente conceptual con residuos; no es un resultado del spin-off (F16).</resultado>
 </AnalisisQuimico>
 
 <PlataformaExterna rdf:about="#ClayOMICS">
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ClayOMICS</rdfs:label>
   <etiqueta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ClayOMICS</etiqueta>
   <tipoPlataforma rdf:datatype="http://www.w3.org/2001/XMLSchema#string">analisis_quimico</tipoPlataforma>
-  <descripcion xml:lang="es">Spin-off de la Universidad de Caldas para análisis de datos químicos mediante técnicas de medición, separación e identificación.</descripcion>
+  <descripcion xml:lang="es">Spin-off de la Universidad de Caldas para análisis de datos químicos. La noticia F16 acredita el servicio; la revisión F17 es del grupo de Cromatografía y no es un resultado del spin-off.</descripcion>
   <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.ucaldas.edu.co/portal/spin-off-clayomics-de-la-universidad-de-caldas-obtiene-su-registro-de-marca/</url>
 </PlataformaExterna>
 
-<Experimento rdf:about="#Experimento_campo_magnetico_conidios">
-  <articuladoCon rdf:resource="#MAGNETIME"/>
-  <rdfs:label xml:lang="es">Germinación de conidios bajo campo electromagnético</rdfs:label>
-  <etiqueta xml:lang="es">Germinación de conidios bajo campo electromagnético</etiqueta>
-  <estadoEnlace rdf:datatype="http://www.w3.org/2001/XMLSchema#string">propuesto</estadoEnlace>
-  <variableRespuesta xml:lang="es">porcentaje de germinación de conidios</variableRespuesta>
-  <condicionExperimental xml:lang="es">Conidios de H. citriformis en la ventana 23-28 °C y humedad relativa superior al 80 %, con y sin campo electromagnético de baja intensidad. Protocolo no ejecutado.</condicionExperimental>
-  <resultado xml:lang="es">Sin resultado medido. La pregunta se articula con MAGNETIME y con el semillero de Magnetobiología (F14, F15). No es un experimento realizado.</resultado>
-</Experimento>
-
-<PlataformaExterna rdf:about="#MAGNETIME">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MAGNETIME</rdfs:label>
-  <etiqueta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MAGNETIME</etiqueta>
-  <tipoPlataforma rdf:datatype="http://www.w3.org/2001/XMLSchema#string">magnetobiologia</tipoPlataforma>
-  <descripcion xml:lang="es">Emprendimiento de base tecnológica de la Universidad de Caldas, vinculado al grupo de Magnetobiología, sobre campos electromagnéticos en sistemas biológicos.</descripcion>
-  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.ucaldas.edu.co/portal/universidad-de-caldas-seleccionada-en-convocatoria-del-ministerio-de-comercio-industria-y-turismo-de-colombia/</url>
-</PlataformaExterna>
-
-<FuenteEvidencia rdf:about="#F15">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F15 - Semillero de Magnetobiología UCaldas</rdfs:label>
-  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F15 - Semillero de Magnetobiología UCaldas</citaCorta>
-  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Universidad de Caldas</autores>
-  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Semillero de Magnetobiología</titulo>
-  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ficha_institucional</tipoFuente>
-  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">interoperabilidad</rolFuente>
-  <notas xml:lang="es">Grupo de Magnetobiología. Estudia campos electromagnéticos en sistemas biológicos. Coordinación: Javier Ignacio Torres Osorio. Ficha publicada en 2024.</notas>
-  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2024</anio>
-  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://investigacionesyposgrados.ucaldas.edu.co/semilleros-de-investigacion/semillero-de-magnetobiologia/</url>
+<FuenteEvidencia rdf:about="#F17">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F17 - Betancourt Arango et al. (2020)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F17 - Betancourt Arango et al. (2020)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Betancourt Arango, J. P.; Patiño Ospina, A.; Taborda Ocampo, G.; Fiscal Ladino, J. A.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Aplicaciones de la xenometabolómica para la identificación de biomarcadores de toxicidad: una revisión del tema</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Artículo de revisión</tipoFuente>
+  <iniciativa rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ClayOMICS</iniciativa>
+  <nivelConfiabilidad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</nivelConfiabilidad>
+  <naturaleza rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hecho documentado (revisión)</naturaleza>
+  <acceso rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abierto (licencia no verificada)</acceso>
+  <fechaConsulta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11/nov/2026</fechaConsulta>
+  <informacionExtraida xml:lang="es">Revisión de GC-MS, LC-MS, UHPLC-QTOF-MS, RMN e ICP-MS aplicadas a plaguicidas, metales pesados, micotoxinas y otros analitos, en agua, tejidos, plantas y alimentos.</informacionExtraida>
+  <alcance xml:lang="es">Revisión del grupo de Cromatografía de la Universidad de Caldas. No es un servicio ni un resultado de ClayOMICS. Sirve de puente conceptual con residuos de plaguicidas. Biosalud, 19(1), 7-30.</alcance>
+  <notas xml:lang="es">Revisión del grupo de Cromatografía de la Universidad de Caldas. No es un servicio ni un resultado de ClayOMICS. Sirve de puente conceptual con residuos de plaguicidas. Biosalud, 19(1), 7-30.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2020</anio>
+  <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.17151/biosa.2020.19.1.1</doi>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.17151/biosa.2020.19.1.1</url>
 </FuenteEvidencia>
 
+<RelacionBiocontrol rdf:about="#Relacion_DC_Diaphorencyrtus">
+  <involucraPlaga rdf:resource="#Diaphorina_citri"/>
+  <involucraAgente rdf:resource="#Diaphorencyrtus_sp"/>
+  <fuentePrincipal rdf:resource="#F01"/>
+  <respaldadoPor rdf:resource="#F01"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relacion_DC_Diaphorencyrtus</rdfs:label>
+  <tieneNivelEvidencia rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Media</tieneNivelEvidencia>
+  <variableRespuesta xml:lang="es">presencia del parasitoide sobre ninfas</variableRespuesta>
+  <resultado xml:lang="es">Primer registro en Colombia, en brotes de cítricos de Manizales (F01).</resultado>
+  <condicionExperimental xml:lang="es">Captura manual en brotes. Sin medición de parasitismo ni de clima de uso.</condicionExperimental>
+  <criterioNivel xml:lang="es">Media para el control: la fuente es de confiabilidad alta, pero solo prueba presencia. El efecto sobre la plaga es una hipótesis y no hay ventana de uso.</criterioNivel>
+</RelacionBiocontrol>
+
+<RelacionBiocontrol rdf:about="#Relacion_PO_Chrysoperla">
+  <involucraPlaga rdf:resource="#Phyllocoptruta_oleivora"/>
+  <involucraAgente rdf:resource="#Chrysoperla_carnea"/>
+  <fuentePrincipal rdf:resource="#F12"/>
+  <respaldadoPor rdf:resource="#F12"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relacion_PO_Chrysoperla</rdfs:label>
+  <tieneNivelEvidencia rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</tieneNivelEvidencia>
+  <variableRespuesta xml:lang="es">daño de Phyllocoptruta oleivora en fruto</variableRespuesta>
+  <resultado xml:lang="es">La liberación redujo el daño a 10 % en el primer ciclo, en naranja Valencia (F12).</resultado>
+  <condicionExperimental xml:lang="es">Campo en Caicedonia, Valle del Cauca, 1150 msnm. También se observó a Phytoseiidae.</condicionExperimental>
+  <criterioNivel xml:lang="es">Alta para el ensayo de campo contra el ácaro. No autoriza a recomendar Chrysoperla contra Diaphorina citri ni trae una ventana numérica de temperatura.</criterioNivel>
+</RelacionBiocontrol>
+
 <Plaga rdf:about="#Phyllocoptruta_oleivora">
-  <rdf:type rdf:resource="#PlagaSinAgenteDocumentado"/>
   <afectaA rdf:resource="#Citrus_sinensis"/>
-  <afectaA rdf:resource="#Citrus_reticulata"/>
+  <contextualizadoPor rdf:resource="#F12"/>
+  <esControladaPor rdf:resource="#Chrysoperla_carnea"/>
   <rdfs:label xml:lang="es">ácaro tostador de los cítricos</rdfs:label>
   <nombreComun xml:lang="es">ácaro tostador de los cítricos</nombreComun>
   <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phyllocoptruta oleivora</nombreCientifico>
-  <descripcion xml:lang="es">Ácaro eriófido que daña la epidermis del fruto. Hirsutella thompsonii se discute en la literatura de ácaros, pero no se codifica en esta semilla. Por eso la consulta dispara la laguna de conocimiento de la base.</descripcion>
+  <descripcion xml:lang="es">Ácaro eriófido evaluado en naranja Valencia junto con Polyphagotarsonemus latus (F12). Esa fuente no autoriza a usar el mismo agente contra Diaphorina citri.</descripcion>
 </Plaga>
 
-<Plaga rdf:about="#Compsus_sp">
-  <rdf:type rdf:resource="#PlagaSinAgenteDocumentado"/>
-  <afectaA rdf:resource="#Citrus_sinensis"/>
-  <afectaA rdf:resource="#Citrus_reticulata"/>
-  <rdfs:label xml:lang="es">picudo de los cítricos</rdfs:label>
-  <nombreComun xml:lang="es">picudo de los cítricos</nombreComun>
-  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Compsus sp.</nombreCientifico>
-  <descripcion xml:lang="es">Picudo asociado a cítricos. Esta base no registra un enemigo natural. La laguna es del inventario: no afirma que no existan controladores en la literatura.</descripcion>
-</Plaga>
+<Cultivo rdf:about="#Citrus_sinensis">
+  <rdfs:label xml:lang="es">naranja dulce</rdfs:label>
+  <nombreComun xml:lang="es">naranja dulce</nombreComun>
+  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Citrus sinensis</nombreCientifico>
+  <descripcion xml:lang="es">Naranja Valencia del ensayo de campo en Caicedonia sobre ácaros (F12).</descripcion>
+</Cultivo>
 
-<FuenteEvidencia rdf:about="#F17">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F17 - Gómez (2024)</rdfs:label>
-  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F17 - Gómez (2024)</citaCorta>
-  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gómez, C.</autores>
-  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Control biológico y microbiológico de plagas y enfermedades en cítricos</titulo>
-  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">documento_repositorio</tipoFuente>
-  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">contexto</rolFuente>
-  <notas xml:lang="es">Registro del repositorio institucional de la Universidad de Caldas. La ficha pública consultada no detalla resultados, así que no se transcriben.</notas>
-  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2024</anio>
-  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://repositorio.ucaldas.edu.co/handle/ucaldas/19978</url>
+<FuenteEvidencia rdf:about="#F12">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F12 - Imbachi et al. (2012)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F12 - Imbachi et al. (2012)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Imbachi, K.; Mesa, N. C.; Rodríguez, I. V. et al.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Evaluación de estrategias de control biológico de Polyphagotarsonemus latus (Banks) y Phyllocoptruta oleivora (Ashmead) en naranja Valencia</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Artículo científico (campo)</tipoFuente>
+  <iniciativa rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biocontroladores</iniciativa>
+  <nivelConfiabilidad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</nivelConfiabilidad>
+  <naturaleza rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hecho documentado (campo)</naturaleza>
+  <acceso rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abierto (licencia no verificada)</acceso>
+  <fechaConsulta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11/nov/2026</fechaConsulta>
+  <informacionExtraida xml:lang="es">En naranja Valencia (Caicedonia, Valle del Cauca, 1150 msnm) la liberación de Chrysoperla carnea redujo el daño de Phyllocoptruta oleivora a 10 % en el primer ciclo. Los ácaros Phytoseiidae se dispersaron rápido de los frutos.</informacionExtraida>
+  <alcance xml:lang="es">Las plagas objetivo son ácaros, no Diaphorina citri. No sustenta que Chrysoperla controle al psílido. Región distinta a Caldas. Acta Agronómica, 61(4), 333-338.</alcance>
+  <notas xml:lang="es">Las plagas objetivo son ácaros, no Diaphorina citri. No sustenta que Chrysoperla controle al psílido. Región distinta a Caldas. Acta Agronómica, 61(4), 333-338.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2012</anio>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://revistas.unal.edu.co/index.php/acta_agronomica/article/download/38139/40315/169692</url>
 </FuenteEvidencia>
 
-<FuenteEvidencia rdf:about="#F14">
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F14 - Universidad de Caldas (2024)</rdfs:label>
-  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F14 - Universidad de Caldas (2024)</citaCorta>
-  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Universidad de Caldas</autores>
-  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Universidad de Caldas seleccionada en la convocatoria ALDEA del Ministerio de Comercio, Industria y Turismo</titulo>
-  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nota_institucional</tipoFuente>
-  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">interoperabilidad</rolFuente>
-  <notas xml:lang="es">Nota del 4 de abril de 2024. Nombra los emprendimientos de base tecnológica Compocol, Clayomics, Biocontroladores y Magnetime.</notas>
-  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2024</anio>
-  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.ucaldas.edu.co/portal/universidad-de-caldas-seleccionada-en-convocatoria-del-ministerio-de-comercio-industria-y-turismo-de-colombia/</url>
-</FuenteEvidencia>
+<AgenteBiocontrol rdf:about="#Chrysoperla_carnea">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Chrysoperla carnea</rdfs:label>
+  <nombreComun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Chrysoperla carnea</nombreComun>
+  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Chrysoperla carnea</nombreCientifico>
+  <tipoAgente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">depredador</tipoAgente>
+  <descripcion xml:lang="es">Depredador liberado contra ácaros en naranja Valencia (F12). El inventario no lo documenta como controlador de Diaphorina citri.</descripcion>
+</AgenteBiocontrol>
 
 <swrl:Variable rdf:about="urn:swrl#p"/>
 
@@ -819,12 +1016,6 @@
 <swrl:Variable rdf:about="urn:swrl#tmax"/>
 
 <swrl:Variable rdf:about="urn:swrl#t"/>
-
-<swrl:Variable rdf:about="urn:swrl#hmin"/>
-
-<swrl:Variable rdf:about="urn:swrl#hmax"/>
-
-<swrl:Variable rdf:about="urn:swrl#h"/>
 
 <swrl:Variable rdf:about="urn:swrl#res"/>
 
@@ -1312,85 +1503,12 @@
                                                             <rdf:Description>
                                                               <rdf:first>
                                                                 <swrl:DatavaluedPropertyAtom>
-                                                                  <swrl:propertyPredicate rdf:resource="#humedadMin"/>
-                                                                  <swrl:argument1 rdf:resource="urn:swrl#c"/>
-                                                                  <swrl:argument2 rdf:resource="urn:swrl#hmin"/>
+                                                                  <swrl:propertyPredicate rdf:resource="#tieneNivelEvidencia"/>
+                                                                  <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                                                                  <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Baja</swrl:argument2>
                                                                 </swrl:DatavaluedPropertyAtom>
                                                               </rdf:first>
-                                                              <rdf:rest>
-                                                                <rdf:Description>
-                                                                  <rdf:first>
-                                                                    <swrl:DatavaluedPropertyAtom>
-                                                                      <swrl:propertyPredicate rdf:resource="#humedadMax"/>
-                                                                      <swrl:argument1 rdf:resource="urn:swrl#c"/>
-                                                                      <swrl:argument2 rdf:resource="urn:swrl#hmax"/>
-                                                                    </swrl:DatavaluedPropertyAtom>
-                                                                  </rdf:first>
-                                                                  <rdf:rest>
-                                                                    <rdf:Description>
-                                                                      <rdf:first>
-                                                                        <swrl:DatavaluedPropertyAtom>
-                                                                          <swrl:propertyPredicate rdf:resource="#humedadActual"/>
-                                                                          <swrl:argument1 rdf:resource="urn:swrl#q"/>
-                                                                          <swrl:argument2 rdf:resource="urn:swrl#h"/>
-                                                                        </swrl:DatavaluedPropertyAtom>
-                                                                      </rdf:first>
-                                                                      <rdf:rest>
-                                                                        <rdf:Description>
-                                                                          <rdf:first>
-                                                                            <swrl:BuiltinAtom>
-                                                                              <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual"/>
-                                                                              <swrl:arguments>
-                                                                                <rdf:Description>
-                                                                                  <rdf:first rdf:resource="urn:swrl#h"/>
-                                                                                  <rdf:rest>
-                                                                                    <rdf:Description>
-                                                                                      <rdf:first rdf:resource="urn:swrl#hmin"/>
-                                                                                      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                                                    </rdf:Description>
-                                                                                  </rdf:rest>
-                                                                                </rdf:Description>
-                                                                              </swrl:arguments>
-                                                                            </swrl:BuiltinAtom>
-                                                                          </rdf:first>
-                                                                          <rdf:rest>
-                                                                            <rdf:Description>
-                                                                              <rdf:first>
-                                                                                <swrl:BuiltinAtom>
-                                                                                  <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThanOrEqual"/>
-                                                                                  <swrl:arguments>
-                                                                                    <rdf:Description>
-                                                                                      <rdf:first rdf:resource="urn:swrl#h"/>
-                                                                                      <rdf:rest>
-                                                                                        <rdf:Description>
-                                                                                          <rdf:first rdf:resource="urn:swrl#hmax"/>
-                                                                                          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                                                        </rdf:Description>
-                                                                                      </rdf:rest>
-                                                                                    </rdf:Description>
-                                                                                  </swrl:arguments>
-                                                                                </swrl:BuiltinAtom>
-                                                                              </rdf:first>
-                                                                              <rdf:rest>
-                                                                                <rdf:Description>
-                                                                                  <rdf:first>
-                                                                                    <swrl:DatavaluedPropertyAtom>
-                                                                                      <swrl:propertyPredicate rdf:resource="#tieneNivelEvidencia"/>
-                                                                                      <swrl:argument1 rdf:resource="urn:swrl#r"/>
-                                                                                      <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Baja</swrl:argument2>
-                                                                                    </swrl:DatavaluedPropertyAtom>
-                                                                                  </rdf:first>
-                                                                                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                                                </rdf:Description>
-                                                                              </rdf:rest>
-                                                                            </rdf:Description>
-                                                                          </rdf:rest>
-                                                                        </rdf:Description>
-                                                                      </rdf:rest>
-                                                                    </rdf:Description>
-                                                                  </rdf:rest>
-                                                                </rdf:Description>
-                                                              </rdf:rest>
+                                                              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
                                                             </rdf:Description>
                                                           </rdf:rest>
                                                         </rdf:Description>
@@ -1580,85 +1698,12 @@
                                                             <rdf:Description>
                                                               <rdf:first>
                                                                 <swrl:DatavaluedPropertyAtom>
-                                                                  <swrl:propertyPredicate rdf:resource="#humedadMin"/>
-                                                                  <swrl:argument1 rdf:resource="urn:swrl#c"/>
-                                                                  <swrl:argument2 rdf:resource="urn:swrl#hmin"/>
+                                                                  <swrl:propertyPredicate rdf:resource="#tieneNivelEvidencia"/>
+                                                                  <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                                                                  <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Media</swrl:argument2>
                                                                 </swrl:DatavaluedPropertyAtom>
                                                               </rdf:first>
-                                                              <rdf:rest>
-                                                                <rdf:Description>
-                                                                  <rdf:first>
-                                                                    <swrl:DatavaluedPropertyAtom>
-                                                                      <swrl:propertyPredicate rdf:resource="#humedadMax"/>
-                                                                      <swrl:argument1 rdf:resource="urn:swrl#c"/>
-                                                                      <swrl:argument2 rdf:resource="urn:swrl#hmax"/>
-                                                                    </swrl:DatavaluedPropertyAtom>
-                                                                  </rdf:first>
-                                                                  <rdf:rest>
-                                                                    <rdf:Description>
-                                                                      <rdf:first>
-                                                                        <swrl:DatavaluedPropertyAtom>
-                                                                          <swrl:propertyPredicate rdf:resource="#humedadActual"/>
-                                                                          <swrl:argument1 rdf:resource="urn:swrl#q"/>
-                                                                          <swrl:argument2 rdf:resource="urn:swrl#h"/>
-                                                                        </swrl:DatavaluedPropertyAtom>
-                                                                      </rdf:first>
-                                                                      <rdf:rest>
-                                                                        <rdf:Description>
-                                                                          <rdf:first>
-                                                                            <swrl:BuiltinAtom>
-                                                                              <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual"/>
-                                                                              <swrl:arguments>
-                                                                                <rdf:Description>
-                                                                                  <rdf:first rdf:resource="urn:swrl#h"/>
-                                                                                  <rdf:rest>
-                                                                                    <rdf:Description>
-                                                                                      <rdf:first rdf:resource="urn:swrl#hmin"/>
-                                                                                      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                                                    </rdf:Description>
-                                                                                  </rdf:rest>
-                                                                                </rdf:Description>
-                                                                              </swrl:arguments>
-                                                                            </swrl:BuiltinAtom>
-                                                                          </rdf:first>
-                                                                          <rdf:rest>
-                                                                            <rdf:Description>
-                                                                              <rdf:first>
-                                                                                <swrl:BuiltinAtom>
-                                                                                  <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThanOrEqual"/>
-                                                                                  <swrl:arguments>
-                                                                                    <rdf:Description>
-                                                                                      <rdf:first rdf:resource="urn:swrl#h"/>
-                                                                                      <rdf:rest>
-                                                                                        <rdf:Description>
-                                                                                          <rdf:first rdf:resource="urn:swrl#hmax"/>
-                                                                                          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                                                        </rdf:Description>
-                                                                                      </rdf:rest>
-                                                                                    </rdf:Description>
-                                                                                  </swrl:arguments>
-                                                                                </swrl:BuiltinAtom>
-                                                                              </rdf:first>
-                                                                              <rdf:rest>
-                                                                                <rdf:Description>
-                                                                                  <rdf:first>
-                                                                                    <swrl:DatavaluedPropertyAtom>
-                                                                                      <swrl:propertyPredicate rdf:resource="#tieneNivelEvidencia"/>
-                                                                                      <swrl:argument1 rdf:resource="urn:swrl#r"/>
-                                                                                      <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Media</swrl:argument2>
-                                                                                    </swrl:DatavaluedPropertyAtom>
-                                                                                  </rdf:first>
-                                                                                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                                                </rdf:Description>
-                                                                              </rdf:rest>
-                                                                            </rdf:Description>
-                                                                          </rdf:rest>
-                                                                        </rdf:Description>
-                                                                      </rdf:rest>
-                                                                    </rdf:Description>
-                                                                  </rdf:rest>
-                                                                </rdf:Description>
-                                                              </rdf:rest>
+                                                              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
                                                             </rdf:Description>
                                                           </rdf:rest>
                                                         </rdf:Description>
@@ -1848,85 +1893,12 @@
                                                             <rdf:Description>
                                                               <rdf:first>
                                                                 <swrl:DatavaluedPropertyAtom>
-                                                                  <swrl:propertyPredicate rdf:resource="#humedadMin"/>
-                                                                  <swrl:argument1 rdf:resource="urn:swrl#c"/>
-                                                                  <swrl:argument2 rdf:resource="urn:swrl#hmin"/>
+                                                                  <swrl:propertyPredicate rdf:resource="#tieneNivelEvidencia"/>
+                                                                  <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                                                                  <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</swrl:argument2>
                                                                 </swrl:DatavaluedPropertyAtom>
                                                               </rdf:first>
-                                                              <rdf:rest>
-                                                                <rdf:Description>
-                                                                  <rdf:first>
-                                                                    <swrl:DatavaluedPropertyAtom>
-                                                                      <swrl:propertyPredicate rdf:resource="#humedadMax"/>
-                                                                      <swrl:argument1 rdf:resource="urn:swrl#c"/>
-                                                                      <swrl:argument2 rdf:resource="urn:swrl#hmax"/>
-                                                                    </swrl:DatavaluedPropertyAtom>
-                                                                  </rdf:first>
-                                                                  <rdf:rest>
-                                                                    <rdf:Description>
-                                                                      <rdf:first>
-                                                                        <swrl:DatavaluedPropertyAtom>
-                                                                          <swrl:propertyPredicate rdf:resource="#humedadActual"/>
-                                                                          <swrl:argument1 rdf:resource="urn:swrl#q"/>
-                                                                          <swrl:argument2 rdf:resource="urn:swrl#h"/>
-                                                                        </swrl:DatavaluedPropertyAtom>
-                                                                      </rdf:first>
-                                                                      <rdf:rest>
-                                                                        <rdf:Description>
-                                                                          <rdf:first>
-                                                                            <swrl:BuiltinAtom>
-                                                                              <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual"/>
-                                                                              <swrl:arguments>
-                                                                                <rdf:Description>
-                                                                                  <rdf:first rdf:resource="urn:swrl#h"/>
-                                                                                  <rdf:rest>
-                                                                                    <rdf:Description>
-                                                                                      <rdf:first rdf:resource="urn:swrl#hmin"/>
-                                                                                      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                                                    </rdf:Description>
-                                                                                  </rdf:rest>
-                                                                                </rdf:Description>
-                                                                              </swrl:arguments>
-                                                                            </swrl:BuiltinAtom>
-                                                                          </rdf:first>
-                                                                          <rdf:rest>
-                                                                            <rdf:Description>
-                                                                              <rdf:first>
-                                                                                <swrl:BuiltinAtom>
-                                                                                  <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThanOrEqual"/>
-                                                                                  <swrl:arguments>
-                                                                                    <rdf:Description>
-                                                                                      <rdf:first rdf:resource="urn:swrl#h"/>
-                                                                                      <rdf:rest>
-                                                                                        <rdf:Description>
-                                                                                          <rdf:first rdf:resource="urn:swrl#hmax"/>
-                                                                                          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                                                        </rdf:Description>
-                                                                                      </rdf:rest>
-                                                                                    </rdf:Description>
-                                                                                  </swrl:arguments>
-                                                                                </swrl:BuiltinAtom>
-                                                                              </rdf:first>
-                                                                              <rdf:rest>
-                                                                                <rdf:Description>
-                                                                                  <rdf:first>
-                                                                                    <swrl:DatavaluedPropertyAtom>
-                                                                                      <swrl:propertyPredicate rdf:resource="#tieneNivelEvidencia"/>
-                                                                                      <swrl:argument1 rdf:resource="urn:swrl#r"/>
-                                                                                      <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</swrl:argument2>
-                                                                                    </swrl:DatavaluedPropertyAtom>
-                                                                                  </rdf:first>
-                                                                                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                                                </rdf:Description>
-                                                                              </rdf:rest>
-                                                                            </rdf:Description>
-                                                                          </rdf:rest>
-                                                                        </rdf:Description>
-                                                                      </rdf:rest>
-                                                                    </rdf:Description>
-                                                                  </rdf:rest>
-                                                                </rdf:Description>
-                                                              </rdf:rest>
+                                                              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
                                                             </rdf:Description>
                                                           </rdf:rest>
                                                         </rdf:Description>

@@ -47,7 +47,7 @@ CLASES = {
     "Cultivo": "Cultivo de cítricos hospedero de la plaga.",
     "Plaga": "Organismo que afecta al menos un cultivo del inventario.",
     "AgenteBiocontrol": "Enemigo natural o microorganismo de control documentado.",
-    "CondicionUso": "Ventana operativa de temperatura y humedad de una relación.",
+    "CondicionUso": "Ventana de temperatura documentada. La humedad solo decide si la fuente la marca como umbral.",
     "FuenteEvidencia": "Publicación, tesis o nota que respalda o contextualiza un hecho.",
     "RelacionBiocontrol": "Relación reificada entre plaga, agente, condición, evidencia y restricciones.",
     "AnalisisQuimico": "Análisis químico, medido o propuesto, articulado con una plataforma.",
@@ -73,6 +73,7 @@ PROPIEDADES_OBJETO = {
     "justificadoPor": ("Restriccion", "FuenteEvidencia", False),
     "contextualizadoPor": ("Plaga", "FuenteEvidencia", False),
     "articuladoCon": (None, "PlataformaExterna", True),
+    "documentadoEn": (None, "FuenteEvidencia", True),
     "consultaPlaga": ("Consulta", "Plaga", True),
     "altamenteRecomendadoPara": ("AgenteBiocontrol", "Plaga", False),
     "potencialmenteRecomendadoPara": ("AgenteBiocontrol", "Plaga", False),
@@ -89,7 +90,13 @@ DATOS_FUNCIONALES = (
     "anio",
     "titulo",
     "tipoFuente",
-    "rolFuente",
+    "iniciativa",
+    "nivelConfiabilidad",
+    "naturaleza",
+    "acceso",
+    "fechaConsulta",
+    "informacionExtraida",
+    "alcance",
     "doi",
     "url",
     "citaCorta",
@@ -99,6 +106,7 @@ DATOS_FUNCIONALES = (
     "temperaturaMax",
     "humedadMin",
     "humedadMax",
+    "estadoVentanaHumedad",
     "rangoMin",
     "rangoMax",
     "rangoValido",
@@ -126,7 +134,7 @@ DECIMALES = {
     "temperaturaActual",
     "humedadActual",
 }
-CONTROLADOS = {"tieneNivelEvidencia", "estadoEnlace"}
+CONTROLADOS = {"tieneNivelEvidencia", "estadoEnlace", "estadoVentanaHumedad", "nivelConfiabilidad"}
 
 
 def _configurar_registro() -> None:
@@ -226,8 +234,14 @@ def _agregar_individuos(grafo: Graph) -> None:
         _agregar(grafo, fuente.id, "autores", Literal(fuente.autores))
         _agregar(grafo, fuente.id, "titulo", Literal(fuente.titulo))
         _agregar(grafo, fuente.id, "tipoFuente", Literal(fuente.tipo))
-        _agregar(grafo, fuente.id, "rolFuente", Literal(fuente.rol))
-        _agregar(grafo, fuente.id, "notas", _texto(fuente.notas))
+        _agregar(grafo, fuente.id, "iniciativa", Literal(fuente.iniciativa))
+        _agregar(grafo, fuente.id, "nivelConfiabilidad", _controlado(fuente.nivel))
+        _agregar(grafo, fuente.id, "naturaleza", Literal(fuente.naturaleza))
+        _agregar(grafo, fuente.id, "acceso", Literal(fuente.acceso))
+        _agregar(grafo, fuente.id, "fechaConsulta", Literal(fuente.fecha_consulta))
+        _agregar(grafo, fuente.id, "informacionExtraida", _texto(fuente.informacion_extraida))
+        _agregar(grafo, fuente.id, "alcance", _texto(fuente.alcance))
+        _agregar(grafo, fuente.id, "notas", _texto(fuente.alcance))
         if fuente.anio is not None:
             _agregar(grafo, fuente.id, "anio", _entero(fuente.anio))
         if fuente.doi:
@@ -259,15 +273,26 @@ def _agregar_individuos(grafo: Graph) -> None:
 
     for condicion in CONDICIONES:
         grafo.add((BIO[condicion.id], RDF.type, BIO.CondicionUso))
-        ventana = (
-            f"{condicion.temp_min:g}–{condicion.temp_max:g} °C; "
-            f"{condicion.hum_min:g}–{condicion.hum_max:g} % HR"
-        )
+        if condicion.hum_min is not None and condicion.hum_max is not None and condicion.humedad_decide:
+            ventana = (
+                f"{condicion.temp_min:g}–{condicion.temp_max:g} °C; "
+                f"{condicion.hum_min:g}–{condicion.hum_max:g} % HR"
+            )
+        elif condicion.hum_min is not None and condicion.hum_max is not None:
+            ventana = (
+                f"{condicion.temp_min:g}–{condicion.temp_max:g} °C; "
+                f"HR de ensayo {condicion.hum_min:g}–{condicion.hum_max:g} % (no decide)"
+            )
+        else:
+            ventana = f"{condicion.temp_min:g}–{condicion.temp_max:g} °C"
         grafo.add((BIO[condicion.id], RDFS.label, Literal(ventana)))
         _agregar(grafo, condicion.id, "temperaturaMin", _decimal(condicion.temp_min))
         _agregar(grafo, condicion.id, "temperaturaMax", _decimal(condicion.temp_max))
-        _agregar(grafo, condicion.id, "humedadMin", _decimal(condicion.hum_min))
-        _agregar(grafo, condicion.id, "humedadMax", _decimal(condicion.hum_max))
+        if condicion.hum_min is not None and condicion.hum_max is not None:
+            _agregar(grafo, condicion.id, "humedadMin", _decimal(condicion.hum_min))
+            _agregar(grafo, condicion.id, "humedadMax", _decimal(condicion.hum_max))
+            estado_humedad = "documentada" if condicion.humedad_decide else "ensayo"
+            _agregar(grafo, condicion.id, "estadoVentanaHumedad", _controlado(estado_humedad))
         _agregar(grafo, condicion.id, "rangoMin", _decimal(condicion.temp_min))
         _agregar(grafo, condicion.id, "rangoMax", _decimal(condicion.temp_max))
         _agregar(grafo, condicion.id, "rangoValido", Literal(ventana))
@@ -299,6 +324,7 @@ def _agregar_individuos(grafo: Graph) -> None:
         _agregar(grafo, analisis.id, "condicionExperimental", _texto(analisis.condicion_experimental))
         _agregar(grafo, analisis.id, "resultado", _texto(analisis.resultado))
         _agregar(grafo, analisis.id, "articuladoCon", BIO[analisis.plataforma_id])
+        _agregar(grafo, analisis.id, "documentadoEn", BIO[analisis.fuente_id])
 
     for experimento in EXPERIMENTOS:
         grafo.add((BIO[experimento.id], RDF.type, BIO.Experimento))
@@ -309,6 +335,7 @@ def _agregar_individuos(grafo: Graph) -> None:
         _agregar(grafo, experimento.id, "condicionExperimental", _texto(experimento.condicion_experimental))
         _agregar(grafo, experimento.id, "resultado", _texto(experimento.resultado))
         _agregar(grafo, experimento.id, "articuladoCon", BIO[experimento.plataforma_id])
+        _agregar(grafo, experimento.id, "documentadoEn", BIO[experimento.fuente_id])
 
     for relacion in RELACIONES:
         grafo.add((BIO[relacion.id], RDF.type, BIO.RelacionBiocontrol))
@@ -316,7 +343,8 @@ def _agregar_individuos(grafo: Graph) -> None:
         _agregar(grafo, relacion.id, "involucraPlaga", BIO[relacion.plaga_id])
         _agregar(grafo, relacion.id, "involucraAgente", BIO[relacion.agente_id])
         _agregar(grafo, relacion.plaga_id, "esControladaPor", BIO[relacion.agente_id])
-        _agregar(grafo, relacion.id, "tieneCondicion", BIO[relacion.condicion_id])
+        if relacion.condicion_id is not None:
+            _agregar(grafo, relacion.id, "tieneCondicion", BIO[relacion.condicion_id])
         _agregar(grafo, relacion.id, "fuentePrincipal", BIO[relacion.fuente_principal_id])
         _agregar(grafo, relacion.id, "tieneNivelEvidencia", _controlado(relacion.nivel))
         _agregar(grafo, relacion.id, "variableRespuesta", _texto(relacion.variable_respuesta))
@@ -345,11 +373,15 @@ def escribir_csv() -> None:
                 "anio",
                 "titulo",
                 "tipo",
-                "rol",
+                "iniciativa",
+                "nivel",
+                "naturaleza",
                 "cita_corta",
                 "doi",
                 "url",
-                "notas",
+                "acceso",
+                "informacion_extraida",
+                "alcance",
             ],
         )
         escritor.writeheader()
@@ -360,11 +392,15 @@ def escribir_csv() -> None:
                 "anio": "" if fuente.anio is None else fuente.anio,
                 "titulo": fuente.titulo,
                 "tipo": fuente.tipo,
-                "rol": fuente.rol,
+                "iniciativa": fuente.iniciativa,
+                "nivel": fuente.nivel,
+                "naturaleza": fuente.naturaleza,
                 "cita_corta": fuente.cita_corta,
                 "doi": fuente.doi,
                 "url": fuente.url,
-                "notas": fuente.notas,
+                "acceso": fuente.acceso,
+                "informacion_extraida": fuente.informacion_extraida,
+                "alcance": fuente.alcance,
             })
 
 
@@ -376,8 +412,8 @@ def escribir_turtle(grafo: Graph) -> None:
         "# Instancias y esquema del prototipo AgroTech Biocontrol.\n"
         "# Generado desde data/semilla.py. Regenerar con:\n"
         "#   python -m ontology.construir_ontologia\n"
-        "# Las ventanas numéricas son parámetros operativos del prototipo,\n"
-        "# anclados en las fuentes citadas, no una prescripción de campo.\n\n"
+        "# Inventario F01–F17 tomado de data/inventario_fuentes.tex.\n"
+        "# La humedad de un ensayo no se usa como umbral si la ficha no la documenta.\n\n"
     )
     RUTA_INSTANCIAS.write_text(encabezado + cuerpo, encoding="utf-8")
 

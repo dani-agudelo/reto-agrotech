@@ -15,8 +15,15 @@ def test_ontologia_carga_clases_e_individuos() -> None:
     nombres = {plaga.id for plaga in gestor.plagas}
     assert nombres == {"Diaphorina_citri", "Compsus_sp", "Phyllocoptruta_oleivora"}
     agentes = {agente["id"] for agente in gestor.listar_agentes()}
-    assert agentes == {"Tamarixia_radiata", "Diaphorencyrtus_sp", "Hirsutella_citriformis"}
-    assert len(gestor.relaciones) == 3
+    assert agentes == {
+        "Tamarixia_radiata",
+        "Diaphorencyrtus_sp",
+        "Hirsutella_citriformis",
+        "Beauveria_bassiana",
+        "Trigonospila_unicaldasi",
+        "Chrysoperla_carnea",
+    }
+    assert len(gestor.relaciones) == 6
     assert len(gestor.listar_fuentes()) == 17
 
 

@@ -1,8 +1,8 @@
 # Instancias y esquema del prototipo AgroTech Biocontrol.
 # Generado desde data/semilla.py. Regenerar con:
 #   python -m ontology.construir_ontologia
-# Las ventanas numéricas son parámetros operativos del prototipo,
-# anclados en las fuentes citadas, no una prescripción de campo.
+# Inventario F01–F17 tomado de data/inventario_fuentes.tex.
+# La humedad de un ensayo no se usa como umbral si la ficha no la documenta.
 
 @prefix bio: <http://agrotech.ucaldas.edu.co/ontologias/biocontrol#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -12,130 +12,162 @@
 <http://agrotech.ucaldas.edu.co/ontologias/biocontrol> a owl:Ontology ;
     rdfs:comment "Ontología de biocontrol de plagas de cítricos. Prototipo académico AgroTech, Universidad de Caldas. No es una prescripción agronómica."@es .
 
-bio:Compsus_sp a bio:Plaga,
-        bio:PlagaSinAgenteDocumentado ;
-    rdfs:label "picudo de los cítricos"@es ;
-    bio:afectaA bio:Citrus_reticulata,
-        bio:Citrus_sinensis ;
-    bio:descripcion "Picudo asociado a cítricos. Esta base no registra un enemigo natural. La laguna es del inventario: no afirma que no existan controladores en la literatura."@es ;
-    bio:nombreCientifico "Compsus sp." ;
-    bio:nombreComun "picudo de los cítricos"@es .
+bio:Analisis_xenometabolomica a bio:AnalisisQuimico ;
+    rdfs:label "Revisión de técnicas analíticas para biomarcadores de toxicidad"@es ;
+    bio:articuladoCon bio:ClayOMICS ;
+    bio:condicionExperimental "Revisión del tema. No es un análisis encargado a ClayOMICS ni un perfil de una cepa."@es ;
+    bio:documentadoEn bio:F17 ;
+    bio:estadoEnlace "contexto"^^xsd:string ;
+    bio:etiqueta "Revisión de técnicas analíticas para biomarcadores de toxicidad"@es ;
+    bio:resultado "F17 reseña GC-MS, LC-MS, UHPLC-QTOF-MS, RMN e ICP-MS frente a plaguicidas, metales y micotoxinas. Sirve de puente conceptual con residuos; no es un resultado del spin-off (F16)."@es ;
+    bio:variableRespuesta "técnica analítica, analito y matriz"@es .
 
-bio:F13 a bio:FuenteEvidencia ;
-    rdfs:label "F13 - Universidad de Caldas (ClayOMICS)" ;
+bio:Experimento_magnetico_soja a bio:Experimento ;
+    rdfs:label "Campo magnético estático en germinación de soja"@es ;
+    bio:articuladoCon bio:MAGNETIME ;
+    bio:condicionExperimental "Semillas de soja a 125 y 300 mT durante 10, 20 y 60 min."@es ;
+    bio:documentadoEn bio:F14 ;
+    bio:estadoEnlace "documentado"^^xsd:string ;
+    bio:etiqueta "Campo magnético estático en germinación de soja"@es ;
+    bio:resultado "300 mT por 10 min redujo más el tiempo medio de germinación. La absorción de agua no cambió de forma significativa (F14). Especie: soja."@es ;
+    bio:variableRespuesta "tiempo medio de germinación y absorción de agua"@es .
+
+bio:Experimento_magnetico_tomate_comercial a bio:Experimento ;
+    rdfs:label "Tratamiento magnético de semilla de tomate a escala comercial"@es ;
+    bio:articuladoCon bio:MAGNETIME ;
+    bio:condicionExperimental "Sistema productivo comercial de tomate. Tesis de doctorado, autor por verificar en la ficha."@es ;
+    bio:documentadoEn bio:F13 ;
+    bio:estadoEnlace "documentado"^^xsd:string ;
+    bio:etiqueta "Tratamiento magnético de semilla de tomate a escala comercial"@es ;
+    bio:resultado "El rendimiento aumentó y la floración no cambió (F13, confiabilidad media). No hay validación en cítricos."@es ;
+    bio:variableRespuesta "rendimiento y floración de Solanum lycopersicum"@es .
+
+bio:Experimento_magnetico_tomate_pregrado a bio:Experimento ;
+    rdfs:label "Desarrollo vegetativo de tomate tras tratamiento magnético de la semilla"@es ;
+    bio:articuladoCon bio:MAGNETIME ;
+    bio:condicionExperimental "Campo magnético estático no homogéneo sobre semillas de tomate."@es ;
+    bio:documentadoEn bio:F15 ;
+    bio:estadoEnlace "documentado"^^xsd:string ;
+    bio:etiqueta "Desarrollo vegetativo de tomate tras tratamiento magnético de la semilla"@es ;
+    bio:resultado "21 % más área foliar y 9 % más altura que el control (F15, trabajo de grado). Cultivo: tomate."@es ;
+    bio:variableRespuesta "área foliar y altura"@es .
+
+bio:F16 a bio:FuenteEvidencia ;
+    rdfs:label "F16 - Universidad de Caldas (2022)" ;
+    bio:acceso "Abierto (web institucional)" ;
+    bio:alcance "Sirve para la existencia y el alcance de los servicios, no como evidencia científica. La fecha exacta de publicación de la nota queda por completar."@es ;
+    bio:anio 2022 ;
     bio:autores "Universidad de Caldas" ;
-    bio:citaCorta "F13 - Universidad de Caldas (ClayOMICS)" ;
-    bio:notas "ClayOMICS ofrece análisis de datos químicos. La nota no reporta un ensayo de biocontrol ni un perfil de Hirsutella."@es ;
-    bio:rolFuente "interoperabilidad" ;
-    bio:tipoFuente "nota_institucional" ;
-    bio:titulo "Spin-off ClayOMICS de la Universidad de Caldas obtiene su registro de marca" ;
+    bio:citaCorta "F16 - Universidad de Caldas (2022)" ;
+    bio:fechaConsulta "11/nov/2026" ;
+    bio:informacionExtraida "ClayOMICS ofrece análisis de datos químicos mediante técnicas de medición, separación e identificación. Surge del grupo de Cromatografía y Técnicas Afines y obtuvo registro de marca ante la SIC en 2022."@es ;
+    bio:iniciativa "ClayOMICS" ;
+    bio:naturaleza "Contexto institucional" ;
+    bio:nivelConfiabilidad "Media"^^xsd:string ;
+    bio:notas "Sirve para la existencia y el alcance de los servicios, no como evidencia científica. La fecha exacta de publicación de la nota queda por completar."@es ;
+    bio:tipoFuente "Noticia institucional" ;
+    bio:titulo "Spin Off ClayOMICs de la Universidad de Caldas obtiene su registro de marca" ;
     bio:url "https://www.ucaldas.edu.co/portal/spin-off-clayomics-de-la-universidad-de-caldas-obtiene-su-registro-de-marca/" .
 
-bio:F14 a bio:FuenteEvidencia ;
-    rdfs:label "F14 - Universidad de Caldas (2024)" ;
-    bio:anio 2024 ;
-    bio:autores "Universidad de Caldas" ;
-    bio:citaCorta "F14 - Universidad de Caldas (2024)" ;
-    bio:notas "Nota del 4 de abril de 2024. Nombra los emprendimientos de base tecnológica Compocol, Clayomics, Biocontroladores y Magnetime."@es ;
-    bio:rolFuente "interoperabilidad" ;
-    bio:tipoFuente "nota_institucional" ;
-    bio:titulo "Universidad de Caldas seleccionada en la convocatoria ALDEA del Ministerio de Comercio, Industria y Turismo" ;
-    bio:url "https://www.ucaldas.edu.co/portal/universidad-de-caldas-seleccionada-en-convocatoria-del-ministerio-de-comercio-industria-y-turismo-de-colombia/" .
+bio:PlagaSinAgenteDocumentado a owl:Class ;
+    rdfs:label "PlagaSinAgenteDocumentado"@es ;
+    rdfs:comment "Cierre de mundo local: la plaga no tiene agente en esta base."@es ;
+    rdfs:subClassOf bio:Plaga .
 
-bio:F15 a bio:FuenteEvidencia ;
-    rdfs:label "F15 - Semillero de Magnetobiología UCaldas" ;
-    bio:anio 2024 ;
-    bio:autores "Universidad de Caldas" ;
-    bio:citaCorta "F15 - Semillero de Magnetobiología UCaldas" ;
-    bio:notas "Grupo de Magnetobiología. Estudia campos electromagnéticos en sistemas biológicos. Coordinación: Javier Ignacio Torres Osorio. Ficha publicada en 2024."@es ;
-    bio:rolFuente "interoperabilidad" ;
-    bio:tipoFuente "ficha_institucional" ;
-    bio:titulo "Semillero de Magnetobiología" ;
-    bio:url "https://investigacionesyposgrados.ucaldas.edu.co/semilleros-de-investigacion/semillero-de-magnetobiologia/" .
+bio:Relacion_Compsus_Trigonospila a bio:RelacionBiocontrol ;
+    rdfs:label "Relacion_Compsus_Trigonospila" ;
+    bio:condicionExperimental "Colecta en Maltería (2250 msnm) y holotipo en la Granja Tesorito (2280 m)."@es ;
+    bio:criterioNivel "Alta para el hecho del parasitismo. No hay condiciones de uso ni protocolo de liberación, así que no se activa una recomendación climática."@es ;
+    bio:fuentePrincipal bio:F04 ;
+    bio:involucraAgente bio:Trigonospila_unicaldasi ;
+    bio:involucraPlaga bio:Compsus_sp ;
+    bio:respaldadoPor bio:F03,
+        bio:F04 ;
+    bio:resultado "Parasitismo de adultos en limón, con la especie descrita en 2017 (F04) y un estudio morfológico previo del género (F03)."@es ;
+    bio:tieneNivelEvidencia "Alta"^^xsd:string ;
+    bio:variableRespuesta "parasitismo de adultos de Compsus"@es .
 
-bio:F17 a bio:FuenteEvidencia ;
-    rdfs:label "F17 - Gómez (2024)" ;
-    bio:anio 2024 ;
-    bio:autores "Gómez, C." ;
-    bio:citaCorta "F17 - Gómez (2024)" ;
-    bio:notas "Registro del repositorio institucional de la Universidad de Caldas. La ficha pública consultada no detalla resultados, así que no se transcriben."@es ;
-    bio:rolFuente "contexto" ;
-    bio:tipoFuente "documento_repositorio" ;
-    bio:titulo "Control biológico y microbiológico de plagas y enfermedades en cítricos" ;
-    bio:url "https://repositorio.ucaldas.edu.co/handle/ucaldas/19978" .
-
-bio:Phyllocoptruta_oleivora a bio:Plaga,
-        bio:PlagaSinAgenteDocumentado ;
-    rdfs:label "ácaro tostador de los cítricos"@es ;
-    bio:afectaA bio:Citrus_reticulata,
-        bio:Citrus_sinensis ;
-    bio:descripcion "Ácaro eriófido que daña la epidermis del fruto. Hirsutella thompsonii se discute en la literatura de ácaros, pero no se codifica en esta semilla. Por eso la consulta dispara la laguna de conocimiento de la base."@es ;
-    bio:nombreCientifico "Phyllocoptruta oleivora" ;
-    bio:nombreComun "ácaro tostador de los cítricos"@es .
+bio:Relacion_DC_Beauveria a bio:RelacionBiocontrol ;
+    rdfs:label "Relacion_DC_Beauveria" ;
+    bio:condicionExperimental "Laboratorio, cepas mexicanas Bb-Dc y Bb-Rhy."@es ;
+    bio:criterioNivel "Alta para ese bioensayo. La limitación se anota aparte: no es una cepa de la Universidad de Caldas y no se extrapola a Caldas."@es ;
+    bio:fuentePrincipal bio:F11 ;
+    bio:involucraAgente bio:Beauveria_bassiana ;
+    bio:involucraPlaga bio:Diaphorina_citri ;
+    bio:respaldadoPor bio:F11 ;
+    bio:resultado "Sin efecto sobre huevos. Mortalidad de ninfas entre 21 y 58 % según la cepa, a 1×10^8 conidios/mL (F11)."@es ;
+    bio:tieneNivelEvidencia "Alta"^^xsd:string ;
+    bio:variableRespuesta "mortalidad de ninfas de Diaphorina citri"@es .
 
 bio:Relacion_DC_Diaphorencyrtus a bio:RelacionBiocontrol ;
     rdfs:label "Relacion_DC_Diaphorencyrtus" ;
-    bio:condicionExperimental "Conteos de momias y emergencia de adultos en un huerto de Agrosavia, Palmira, en 2020 y 2021 (F05)."@es ;
-    bio:criterioNivel "Media: la especie está confirmada en Colombia, pero las tasas de campo son bajas frente a Tamarixia (F05). La regla R2 agrega precaución."@es ;
-    bio:fuentePrincipal bio:F05 ;
+    bio:condicionExperimental "Captura manual en brotes. Sin medición de parasitismo ni de clima de uso."@es ;
+    bio:criterioNivel "Media para el control: la fuente es de confiabilidad alta, pero solo prueba presencia. El efecto sobre la plaga es una hipótesis y no hay ventana de uso."@es ;
+    bio:fuentePrincipal bio:F01 ;
     bio:involucraAgente bio:Diaphorencyrtus_sp ;
     bio:involucraPlaga bio:Diaphorina_citri ;
-    bio:respaldadoPor bio:F04,
-        bio:F05 ;
-    bio:resultado "Parasitismo de 0,3 % a 1,0 % en Palmira, frente a 1,5 %–24,2 % de Tamarixia en el mismo estudio (F05)."@es ;
-    bio:tieneCondicion bio:Condicion_Diaphorencyrtus ;
+    bio:respaldadoPor bio:F01 ;
+    bio:resultado "Primer registro en Colombia, en brotes de cítricos de Manizales (F01)."@es ;
     bio:tieneNivelEvidencia "Media"^^xsd:string ;
-    bio:tieneRestriccion bio:Restriccion_neonicotinoide,
-        bio:Restriccion_piretroide ;
-    bio:variableRespuesta "parasitismo de ninfas de Diaphorina citri"@es .
+    bio:variableRespuesta "presencia del parasitoide sobre ninfas"@es .
 
 bio:Relacion_DC_Hirsutella a bio:RelacionBiocontrol ;
     rdfs:label "Relacion_DC_Hirsutella" ;
-    bio:condicionExperimental "Bioensayo de contacto directo entre adultos de D. citri y cultivos esporulados; caracterización morfológica, morfométrica y del gen ribosomal 28S (F08)."@es ;
-    bio:criterioNivel "Media: hay patogenicidad alta en laboratorio (F08) y una ventana ambiental descrita en la revisión (F07), pero el inventario no incluye un programa comercial de campo. Por eso no se asigna Alta y, si la ventana se cumple, se activa R2."@es ;
-    bio:fuentePrincipal bio:F08 ;
+    bio:condicionExperimental "Bioensayo de laboratorio con la cepa de Montelindo. La incubación publicada como 25 ± 20 °C no se convierte en rango de campo."@es ;
+    bio:criterioNivel "Alta para la patogenicidad de laboratorio. Sin ventana agroclimática ni ensayo de campo, así que no compite con Tamarixia en la regla climática."@es ;
+    bio:fuentePrincipal bio:F07 ;
     bio:involucraAgente bio:Hirsutella_citriformis ;
     bio:involucraPlaga bio:Diaphorina_citri ;
-    bio:respaldadoPor bio:F07,
-        bio:F08,
-        bio:F09,
-        bio:F12 ;
-    bio:resultado "Mortalidad acumulada de 98 % con conidios de H. citriformis y 3 % en el control; sinnemas a los 7 días post-mortem (F08)."@es ;
-    bio:tieneCondicion bio:Condicion_Hirsutella ;
-    bio:tieneExperimento bio:Experimento_campo_magnetico_conidios ;
-    bio:tieneNivelEvidencia "Media"^^xsd:string ;
-    bio:tieneRestriccion bio:Restriccion_azufre,
-        bio:Restriccion_cuprico ;
-    bio:variableRespuesta "mortalidad acumulada de adultos de Diaphorina citri"@es ;
-    bio:verificadoPor bio:Analisis_exudados_Hirsutella .
+    bio:respaldadoPor bio:F07 ;
+    bio:resultado "98 % de mortalidad acumulada con conidios y 3 % en el control (F07)."@es ;
+    bio:tieneNivelEvidencia "Alta"^^xsd:string ;
+    bio:variableRespuesta "mortalidad acumulada de Diaphorina citri"@es .
 
 bio:Relacion_DC_Tamarixia a bio:RelacionBiocontrol ;
     rdfs:label "Relacion_DC_Tamarixia" ;
-    bio:condicionExperimental "Observación de momias y emergencia del parasitoide sobre brotes de cítricos en el Centro de Investigación y Cría de Enemigos Naturales de la Universidad de Caldas, entre enero y abril de 2016 (F02)."@es ;
-    bio:criterioNivel "Alta por convergencia: reporte local de presencia y acción parasítica (F02), revisión biológica (F03), supervivencia bajo regímenes de temperatura y humedad (F04) y rutas de acceso en Colombia (F10). No es un metaanálisis de eficacia de campo."@es ;
+    bio:condicionExperimental "Colecta de brotes en Caldas, enero a abril de 2016 (F02). Tabla de vida a cinco temperaturas constantes y 70 ± 10 % HR (F08)."@es ;
+    bio:criterioNivel "Alta porque F02, F08 y F09 documentan la relación. La ventana de decisión es 15-35 °C. No se usa 20-30 °C ni 60-85 % HR como umbral: el inventario los marca como parcial o sin fuente."@es ;
     bio:fuentePrincipal bio:F02 ;
     bio:involucraAgente bio:Tamarixia_radiata ;
     bio:involucraPlaga bio:Diaphorina_citri ;
     bio:respaldadoPor bio:F02,
-        bio:F03,
-        bio:F04,
-        bio:F10,
-        bio:F16 ;
-    bio:resultado "Presencia y acción parasítica documentadas en Caldas (F02). El inventario no codifica un porcentaje único de eficacia de campo."@es ;
+        bio:F08,
+        bio:F09 ;
+    bio:resultado "Presencia y parasitismo en Caldas (F02). En laboratorio hay desarrollo entre 15 y 35 °C y la mayor viabilidad a 25 °C (F08). F09 amplía el estudio térmico a promedios de 12 a 38 °C."@es ;
     bio:tieneCondicion bio:Condicion_Tamarixia ;
     bio:tieneNivelEvidencia "Alta"^^xsd:string ;
-    bio:tieneRestriccion bio:Restriccion_neonicotinoide,
-        bio:Restriccion_piretroide ;
-    bio:variableRespuesta "parasitismo de ninfas de Diaphorina citri"@es .
+    bio:tieneRestriccion bio:Restriccion_botanicos,
+        bio:Restriccion_extractos ;
+    bio:variableRespuesta "parasitismo de ninfas y viabilidad del desarrollo de Tamarixia radiata"@es .
+
+bio:Relacion_PO_Chrysoperla a bio:RelacionBiocontrol ;
+    rdfs:label "Relacion_PO_Chrysoperla" ;
+    bio:condicionExperimental "Campo en Caicedonia, Valle del Cauca, 1150 msnm. También se observó a Phytoseiidae."@es ;
+    bio:criterioNivel "Alta para el ensayo de campo contra el ácaro. No autoriza a recomendar Chrysoperla contra Diaphorina citri ni trae una ventana numérica de temperatura."@es ;
+    bio:fuentePrincipal bio:F12 ;
+    bio:involucraAgente bio:Chrysoperla_carnea ;
+    bio:involucraPlaga bio:Phyllocoptruta_oleivora ;
+    bio:respaldadoPor bio:F12 ;
+    bio:resultado "La liberación redujo el daño a 10 % en el primer ciclo, en naranja Valencia (F12)."@es ;
+    bio:tieneNivelEvidencia "Alta"^^xsd:string ;
+    bio:variableRespuesta "daño de Phyllocoptruta oleivora en fruto"@es .
 
 bio:RestriccionActiva a owl:Class ;
     rdfs:label "RestriccionActiva"@es ;
     rdfs:comment "Estado inferido cuando una práctica de la consulta coincide con una restricción."@es .
 
+bio:acceso a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "acceso"@es .
+
 bio:afectaA a owl:ObjectProperty ;
     rdfs:label "afectaA"@es ;
     rdfs:domain bio:Plaga ;
     rdfs:range bio:Cultivo .
+
+bio:alcance a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "alcance"@es .
 
 bio:altamenteRecomendadoPara a owl:ObjectProperty ;
     rdfs:label "altamenteRecomendadoPara"@es ;
@@ -194,6 +226,11 @@ bio:descripcionCondicion a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "descripcionCondicion"@es .
 
+bio:documentadoEn a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "documentadoEn"@es ;
+    rdfs:range bio:FuenteEvidencia .
+
 bio:doi a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "doi"@es .
@@ -208,9 +245,18 @@ bio:estadoEnlace a owl:DatatypeProperty,
     rdfs:label "estadoEnlace"@es ;
     rdfs:range xsd:string .
 
+bio:estadoVentanaHumedad a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "estadoVentanaHumedad"@es ;
+    rdfs:range xsd:string .
+
 bio:etiqueta a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "etiqueta"@es .
+
+bio:fechaConsulta a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "fechaConsulta"@es .
 
 bio:fuentePrincipal a owl:FunctionalProperty,
         owl:ObjectProperty ;
@@ -233,6 +279,14 @@ bio:humedadMin a owl:DatatypeProperty,
     rdfs:label "humedadMin"@es ;
     rdfs:range xsd:decimal .
 
+bio:informacionExtraida a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "informacionExtraida"@es .
+
+bio:iniciativa a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "iniciativa"@es .
+
 bio:involucraAgente a owl:FunctionalProperty,
         owl:ObjectProperty ;
     rdfs:label "involucraAgente"@es ;
@@ -249,6 +303,15 @@ bio:justificadoPor a owl:ObjectProperty ;
     rdfs:label "justificadoPor"@es ;
     rdfs:domain bio:Restriccion ;
     rdfs:range bio:FuenteEvidencia .
+
+bio:naturaleza a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "naturaleza"@es .
+
+bio:nivelConfiabilidad a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "nivelConfiabilidad"@es ;
+    rdfs:range xsd:string .
 
 bio:nombreCientifico a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -289,10 +352,6 @@ bio:respaldadoPor a owl:ObjectProperty ;
 bio:resultado a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "resultado"@es .
-
-bio:rolFuente a owl:DatatypeProperty,
-        owl:FunctionalProperty ;
-    rdfs:label "rolFuente"@es .
 
 bio:temperaturaActual a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -368,335 +427,460 @@ bio:verificadoPor a owl:ObjectProperty ;
     rdfs:domain bio:RelacionBiocontrol ;
     rdfs:range bio:AnalisisQuimico .
 
-bio:Analisis_exudados_Hirsutella a bio:AnalisisQuimico ;
-    rdfs:label "Perfil químico propuesto de exudados de Hirsutella citriformis"@es ;
-    bio:articuladoCon bio:ClayOMICS ;
-    bio:condicionExperimental "No hay un protocolo ejecutado en este prototipo. La revisión F07 indica que el papel de los exudados del hongo está poco caracterizado."@es ;
-    bio:estadoEnlace "propuesto"^^xsd:string ;
-    bio:etiqueta "Perfil químico propuesto de exudados de Hirsutella citriformis"@es ;
-    bio:resultado "Enlace de interoperabilidad propuesto con ClayOMICS (F13). El prototipo no afirma un resultado medido por esa plataforma."@es ;
-    bio:variableRespuesta "exudados con actividad biológica y compatibilidad de soportes de formulación"@es .
+bio:Citricos a bio:Cultivo ;
+    rdfs:label "cítricos"@es ;
+    bio:descripcion "Hospedero citado de forma genérica en los registros de Diaphorina citri y sus parasitoides en Caldas (F01, F02). La ficha no fija la especie."@es ;
+    bio:nombreCientifico "Citrus spp." ;
+    bio:nombreComun "cítricos"@es .
+
+bio:Citrus_limon a bio:Cultivo ;
+    rdfs:label "limón"@es ;
+    bio:descripcion "Hospedero del holotipo de Trigonospila unicaldasi en la Granja Tesorito (F04)."@es ;
+    bio:nombreCientifico "Citrus limon" ;
+    bio:nombreComun "limón"@es .
+
+bio:Citrus_sinensis a bio:Cultivo ;
+    rdfs:label "naranja dulce"@es ;
+    bio:descripcion "Naranja Valencia del ensayo de campo en Caicedonia sobre ácaros (F12)."@es ;
+    bio:nombreCientifico "Citrus sinensis" ;
+    bio:nombreComun "naranja dulce"@es .
 
 bio:ClayOMICS a bio:PlataformaExterna ;
     rdfs:label "ClayOMICS" ;
-    bio:descripcion "Spin-off de la Universidad de Caldas para análisis de datos químicos mediante técnicas de medición, separación e identificación."@es ;
+    bio:descripcion "Spin-off de la Universidad de Caldas para análisis de datos químicos. La noticia F16 acredita el servicio; la revisión F17 es del grupo de Cromatografía y no es un resultado del spin-off."@es ;
     bio:etiqueta "ClayOMICS" ;
     bio:tipoPlataforma "analisis_quimico" ;
     bio:url "https://www.ucaldas.edu.co/portal/spin-off-clayomics-de-la-universidad-de-caldas-obtiene-su-registro-de-marca/" .
 
-bio:Condicion_Diaphorencyrtus a bio:CondicionUso ;
-    rdfs:label "22–32 °C; 50–90 % HR" ;
-    bio:descripcionCondicion "Ventana operativa más amplia. McFarland y Hoy (2001, F04) compararon supervivencia adulta a 25 °C y 30 °C; Kondo et al. (2022, F05) confirman la especie en campo sin publicar una curva térmica propia."@es ;
-    bio:humedadMax 90.0 ;
-    bio:humedadMin 50.0 ;
-    bio:rangoMax 32.0 ;
-    bio:rangoMin 22.0 ;
-    bio:rangoValido "22–32 °C; 50–90 % HR" ;
-    bio:temperaturaMax 32.0 ;
-    bio:temperaturaMin 22.0 .
-
-bio:Condicion_Hirsutella a bio:CondicionUso ;
-    rdfs:label "23–28 °C; 80–98 % HR" ;
-    bio:descripcionCondicion "Ventana de la revisión de Pérez-González et al. (2022, F07): desarrollo óptimo cerca de 25 °C y epizootias con humedad relativa superior al 80 %, con registros de campo entre 25 °C y 28 °C. El bioensayo de 2024 (F08) demuestra patogenicidad en laboratorio, no esta ventana en Caldas."@es ;
-    bio:humedadMax 98.0 ;
-    bio:humedadMin 80.0 ;
-    bio:rangoMax 28.0 ;
-    bio:rangoMin 23.0 ;
-    bio:rangoValido "23–28 °C; 80–98 % HR" ;
-    bio:temperaturaMax 28.0 ;
-    bio:temperaturaMin 23.0 .
+bio:Compsus_sp a bio:Plaga ;
+    rdfs:label "picudo de los cítricos"@es ;
+    bio:afectaA bio:Citrus_limon ;
+    bio:contextualizadoPor bio:F03,
+        bio:F04 ;
+    bio:descripcion "Picudo recolectado en Maltería y en limón de la Granja Tesorito. F03 lo trata como Compsus viridilineatus y F04 como Compsus sp."@es ;
+    bio:esControladaPor bio:Trigonospila_unicaldasi ;
+    bio:nombreCientifico "Compsus sp." ;
+    bio:nombreComun "picudo de los cítricos"@es .
 
 bio:Condicion_Tamarixia a bio:CondicionUso ;
-    rdfs:label "20–30 °C; 60–85 % HR" ;
-    bio:descripcionCondicion "Ventana operativa del prototipo. Cubre el óptimo de laboratorio cercano a 25 °C y los regímenes de 25 °C y 30 °C de McFarland y Hoy (2001, F04). La humedad 60-85 % excluye los extremos secos del ensayo (7 % y 33 %) y la saturación (97 %). No es la tabla de un único experimento."@es ;
-    bio:humedadMax 85.0 ;
+    rdfs:label "15–35 °C; HR de ensayo 60–80 % (no decide)" ;
+    bio:descripcionCondicion "Ventana térmica documentada por la tabla de vida de F08: desarrollo a 15, 20, 25, 30 y 35 °C, con mayor viabilidad y tasa reproductiva neta a 25 °C. F09 estudia promedios de 12 a 38 °C y no se usa como umbral de liberación. La humedad 70 ± 10 % (60-80 %) es la condición de ensayo de F08; el inventario la marca como no equivalente a un rango de viabilidad, así que no decide la recomendación."@es ;
+    bio:estadoVentanaHumedad "ensayo"^^xsd:string ;
+    bio:humedadMax 80.0 ;
     bio:humedadMin 60.0 ;
-    bio:rangoMax 30.0 ;
-    bio:rangoMin 20.0 ;
-    bio:rangoValido "20–30 °C; 60–85 % HR" ;
-    bio:temperaturaMax 30.0 ;
-    bio:temperaturaMin 20.0 .
+    bio:rangoMax 35.0 ;
+    bio:rangoMin 15.0 ;
+    bio:rangoValido "15–35 °C; HR de ensayo 60–80 % (no decide)" ;
+    bio:temperaturaMax 35.0 ;
+    bio:temperaturaMin 15.0 .
 
 bio:Consulta a owl:Class ;
     rdfs:label "Consulta"@es ;
     rdfs:comment "Hechos temporales de una pregunta: plaga, clima y prácticas."@es .
 
-bio:Experimento_campo_magnetico_conidios a bio:Experimento ;
-    rdfs:label "Germinación de conidios bajo campo electromagnético"@es ;
-    bio:articuladoCon bio:MAGNETIME ;
-    bio:condicionExperimental "Conidios de H. citriformis en la ventana 23-28 °C y humedad relativa superior al 80 %, con y sin campo electromagnético de baja intensidad. Protocolo no ejecutado."@es ;
-    bio:estadoEnlace "propuesto"^^xsd:string ;
-    bio:etiqueta "Germinación de conidios bajo campo electromagnético"@es ;
-    bio:resultado "Sin resultado medido. La pregunta se articula con MAGNETIME y con el semillero de Magnetobiología (F14, F15). No es un experimento realizado."@es ;
-    bio:variableRespuesta "porcentaje de germinación de conidios"@es .
+bio:F05 a bio:FuenteEvidencia ;
+    rdfs:label "F05 - Restrepo-García y Soto-Giraldo (2017)" ;
+    bio:acceso "Abierto (licencia no verificada)" ;
+    bio:alcance "Ensayo de laboratorio sobre la plaga. No se codifica como restricción de enemigos naturales: el inventario pide verificar ese efecto antes de usarlo en R4. Boletín Científico Centro de Museos, 21(2), 51-60."@es ;
+    bio:anio 2017 ;
+    bio:autores "Restrepo-García, A. M.; Soto-Giraldo, A." ;
+    bio:citaCorta "F05 - Restrepo-García y Soto-Giraldo (2017)" ;
+    bio:doi "10.17151/bccm.2017.21.2.4" ;
+    bio:fechaConsulta "11/nov/2026" ;
+    bio:informacionExtraida "Toxicidad letal y subletal del caldo sulfocálcico sobre Diaphorina citri en el Centro de Investigación y Cría de Enemigos Naturales de la Universidad de Caldas."@es ;
+    bio:iniciativa "Biocontroladores" ;
+    bio:naturaleza "Hecho documentado (laboratorio)" ;
+    bio:nivelConfiabilidad "Alta"^^xsd:string ;
+    bio:notas "Ensayo de laboratorio sobre la plaga. No se codifica como restricción de enemigos naturales: el inventario pide verificar ese efecto antes de usarlo en R4. Boletín Científico Centro de Museos, 21(2), 51-60."@es ;
+    bio:tipoFuente "Artículo científico (laboratorio)" ;
+    bio:titulo "Control alternativo de Diaphorina citri Kuwayama (Hemiptera: Liviidae) utilizando caldo sulfocálcico" ;
+    bio:url "https://doi.org/10.17151/bccm.2017.21.2.4" .
 
-bio:F01 a bio:FuenteEvidencia ;
-    rdfs:label "F01 - Bové (2006)" ;
-    bio:anio 2006 ;
-    bio:autores "Bové, J. M." ;
-    bio:citaCorta "F01 - Bové (2006)" ;
-    bio:notas "Journal of Plant Pathology, 88(1), 7-37. Revisión del patosistema HLB. No evalúa la eficacia de un agente de biocontrol."@es ;
-    bio:rolFuente "contexto" ;
-    bio:tipoFuente "articulo" ;
-    bio:titulo "Huanglongbing: a destructive, newly-emerging, century-old disease of citrus" .
+bio:F06 a bio:FuenteEvidencia ;
+    rdfs:label "F06 - Barros-Barrios et al. (2024)" ;
+    bio:acceso "Abierto (licencia no verificada)" ;
+    bio:alcance "Condiciones controladas. Los valores cuantitativos por extracto no están en la ficha; la restricción advierte la interacción, no una prohibición numérica. Boletín Científico Centro de Museos, 28(1), 125-138."@es ;
+    bio:anio 2024 ;
+    bio:autores "Barros-Barrios, M. M.; Restrepo-García, A. M.; Narváez-Solarte, W.; Soto-Giraldo, A." ;
+    bio:citaCorta "F06 - Barros-Barrios et al. (2024)" ;
+    bio:doi "10.17151/bccm.2024.28.1.7" ;
+    bio:fechaConsulta "11/nov/2026" ;
+    bio:informacionExtraida "Efecto de extractos de Murraya paniculata, Cocos nucifera, Syzygium aromaticum y Psidium guajava sobre Diaphorina citri y Tamarixia radiata, en olfatometría."@es ;
+    bio:iniciativa "Biocontroladores" ;
+    bio:naturaleza "Hecho documentado (laboratorio)" ;
+    bio:nivelConfiabilidad "Alta"^^xsd:string ;
+    bio:notas "Condiciones controladas. Los valores cuantitativos por extracto no están en la ficha; la restricción advierte la interacción, no una prohibición numérica. Boletín Científico Centro de Museos, 28(1), 125-138."@es ;
+    bio:tipoFuente "Artículo científico (laboratorio)" ;
+    bio:titulo "Efecto de extractos vegetales compuestos sobre Diaphorina citri (Hemiptera: Liviidae) y su parasitoide Tamarixia radiata (Hymenoptera: Eulophidae)" ;
+    bio:url "https://doi.org/10.17151/bccm.2024.28.1.7" .
 
-bio:F03 a bio:FuenteEvidencia ;
-    rdfs:label "F03 - Chen y Stansly (2014)" ;
-    bio:anio 2014 ;
-    bio:autores "Chen, X.; Stansly, P. A." ;
-    bio:citaCorta "F03 - Chen y Stansly (2014)" ;
-    bio:notas "Florida Entomologist, 97(4), 1404-1412. Revisión biológica del parasitoide."@es ;
-    bio:rolFuente "respalda_relacion" ;
-    bio:tipoFuente "articulo" ;
-    bio:titulo "Biology of Tamarixia radiata (Hymenoptera: Eulophidae), parasitoid of the citrus greening disease vector Diaphorina citri (Hemiptera: Psyllidae): a mini review" .
+bio:F08 a bio:FuenteEvidencia ;
+    rdfs:label "F08 - Gómez-Torres et al. (2012)" ;
+    bio:acceso "Resumen abierto; texto completo posiblemente restringido" ;
+    bio:alcance "Población brasileña en laboratorio. La viabilidad es de desarrollo, no de una liberación en campo. La humedad es condición de ensayo, no un umbral de uso. Journal of Economic Entomology, 105(2). Páginas por completar al citar."@es ;
+    bio:anio 2012 ;
+    bio:autores "Gómez-Torres, M. L.; Nava, D. E. et al." ;
+    bio:citaCorta "F08 - Gómez-Torres et al. (2012)" ;
+    bio:doi "10.1603/EC11280" ;
+    bio:fechaConsulta "11/nov/2026" ;
+    bio:informacionExtraida "Tabla de vida a 15, 20, 25, 30 y 35 °C, con 70 ± 10 % de humedad relativa. Hubo desarrollo en todas esas temperaturas y la mayor viabilidad y tasa reproductiva neta ocurrió a 25 °C."@es ;
+    bio:iniciativa "Biocontroladores" ;
+    bio:naturaleza "Hecho documentado (laboratorio)" ;
+    bio:nivelConfiabilidad "Alta"^^xsd:string ;
+    bio:notas "Población brasileña en laboratorio. La viabilidad es de desarrollo, no de una liberación en campo. La humedad es condición de ensayo, no un umbral de uso. Journal of Economic Entomology, 105(2). Páginas por completar al citar."@es ;
+    bio:tipoFuente "Artículo científico (laboratorio)" ;
+    bio:titulo "Life table of Tamarixia radiata (Hymenoptera: Eulophidae) on Diaphorina citri (Hemiptera: Psyllidae) at different temperatures" ;
+    bio:url "https://doi.org/10.1603/EC11280" .
 
 bio:F09 a bio:FuenteEvidencia ;
-    rdfs:label "F09 - Casique-Valdes et al. (2011)" ;
-    bio:anio 2011 ;
-    bio:autores "Casique-Valdes, R.; Reyes-Martinez, A. Y.; Sanchez-Peña, S. R.; Bidochka, M. J.; Lopez-Arroyo, J. I." ;
-    bio:citaCorta "F09 - Casique-Valdes et al. (2011)" ;
-    bio:notas "Florida Entomologist, 94(3), 703-705. Patogenicidad del hongo sobre el psílido."@es ;
-    bio:rolFuente "respalda_relacion" ;
-    bio:tipoFuente "articulo" ;
-    bio:titulo "Pathogenicity of Hirsutella citriformis to Diaphorina citri and Bactericera cockerelli" ;
-    bio:url "https://www.jstor.org/stable/41336460" .
+    rdfs:label "F09 - McCalla et al. (2019)" ;
+    bio:acceso "Resumen abierto; texto completo posiblemente restringido" ;
+    bio:alcance "Población de Pakistán liberada en California, en laboratorio. Complementa a F08 con un rango térmico más amplio, pero no fija un umbral de liberación. Journal of Economic Entomology, 112(4), 1560-1574."@es ;
+    bio:anio 2019 ;
+    bio:autores "McCalla, K. A.; Keçeci, M.; Milosavljevic, I.; Ratkowsky, D. A.; Hoddle, M. S." ;
+    bio:citaCorta "F09 - McCalla et al. (2019)" ;
+    bio:doi "10.1093/jee/toz067" ;
+    bio:fechaConsulta "11/nov/2026" ;
+    bio:informacionExtraida "Temperaturas constantes y fluctuantes, con promedios de 12 a 38 °C, afectan el desarrollo y la longevidad de Tamarixia radiata."@es ;
+    bio:iniciativa "Biocontroladores" ;
+    bio:naturaleza "Hecho documentado (laboratorio)" ;
+    bio:nivelConfiabilidad "Alta"^^xsd:string ;
+    bio:notas "Población de Pakistán liberada en California, en laboratorio. Complementa a F08 con un rango térmico más amplio, pero no fija un umbral de liberación. Journal of Economic Entomology, 112(4), 1560-1574."@es ;
+    bio:tipoFuente "Artículo científico (laboratorio)" ;
+    bio:titulo "The influence of temperature variation on life history parameters and thermal performance curves of Tamarixia radiata, a parasitoid of the Asian citrus psyllid" ;
+    bio:url "https://doi.org/10.1093/jee/toz067" .
 
 bio:F10 a bio:FuenteEvidencia ;
-    rdfs:label "F10 - AgroSavia (s. f.)" ;
-    bio:autores "AgroSavia" ;
-    bio:citaCorta "F10 - AgroSavia (s. f.)" ;
-    bio:notas "Oferta tecnológica: incremento in situ, traspatios y reservorios. No es un artículo de eficacia y no aporta un porcentaje de control."@es ;
-    bio:rolFuente "respalda_relacion" ;
-    bio:tipoFuente "recomendacion_tecnologica" ;
-    bio:titulo "Rutas de acceso al parasitoide Tamarixia radiata" ;
-    bio:url "https://www.agrosavia.co/productos-y-servicios/oferta-tecnologica/linea-agricola/frutales/recomendaciones-protocolos-y-metodologias/758-rutas-de-acceso-al-parasitoide-tamarixia-radiata" .
-
-bio:F11 a bio:FuenteEvidencia ;
-    rdfs:label "F11 - ICA (2017)" ;
+    rdfs:label "F10 - Monsreal-Ceballos et al. (2017)" ;
+    bio:acceso "Abierto (Dialnet; licencia no verificada)" ;
+    bio:alcance "Evalúa insecticidas botánicos, no organofosforados como el clorpirifos. Estudio hecho en México. La carencia de 21 días tras clorpirifos no tiene fuente en este inventario. Ecosistemas y Recursos Agropecuarios, 4(12), 589-596."@es ;
     bio:anio 2017 ;
-    bio:autores "Instituto Colombiano Agropecuario" ;
-    bio:citaCorta "F11 - ICA (2017)" ;
-    bio:notas "Jornada de campo en el Atlántico, 6 de diciembre de 2017, con Tamarixia y hongos entomopatógenos. No es un ensayo publicado."@es ;
-    bio:rolFuente "contexto" ;
-    bio:tipoFuente "nota_institucional" ;
-    bio:titulo "Demostración de método: liberación de controladores biológicos para Diaphorina citri" ;
-    bio:url "https://www.ica.gov.co/noticias/agricola/el-ica-y-corpoica-realizaron-demostracion-de-metod" .
+    bio:autores "Monsreal-Ceballos, R. J.; Ruíz-Sánchez, E.; Sánchez-Borja, M. et al." ;
+    bio:citaCorta "F10 - Monsreal-Ceballos et al. (2017)" ;
+    bio:fechaConsulta "11/nov/2026" ;
+    bio:informacionExtraida "Mortalidad de Tamarixia radiata por residualidad de 12,7 % (Biodie) y 12,3 % (NeemPHC), y por ingestión de 33,3 % y 28,7 %. Bioensayo a 25 ± 5 °C y 60 ± 10 % HR."@es ;
+    bio:iniciativa "Biocontroladores" ;
+    bio:naturaleza "Hecho documentado (laboratorio)" ;
+    bio:nivelConfiabilidad "Alta"^^xsd:string ;
+    bio:notas "Evalúa insecticidas botánicos, no organofosforados como el clorpirifos. Estudio hecho en México. La carencia de 21 días tras clorpirifos no tiene fuente en este inventario. Ecosistemas y Recursos Agropecuarios, 4(12), 589-596."@es ;
+    bio:tipoFuente "Artículo científico (laboratorio)" ;
+    bio:titulo "Efectos de insecticidas botánicos comerciales en Tamarixia radiata, un ectoparasitoide de Diaphorina citri" ;
+    bio:url "https://dialnet.unirioja.es/descarga/articulo/6343377.pdf" .
 
-bio:F12 a bio:FuenteEvidencia ;
-    rdfs:label "F12 - Hernández Arredondo y Rosero Álvarez (2025)" ;
+bio:F13 a bio:FuenteEvidencia ;
+    rdfs:label "F13 - Repositorio UCaldas (2025)" ;
+    bio:acceso "Abierto · CC BY-NC-ND 4.0" ;
+    bio:alcance "Tesis, no artículo revisado por pares. Cultivo: tomate. No hay validación en cítricos. Es la evidencia que el caso integrador señala como faltante para trasladar MAGNETIME al cultivo."@es ;
     bio:anio 2025 ;
-    bio:autores "Hernández Arredondo, C.; Rosero Álvarez, N. V." ;
-    bio:citaCorta "F12 - Hernández Arredondo y Rosero Álvarez (2025)" ;
-    bio:notas "Trabajo de grado, Ingeniería Agronómica, Universidad de Caldas. Asesores: Alberto Soto Giraldo y Ana María Restrepo García. Aislamiento y medios de cultivo; el propio trabajo pide validación de campo."@es ;
-    bio:rolFuente "respalda_relacion" ;
-    bio:tipoFuente "tesis" ;
-    bio:titulo "Aislamiento y multiplicación de cepas nativas de Hirsutella citriformis Speare como controlador biológico de Diaphorina citri" ;
-    bio:url "https://repositorio.ucaldas.edu.co/entities/publication/75c38aef-0b76-4171-8a69-e3a3f06c53f1" .
+    bio:autores "Autor por verificar en la ficha del repositorio" ;
+    bio:citaCorta "F13 - Repositorio UCaldas (2025)" ;
+    bio:fechaConsulta "11/nov/2026" ;
+    bio:informacionExtraida "Tratamiento magnético de semillas de tomate a escala comercial: revisión sistemática, optimización de parámetros, crecimiento, floración y rendimiento. El rendimiento aumentó y la floración no cambió."@es ;
+    bio:iniciativa "MAGNETIME" ;
+    bio:naturaleza "Hecho documentado (tesis)" ;
+    bio:nivelConfiabilidad "Media"^^xsd:string ;
+    bio:notas "Tesis, no artículo revisado por pares. Cultivo: tomate. No hay validación en cítricos. Es la evidencia que el caso integrador señala como faltante para trasladar MAGNETIME al cultivo."@es ;
+    bio:tipoFuente "Tesis de doctorado" ;
+    bio:titulo "Efecto del tratamiento magnético de semillas sobre un sistema productivo de Solanum lycopersicum L., a escala comercial" ;
+    bio:url "https://repositorio.ucaldas.edu.co/handle/ucaldas/22551" .
 
-bio:F16 a bio:FuenteEvidencia ;
-    rdfs:label "F16 - Universidad de Caldas (Biocontroladores)" ;
-    bio:autores "Universidad de Caldas" ;
-    bio:citaCorta "F16 - Universidad de Caldas (Biocontroladores)" ;
-    bio:notas "La nota menciona a Tamarixia radiata entre los desarrollos del spin-off. El prototipo no transcribe cifras de eficacia."@es ;
-    bio:rolFuente "contexto" ;
-    bio:tipoFuente "nota_institucional" ;
-    bio:titulo "Biocontroladores, spin-off de la Universidad de Caldas" ;
-    bio:url "https://www.ucaldas.edu.co/portal/biocontraladores-spin-off-de-la-universidad-de-caldas-en-pro-de-la-agricultura/" .
+bio:F14 a bio:FuenteEvidencia ;
+    rdfs:label "F14 - Torres-Osorio et al. (2015)" ;
+    bio:acceso "Abierto · CC BY" ;
+    bio:alcance "Especie: soja. No hay evidencia en cítricos ni en control de plagas. Tecno Lógicas, 18(35), 11-20."@es ;
+    bio:anio 2015 ;
+    bio:autores "Torres-Osorio, J. I.; Aranzazu-Osorio, J. E.; Carbonell-Padrino, M. V." ;
+    bio:citaCorta "F14 - Torres-Osorio et al. (2015)" ;
+    bio:fechaConsulta "11/nov/2026" ;
+    bio:informacionExtraida "Soja expuesta a 125 y 300 mT durante 10, 20 y 60 min. El electroimán superó a los imanes. 300 mT por 10 min redujo más el tiempo medio de germinación. La absorción de agua no mostró diferencias significativas."@es ;
+    bio:iniciativa "MAGNETIME" ;
+    bio:naturaleza "Hecho documentado (laboratorio)" ;
+    bio:nivelConfiabilidad "Alta"^^xsd:string ;
+    bio:notas "Especie: soja. No hay evidencia en cítricos ni en control de plagas. Tecno Lógicas, 18(35), 11-20."@es ;
+    bio:tipoFuente "Artículo científico (laboratorio)" ;
+    bio:titulo "Efecto del campo magnético estático homogéneo en la germinación y absorción de agua en semillas de soja" ;
+    bio:url "https://www.redalyc.org/pdf/3442/344243102002.pdf" .
 
-bio:MAGNETIME a bio:PlataformaExterna ;
-    rdfs:label "MAGNETIME" ;
-    bio:descripcion "Emprendimiento de base tecnológica de la Universidad de Caldas, vinculado al grupo de Magnetobiología, sobre campos electromagnéticos en sistemas biológicos."@es ;
-    bio:etiqueta "MAGNETIME" ;
-    bio:tipoPlataforma "magnetobiologia" ;
-    bio:url "https://www.ucaldas.edu.co/portal/universidad-de-caldas-seleccionada-en-convocatoria-del-ministerio-de-comercio-industria-y-turismo-de-colombia/" .
+bio:F15 a bio:FuenteEvidencia ;
+    rdfs:label "F15 - Villa Carmona et al. (2023)" ;
+    bio:acceso "Abierto (openAccess)" ;
+    bio:alcance "Trabajo de grado, sin revisión por pares. Cultivo: tomate. Ingeniería Agronómica, Universidad de Caldas."@es ;
+    bio:anio 2023 ;
+    bio:autores "Villa Carmona, E.; Torres Osorio, J. I.; Zamorano-Montañez, C." ;
+    bio:citaCorta "F15 - Villa Carmona et al. (2023)" ;
+    bio:fechaConsulta "11/nov/2026" ;
+    bio:informacionExtraida "Semillas de tomate tratadas con campo magnético estático no homogéneo: plantas con 21 % más área foliar y 9 % más altura que el control."@es ;
+    bio:iniciativa "MAGNETIME" ;
+    bio:naturaleza "Hecho documentado (tesis)" ;
+    bio:nivelConfiabilidad "Media"^^xsd:string ;
+    bio:notas "Trabajo de grado, sin revisión por pares. Cultivo: tomate. Ingeniería Agronómica, Universidad de Caldas."@es ;
+    bio:tipoFuente "Tesis de pregrado" ;
+    bio:titulo "Análisis del desarrollo vegetativo de plantas de Solanum lycopersicum L. generadas de semillas tratadas magnéticamente" ;
+    bio:url "https://repositorio.ucaldas.edu.co/handle/ucaldas/19679" .
 
-bio:Restriccion_azufre a bio:Restriccion ;
-    rdfs:label "Incompatibilidad con azufre"@es ;
-    bio:codigoPractica "aplicacion_azufre" ;
-    bio:descripcion "El azufre elemental a dosis altas afecta al hongo entomopatógeno (F07)."@es ;
-    bio:etiqueta "Incompatibilidad con azufre"@es ;
-    bio:justificadoPor bio:F07 .
+bio:F17 a bio:FuenteEvidencia ;
+    rdfs:label "F17 - Betancourt Arango et al. (2020)" ;
+    bio:acceso "Abierto (licencia no verificada)" ;
+    bio:alcance "Revisión del grupo de Cromatografía de la Universidad de Caldas. No es un servicio ni un resultado de ClayOMICS. Sirve de puente conceptual con residuos de plaguicidas. Biosalud, 19(1), 7-30."@es ;
+    bio:anio 2020 ;
+    bio:autores "Betancourt Arango, J. P.; Patiño Ospina, A.; Taborda Ocampo, G.; Fiscal Ladino, J. A." ;
+    bio:citaCorta "F17 - Betancourt Arango et al. (2020)" ;
+    bio:doi "10.17151/biosa.2020.19.1.1" ;
+    bio:fechaConsulta "11/nov/2026" ;
+    bio:informacionExtraida "Revisión de GC-MS, LC-MS, UHPLC-QTOF-MS, RMN e ICP-MS aplicadas a plaguicidas, metales pesados, micotoxinas y otros analitos, en agua, tejidos, plantas y alimentos."@es ;
+    bio:iniciativa "ClayOMICS" ;
+    bio:naturaleza "Hecho documentado (revisión)" ;
+    bio:nivelConfiabilidad "Alta"^^xsd:string ;
+    bio:notas "Revisión del grupo de Cromatografía de la Universidad de Caldas. No es un servicio ni un resultado de ClayOMICS. Sirve de puente conceptual con residuos de plaguicidas. Biosalud, 19(1), 7-30."@es ;
+    bio:tipoFuente "Artículo de revisión" ;
+    bio:titulo "Aplicaciones de la xenometabolómica para la identificación de biomarcadores de toxicidad: una revisión del tema" ;
+    bio:url "https://doi.org/10.17151/biosa.2020.19.1.1" .
 
-bio:Restriccion_cuprico a bio:Restriccion ;
-    rdfs:label "Incompatibilidad con fungicida cúprico"@es ;
-    bio:codigoPractica "aplicacion_fungicida_cuprico" ;
-    bio:descripcion "Los fungicidas cúpricos comprometen a Hirsutella citriformis. La revisión desaconseja aplicar cobre a dosis altas junto con el hongo (F07)."@es ;
-    bio:etiqueta "Incompatibilidad con fungicida cúprico"@es ;
-    bio:justificadoPor bio:F07 .
+bio:Phyllocoptruta_oleivora a bio:Plaga ;
+    rdfs:label "ácaro tostador de los cítricos"@es ;
+    bio:afectaA bio:Citrus_sinensis ;
+    bio:contextualizadoPor bio:F12 ;
+    bio:descripcion "Ácaro eriófido evaluado en naranja Valencia junto con Polyphagotarsonemus latus (F12). Esa fuente no autoriza a usar el mismo agente contra Diaphorina citri."@es ;
+    bio:esControladaPor bio:Chrysoperla_carnea ;
+    bio:nombreCientifico "Phyllocoptruta oleivora" ;
+    bio:nombreComun "ácaro tostador de los cítricos"@es .
+
+bio:Restriccion_botanicos a bio:Restriccion ;
+    rdfs:label "Mortalidad por insecticidas botánicos"@es ;
+    bio:codigoPractica "aplicacion_insecticida_botanico" ;
+    bio:descripcion "Biodie y NeemPHC causaron mortalidad de Tamarixia radiata por residualidad (12,7 % y 12,3 %) y por ingestión (33,3 % y 28,7 %) en laboratorio (F10). No hay fuente en el inventario para una carencia tras clorpirifos."@es ;
+    bio:etiqueta "Mortalidad por insecticidas botánicos"@es ;
+    bio:justificadoPor bio:F10 .
+
+bio:Restriccion_extractos a bio:Restriccion ;
+    rdfs:label "Interacción con extractos vegetales"@es ;
+    bio:codigoPractica "aplicacion_extractos_vegetales" ;
+    bio:descripcion "F06 evaluó extractos de Murraya paniculata, cocotero, clavo y guayaba sobre Diaphorina citri y Tamarixia radiata. La ficha no trae los valores por extracto; la alerta pide revisarlos antes de liberar, no afirma una dosis incompatible."@es ;
+    bio:etiqueta "Interacción con extractos vegetales"@es ;
+    bio:justificadoPor bio:F06 .
 
 bio:AnalisisQuimico a owl:Class ;
     rdfs:label "AnalisisQuimico"@es ;
     rdfs:comment "Análisis químico, medido o propuesto, articulado con una plataforma."@es .
 
+bio:Beauveria_bassiana a bio:AgenteBiocontrol ;
+    rdfs:label "Beauveria bassiana" ;
+    bio:descripcion "Cepas mexicanas Bb-Dc y Bb-Rhy, patógenas de ninfas de Diaphorina citri en laboratorio (F11). No corresponden a una cepa validada en la Universidad de Caldas."@es ;
+    bio:nombreCientifico "Beauveria bassiana" ;
+    bio:nombreComun "Beauveria bassiana" ;
+    bio:tipoAgente "hongo_entomopatogeno" .
+
+bio:Chrysoperla_carnea a bio:AgenteBiocontrol ;
+    rdfs:label "Chrysoperla carnea" ;
+    bio:descripcion "Depredador liberado contra ácaros en naranja Valencia (F12). El inventario no lo documenta como controlador de Diaphorina citri."@es ;
+    bio:nombreCientifico "Chrysoperla carnea" ;
+    bio:nombreComun "Chrysoperla carnea" ;
+    bio:tipoAgente "depredador" .
+
+bio:CondicionUso a owl:Class ;
+    rdfs:label "CondicionUso"@es ;
+    rdfs:comment "Ventana de temperatura documentada. La humedad solo decide si la fuente la marca como umbral."@es .
+
 bio:Diaphorencyrtus_sp a bio:AgenteBiocontrol ;
-    rdfs:label "Diaphorencyrtus aligarhensis" ;
-    bio:descripcion "Endoparasitoide de Diaphorina citri. El identificador conserva Diaphorencyrtus_sp, como en reportes tempranos; Kondo et al. (2022) asignan el registro colombiano a D. aligarhensis."@es ;
-    bio:nombreCientifico "Diaphorencyrtus aligarhensis" ;
-    bio:nombreComun "Diaphorencyrtus aligarhensis" ;
+    rdfs:label "Diaphorencyrtus sp." ;
+    bio:descripcion "Parasitoide de ninfas de Diaphorina citri. F01 es un registro de presencia en Manizales; el control queda como hipótesis porque no mide parasitismo ni condiciones de uso."@es ;
+    bio:nombreCientifico "Diaphorencyrtus sp." ;
+    bio:nombreComun "Diaphorencyrtus sp." ;
     bio:tipoAgente "parasitoide" .
 
-bio:Experimento a owl:Class ;
-    rdfs:label "Experimento"@es ;
-    rdfs:comment "Experimento, medido o propuesto, articulado con una plataforma."@es .
+bio:F03 a bio:FuenteEvidencia ;
+    rdfs:label "F03 - Soto y Ocampo (2011)" ;
+    bio:acceso "Abierto (licencia no verificada)" ;
+    bio:alcance "Estudio preliminar morfológico, sin eficacia de campo. Volumen y páginas por completar al citar."@es ;
+    bio:anio 2011 ;
+    bio:autores "Soto G., A.; Ocampo S., A." ;
+    bio:citaCorta "F03 - Soto y Ocampo (2011)" ;
+    bio:fechaConsulta "11/nov/2026" ;
+    bio:informacionExtraida "Descripción morfológica de larvas, pupas y adultos de Trigonospila sp., parasitoide de adultos del picudo. Adultos de Compsus recolectados en Maltería, Manizales (2250 msnm)."@es ;
+    bio:iniciativa "Biocontroladores" ;
+    bio:naturaleza "Hecho documentado" ;
+    bio:nivelConfiabilidad "Alta"^^xsd:string ;
+    bio:notas "Estudio preliminar morfológico, sin eficacia de campo. Volumen y páginas por completar al citar."@es ;
+    bio:tipoFuente "Artículo científico (descripción)" ;
+    bio:titulo "Estudio preliminar de Trigonospila sp. (Diptera: Tachinidae), parasitoide de Compsus viridilineatus (Coleoptera: Curculionidae)" ;
+    bio:url "https://revistasojs.ucaldas.edu.co/index.php/boletincientifico/article/view/4434" .
 
-bio:F04 a bio:FuenteEvidencia ;
-    rdfs:label "F04 - McFarland y Hoy (2001)" ;
-    bio:anio 2001 ;
-    bio:autores "McFarland, C. D.; Hoy, M. A." ;
-    bio:citaCorta "F04 - McFarland y Hoy (2001)" ;
-    bio:doi "10.2307/3496171" ;
-    bio:notas "Florida Entomologist, 84(2), 227-233. Supervivencia adulta a 25 °C y 30 °C con humedades relativas de 7 %, 33 %, 53 %, 75 % y 97 %."@es ;
-    bio:rolFuente "respalda_relacion" ;
-    bio:tipoFuente "articulo" ;
-    bio:titulo "Survival of Diaphorina citri, and its two parasitoids Tamarixia radiata and Diaphorencyrtus aligarhensis, under different relative humidities and temperature regimes" ;
-    bio:url "https://doi.org/10.2307/3496171" .
-
-bio:F06 a bio:FuenteEvidencia ;
-    rdfs:label "F06 - Alemán et al. (2007)" ;
-    bio:anio 2007 ;
-    bio:autores "Alemán, J.; Baños, H.; Ravelo, J." ;
-    bio:citaCorta "F06 - Alemán et al. (2007)" ;
-    bio:notas "Revista Protección Vegetal, 22(3), 154-165. Citado por Restrepo-García et al. (2016) al señalar que el control químico puede eliminar enemigos naturales."@es ;
-    bio:rolFuente "respalda_restriccion" ;
-    bio:tipoFuente "articulo" ;
-    bio:titulo "Diaphorina citri y la enfermedad huanglongbing: una combinación destructiva para la producción citrícola" .
-
-bio:F08 a bio:FuenteEvidencia ;
-    rdfs:label "F08 - Restrepo-García et al. (2024)" ;
+bio:F07 a bio:FuenteEvidencia ;
+    rdfs:label "F07 - Restrepo-García et al. (2024)" ;
+    bio:acceso "Abierto (licencia no verificada)" ;
+    bio:alcance "El artículo reporta incubación a 25 ± 20 °C, probable error tipográfico, y no reporta humedad relativa. No se deriva un rango agroclimático ni hay ensayo de campo. Boletín Científico Centro de Museos, 28(2), 181-190."@es ;
     bio:anio 2024 ;
     bio:autores "Restrepo-García, A. M.; Pérez-González, O.; Soto-Giraldo, A." ;
-    bio:citaCorta "F08 - Restrepo-García et al. (2024)" ;
+    bio:citaCorta "F07 - Restrepo-García et al. (2024)" ;
     bio:doi "10.17151/bccm.2024.28.2.9" ;
-    bio:notas "Boletín Científico Centro de Museos, 28(2), 181-190. Cepa de la Granja Montelindo. Mortalidad acumulada de 98 % en bioensayo de contacto y 3 % en el control; similitud del 98,86 % en el gen 28S."@es ;
-    bio:rolFuente "respalda_relacion" ;
-    bio:tipoFuente "articulo" ;
+    bio:fechaConsulta "11/nov/2026" ;
+    bio:informacionExtraida "Cepa de la Granja Montelindo: mortalidad acumulada de Diaphorina citri de 98 % con conidios y 3 % en el control, en bioensayo de laboratorio."@es ;
+    bio:iniciativa "Biocontroladores" ;
+    bio:naturaleza "Hecho documentado (laboratorio)" ;
+    bio:nivelConfiabilidad "Alta"^^xsd:string ;
+    bio:notas "El artículo reporta incubación a 25 ± 20 °C, probable error tipográfico, y no reporta humedad relativa. No se deriva un rango agroclimático ni hay ensayo de campo. Boletín Científico Centro de Museos, 28(2), 181-190."@es ;
+    bio:tipoFuente "Artículo científico (laboratorio)" ;
     bio:titulo "Primer aislamiento de Hirsutella citriformis en Colombia y evaluación de su patogenicidad" ;
     bio:url "https://doi.org/10.17151/bccm.2024.28.2.9" .
 
+bio:F11 a bio:FuenteEvidencia ;
+    rdfs:label "F11 - Cruz-Cruz et al. (2020)" ;
+    bio:acceso "Resumen abierto; texto completo por suscripción" ;
+    bio:alcance "Cepas mexicanas en laboratorio. No valida una cepa local «UC10» ni aplica directamente a Caldas. Southwestern Entomologist, 45(3), 609-620."@es ;
+    bio:anio 2020 ;
+    bio:autores "Cruz-Cruz, D.; Gómez-Ruiz, J.; Barrera, J. F.; Sánchez-Peña, S. R.; Valle-Mora, J. F." ;
+    bio:citaCorta "F11 - Cruz-Cruz et al. (2020)" ;
+    bio:doi "10.3958/059.045.0303" ;
+    bio:fechaConsulta "11/nov/2026" ;
+    bio:informacionExtraida "Cepas de Beauveria bassiana a 1×10^8 conidios/mL: sin efecto sobre huevos; mortalidad de ninfas entre 21 y 58 % según la cepa. CL50 en ninfas IV-V de 8,34×10^6 (Bb-Dc) y 1×10^7 (Bb-Rhy) conidios/mL."@es ;
+    bio:iniciativa "Biocontroladores" ;
+    bio:naturaleza "Hecho documentado (laboratorio)" ;
+    bio:nivelConfiabilidad "Alta"^^xsd:string ;
+    bio:notas "Cepas mexicanas en laboratorio. No valida una cepa local «UC10» ni aplica directamente a Caldas. Southwestern Entomologist, 45(3), 609-620."@es ;
+    bio:tipoFuente "Artículo científico (laboratorio)" ;
+    bio:titulo "Pathogenicity of Beauveria bassiana against immature stages of Diaphorina citri under laboratory conditions" ;
+    bio:url "https://doi.org/10.3958/059.045.0303" .
+
 bio:Hirsutella_citriformis a bio:AgenteBiocontrol ;
     rdfs:label "Hirsutella citriformis" ;
-    bio:descripcion "Hongo entomopatógeno aislado en la Granja Montelindo de la Universidad de Caldas y patógeno de Diaphorina citri en bioensayo de laboratorio."@es ;
+    bio:descripcion "Hongo entomopatógeno aislado en la Granja Montelindo. En laboratorio causó 98 % de mortalidad acumulada de Diaphorina citri (F07). Es la cepa colombiana documentada; el inventario no trae una cepa local de Beauveria llamada UC10."@es ;
     bio:nombreCientifico "Hirsutella citriformis" ;
     bio:nombreComun "Hirsutella citriformis" ;
     bio:tipoAgente "hongo_entomopatogeno" .
 
-bio:PlagaSinAgenteDocumentado a owl:Class ;
-    rdfs:label "PlagaSinAgenteDocumentado"@es ;
-    rdfs:comment "Cierre de mundo local: la plaga no tiene agente en esta base."@es ;
-    rdfs:subClassOf bio:Plaga .
-
-bio:Restriccion_neonicotinoide a bio:Restriccion ;
-    rdfs:label "Incompatibilidad con neonicotinoides"@es ;
-    bio:codigoPractica "aplicacion_neonicotinoide" ;
-    bio:descripcion "Los neonicotinoides, por ejemplo imidacloprid, interfieren con los parasitoides. En Palmira una aspersión de imidacloprid interrumpió el seguimiento de parasitismo (F05)."@es ;
-    bio:etiqueta "Incompatibilidad con neonicotinoides"@es ;
-    bio:justificadoPor bio:F05,
-        bio:F06 .
-
-bio:Restriccion_piretroide a bio:Restriccion ;
-    rdfs:label "Incompatibilidad con piretroides"@es ;
-    bio:codigoPractica "aplicacion_piretroide" ;
-    bio:descripcion "Un insecticida piretroide de amplio espectro en la ventana de liberación deprime a los parasitoides. No conviene liberarlos mientras la práctica esté vigente."@es ;
-    bio:etiqueta "Incompatibilidad con piretroides"@es ;
-    bio:justificadoPor bio:F02,
-        bio:F06 .
-
 bio:Tamarixia_radiata a bio:AgenteBiocontrol ;
     rdfs:label "Tamarixia radiata" ;
-    bio:descripcion "Ectoparasitoide de ninfas de Diaphorina citri. Es el enemigo natural con evidencia convergente en este inventario."@es ;
+    bio:descripcion "Ectoparasitoide de ninfas de Diaphorina citri. Presencia y parasitismo en Caldas (F02); desarrollo entre 15 y 35 °C en laboratorio, con mejor viabilidad a 25 °C (F08)."@es ;
     bio:nombreCientifico "Tamarixia radiata" ;
     bio:nombreComun "Tamarixia radiata" ;
     bio:tipoAgente "parasitoide" .
 
-bio:Citrus_reticulata a bio:Cultivo ;
-    rdfs:label "mandarina"@es ;
-    bio:descripcion "Cultivo de cítricos usado como hospedero en el inventario semilla."@es ;
-    bio:nombreCientifico "Citrus reticulata" ;
-    bio:nombreComun "mandarina"@es .
+bio:Trigonospila_unicaldasi a bio:AgenteBiocontrol ;
+    rdfs:label "Trigonospila unicaldasi" ;
+    bio:descripcion "Parasitoide de adultos de Compsus. F03 describió el género en Maltería; F04 describió la especie con holotipo en la Granja Tesorito."@es ;
+    bio:nombreCientifico "Trigonospila unicaldasi" ;
+    bio:nombreComun "Trigonospila unicaldasi" ;
+    bio:tipoAgente "parasitoide" .
 
-bio:Citrus_sinensis a bio:Cultivo ;
-    rdfs:label "naranja dulce"@es ;
-    bio:descripcion "Cultivo de cítricos usado como hospedero en el inventario semilla."@es ;
-    bio:nombreCientifico "Citrus sinensis" ;
-    bio:nombreComun "naranja dulce"@es .
+bio:F01 a bio:FuenteEvidencia ;
+    rdfs:label "F01 - Arias-Ortega et al. (2016)" ;
+    bio:acceso "Abierto · CC BY 4.0" ;
+    bio:alcance "Documenta presencia. No mide parasitismo ni condiciones de uso; el efecto de control queda como hipótesis."@es ;
+    bio:anio 2016 ;
+    bio:autores "Arias-Ortega, P. L.; Restrepo-García, A. M.; Soto-Giraldo, A." ;
+    bio:citaCorta "F01 - Arias-Ortega et al. (2016)" ;
+    bio:doi "10.17151/bccm.2016.20.1.12" ;
+    bio:fechaConsulta "11/nov/2026" ;
+    bio:informacionExtraida "Primer registro en Colombia de Diaphorencyrtus sp., parasitoide de ninfas de Diaphorina citri, capturado a mano en brotes de cítricos en Manizales."@es ;
+    bio:iniciativa "Biocontroladores" ;
+    bio:naturaleza "Hecho (presencia); hipótesis (control)" ;
+    bio:nivelConfiabilidad "Alta"^^xsd:string ;
+    bio:notas "Documenta presencia. No mide parasitismo ni condiciones de uso; el efecto de control queda como hipótesis."@es ;
+    bio:tipoFuente "Artículo científico (registro)" ;
+    bio:titulo "Primer registro de Diaphorencyrtus sp. (Hymenoptera: Encyrtidae) en Colombia" ;
+    bio:url "https://doi.org/10.17151/bccm.2016.20.1.12" .
 
-bio:Diaphorina_citri a bio:Plaga ;
-    rdfs:label "psílido asiático de los cítricos"@es ;
-    bio:afectaA bio:Citrus_reticulata,
-        bio:Citrus_sinensis ;
-    bio:contextualizadoPor bio:F01,
-        bio:F02,
-        bio:F11 ;
-    bio:descripcion "Vector del Huanglongbing (HLB). En Caldas se documentó a Tamarixia radiata alimentándose y parasitando sus ninfas."@es ;
-    bio:esControladaPor bio:Diaphorencyrtus_sp,
-        bio:Hirsutella_citriformis,
-        bio:Tamarixia_radiata ;
-    bio:nombreCientifico "Diaphorina citri" ;
-    bio:nombreComun "psílido asiático de los cítricos"@es .
+bio:F02 a bio:FuenteEvidencia ;
+    rdfs:label "F02 - Restrepo-García et al. (2016)" ;
+    bio:acceso "Abierto (licencia no verificada)" ;
+    bio:alcance "Documenta presencia y parasitismo en Caldas. No reporta rangos agroclimáticos ni dosis de liberación. Boletín Científico Centro de Museos, 20(1), 204-210."@es ;
+    bio:anio 2016 ;
+    bio:autores "Restrepo-García, A. M.; Arias-Ortega, P. L.; Soto-Giraldo, A." ;
+    bio:citaCorta "F02 - Restrepo-García et al. (2016)" ;
+    bio:doi "10.17151/bccm.2016.20.1.15" ;
+    bio:fechaConsulta "11/nov/2026" ;
+    bio:informacionExtraida "Tamarixia radiata está presente en Caldas y parasita ninfas de Diaphorina citri en brotes colectados entre enero y abril de 2016."@es ;
+    bio:iniciativa "Biocontroladores" ;
+    bio:naturaleza "Hecho documentado" ;
+    bio:nivelConfiabilidad "Alta"^^xsd:string ;
+    bio:notas "Documenta presencia y parasitismo en Caldas. No reporta rangos agroclimáticos ni dosis de liberación. Boletín Científico Centro de Museos, 20(1), 204-210."@es ;
+    bio:tipoFuente "Artículo científico (registro)" ;
+    bio:titulo "Primer reporte de Tamarixia radiata (Waterston) (Hymenoptera: Eulophidae) en el departamento de Caldas, Colombia" ;
+    bio:url "https://doi.org/10.17151/bccm.2016.20.1.15" .
 
-bio:F05 a bio:FuenteEvidencia ;
-    rdfs:label "F05 - Kondo et al. (2022)" ;
-    bio:anio 2022 ;
-    bio:autores "Kondo, T.; Woolley, J. B.; Arciniegas, K. T.; Campos-Patiño, Y." ;
-    bio:citaCorta "F05 - Kondo et al. (2022)" ;
-    bio:doi "10.15446/caldasia.v44n3.95918" ;
-    bio:notas "Caldasia, 44(3), 541-552. Primer reporte confirmado de la especie en Colombia (Palmira). Parasitismo de 0,3 % a 1,0 %, frente a 1,5 %–24,2 % de Tamarixia en el mismo estudio. Una aspersión de imidacloprid interrumpió el seguimiento."@es ;
-    bio:rolFuente "respalda_relacion" ;
-    bio:tipoFuente "articulo" ;
-    bio:titulo "First report in Colombia and diagnosis of Diaphorencyrtus aligarhensis (Hymenoptera: Encyrtidae), a parasitoid wasp of Diaphorina citri" ;
-    bio:url "https://doi.org/10.15446/caldasia.v44n3.95918" .
+bio:F04 a bio:FuenteEvidencia ;
+    rdfs:label "F04 - Vinasco et al. (2017)" ;
+    bio:acceso "Abierto (licencia no verificada)" ;
+    bio:alcance "Descripción taxonómica y registro de parasitismo. No ofrece condiciones de uso ni protocolo de liberación. Boletín Científico Centro de Museos, 21(2), 207-219."@es ;
+    bio:anio 2017 ;
+    bio:autores "Vinasco, N.; Vallejo, L. F.; Soto, A." ;
+    bio:citaCorta "F04 - Vinasco et al. (2017)" ;
+    bio:doi "10.17151/bccm.2017.21.2.14" ;
+    bio:fechaConsulta "11/nov/2026" ;
+    bio:informacionExtraida "Descripción de Trigonospila unicaldasi. Holotipo en la Granja Tesorito, Valle de Maltería, Manizales (2280 m), sobre adultos de Compsus sp. en limón."@es ;
+    bio:iniciativa "Biocontroladores" ;
+    bio:naturaleza "Hecho documentado" ;
+    bio:nivelConfiabilidad "Alta"^^xsd:string ;
+    bio:notas "Descripción taxonómica y registro de parasitismo. No ofrece condiciones de uso ni protocolo de liberación. Boletín Científico Centro de Museos, 21(2), 207-219."@es ;
+    bio:tipoFuente "Artículo científico (descripción de especie)" ;
+    bio:titulo "New species of the genus Trigonospila Pokorny (Diptera: Tachinidae) parasitises adult Compsus sp. Schoenherr (Coleoptera: Curculionidae) in Colombia" ;
+    bio:url "https://doi.org/10.17151/bccm.2017.21.2.14" .
 
-bio:F07 a bio:FuenteEvidencia ;
-    rdfs:label "F07 - Pérez-González et al. (2022)" ;
-    bio:anio 2022 ;
-    bio:autores "Pérez-González, O.; Gómez-Flores, R.; Tamez-Guerra, P." ;
-    bio:citaCorta "F07 - Pérez-González et al. (2022)" ;
-    bio:doi "10.3390/jof8060573" ;
-    bio:notas "Journal of Fungi, 8(6), 573. Revisión: desarrollo óptimo cerca de 25 °C, epizootias con humedad relativa superior al 80 % y precaución frente a cobre, aceite y azufre a dosis altas. El papel de los exudados sigue poco caracterizado."@es ;
-    bio:rolFuente "respalda_relacion" ;
-    bio:tipoFuente "articulo" ;
-    bio:titulo "Insight into biological control potential of Hirsutella citriformis against Asian citrus psyllid as a vector of citrus Huanglongbing disease in America" ;
-    bio:url "https://doi.org/10.3390/jof8060573" .
+bio:F12 a bio:FuenteEvidencia ;
+    rdfs:label "F12 - Imbachi et al. (2012)" ;
+    bio:acceso "Abierto (licencia no verificada)" ;
+    bio:alcance "Las plagas objetivo son ácaros, no Diaphorina citri. No sustenta que Chrysoperla controle al psílido. Región distinta a Caldas. Acta Agronómica, 61(4), 333-338."@es ;
+    bio:anio 2012 ;
+    bio:autores "Imbachi, K.; Mesa, N. C.; Rodríguez, I. V. et al." ;
+    bio:citaCorta "F12 - Imbachi et al. (2012)" ;
+    bio:fechaConsulta "11/nov/2026" ;
+    bio:informacionExtraida "En naranja Valencia (Caicedonia, Valle del Cauca, 1150 msnm) la liberación de Chrysoperla carnea redujo el daño de Phyllocoptruta oleivora a 10 % en el primer ciclo. Los ácaros Phytoseiidae se dispersaron rápido de los frutos."@es ;
+    bio:iniciativa "Biocontroladores" ;
+    bio:naturaleza "Hecho documentado (campo)" ;
+    bio:nivelConfiabilidad "Alta"^^xsd:string ;
+    bio:notas "Las plagas objetivo son ácaros, no Diaphorina citri. No sustenta que Chrysoperla controle al psílido. Región distinta a Caldas. Acta Agronómica, 61(4), 333-338."@es ;
+    bio:tipoFuente "Artículo científico (campo)" ;
+    bio:titulo "Evaluación de estrategias de control biológico de Polyphagotarsonemus latus (Banks) y Phyllocoptruta oleivora (Ashmead) en naranja Valencia" ;
+    bio:url "https://revistas.unal.edu.co/index.php/acta_agronomica/article/download/38139/40315/169692" .
+
+bio:MAGNETIME a bio:PlataformaExterna ;
+    rdfs:label "MAGNETIME" ;
+    bio:descripcion "Línea de tratamiento magnético de semillas. Las fuentes del inventario son de tomate y soja, no de cítricos ni de control de plagas."@es ;
+    bio:etiqueta "MAGNETIME" ;
+    bio:tipoPlataforma "magnetobiologia" ;
+    bio:url "https://repositorio.ucaldas.edu.co/handle/ucaldas/22551" .
 
 bio:PlataformaExterna a owl:Class ;
     rdfs:label "PlataformaExterna"@es ;
     rdfs:comment "Plataforma de la Universidad de Caldas enlazada por interoperabilidad."@es .
 
-bio:CondicionUso a owl:Class ;
-    rdfs:label "CondicionUso"@es ;
-    rdfs:comment "Ventana operativa de temperatura y humedad de una relación."@es .
+bio:Diaphorina_citri a bio:Plaga ;
+    rdfs:label "psílido asiático de los cítricos"@es ;
+    bio:afectaA bio:Citricos ;
+    bio:contextualizadoPor bio:F01,
+        bio:F02,
+        bio:F05 ;
+    bio:descripcion "Psílido de los cítricos. En el inventario tiene parasitoides, un hongo entomopatógeno y un ensayo con Beauveria. El caldo sulfocálcico (F05) se evaluó sobre la plaga, no como restricción de los enemigos naturales."@es ;
+    bio:esControladaPor bio:Beauveria_bassiana,
+        bio:Diaphorencyrtus_sp,
+        bio:Hirsutella_citriformis,
+        bio:Tamarixia_radiata ;
+    bio:nombreCientifico "Diaphorina citri" ;
+    bio:nombreComun "psílido asiático de los cítricos"@es .
 
-bio:Cultivo a owl:Class ;
-    rdfs:label "Cultivo"@es ;
-    rdfs:comment "Cultivo de cítricos hospedero de la plaga."@es .
-
-bio:F02 a bio:FuenteEvidencia ;
-    rdfs:label "F02 - Restrepo-García et al. (2016)" ;
-    bio:anio 2016 ;
-    bio:autores "Restrepo-García, A. M.; Arias-Ortega, P. L.; Soto-Giraldo, A." ;
-    bio:citaCorta "F02 - Restrepo-García et al. (2016)" ;
-    bio:doi "10.17151/bccm.2016.20.1.15" ;
-    bio:notas "Boletín Científico Centro de Museos Museo de Historia Natural, Universidad de Caldas, 20(1), 204-210. Presencia y acción parasítica de Tamarixia radiata sobre ninfas de Diaphorina citri en Caldas."@es ;
-    bio:rolFuente "respalda_relacion" ;
-    bio:tipoFuente "articulo" ;
-    bio:titulo "Primer reporte de Tamarixia radiata (Waterston) (Hymenoptera: Eulophidae) en el departamento de Caldas, Colombia" ;
-    bio:url "https://doi.org/10.17151/bccm.2016.20.1.15" .
+bio:Experimento a owl:Class ;
+    rdfs:label "Experimento"@es ;
+    rdfs:comment "Experimento, medido o propuesto, articulado con una plataforma."@es .
 
 bio:Restriccion a owl:Class ;
     rdfs:label "Restriccion"@es ;
     rdfs:comment "Práctica agronómica que compromete el uso de un agente."@es .
 
+bio:Cultivo a owl:Class ;
+    rdfs:label "Cultivo"@es ;
+    rdfs:comment "Cultivo de cítricos hospedero de la plaga."@es .
+
 bio:AgenteBiocontrol a owl:Class ;
     rdfs:label "AgenteBiocontrol"@es ;
     rdfs:comment "Enemigo natural o microorganismo de control documentado."@es .
 
-bio:RelacionBiocontrol a owl:Class ;
-    rdfs:label "RelacionBiocontrol"@es ;
-    rdfs:comment "Relación reificada entre plaga, agente, condición, evidencia y restricciones."@es .
-
 bio:Plaga a owl:Class ;
     rdfs:label "Plaga"@es ;
     rdfs:comment "Organismo que afecta al menos un cultivo del inventario."@es .
+
+bio:RelacionBiocontrol a owl:Class ;
+    rdfs:label "RelacionBiocontrol"@es ;
+    rdfs:comment "Relación reificada entre plaga, agente, condición, evidencia y restricciones."@es .
 
 bio:FuenteEvidencia a owl:Class ;
     rdfs:label "FuenteEvidencia"@es ;

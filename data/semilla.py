@@ -1,9 +1,9 @@
-"""Semilla única del prototipo.
+"""Semilla alineada con data/inventario_fuentes.tex.
 
-Editar este archivo y regenerar con `python -m ontology.construir_ontologia`
-cuando se agregue una plaga, un agente, una fuente o una regla de datos.
-Los niveles de evidencia son una clasificación del inventario: no son una
-prescripción ni un metaanálisis.
+Los identificadores F01–F17, los niveles de confiabilidad y las limitaciones
+salen de ese inventario. Una fuente puede ser
+confiable y, aun así, no traer una ventana de uso: en ese caso la relación
+se conserva y la ventana no se inventa.
 """
 
 from __future__ import annotations
@@ -13,18 +13,23 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class Fuente:
-    """Fuente de evidencia o de contexto institucional."""
+    """Ficha del inventario: metadatos, extracción y confiabilidad."""
 
     id: str
     autores: str
     anio: int | None
     titulo: str
     tipo: str
-    rol: str
+    iniciativa: str
+    nivel: str
+    naturaleza: str
     cita_corta: str
-    notas: str
+    informacion_extraida: str
+    alcance: str
+    acceso: str
     doi: str = ""
     url: str = ""
+    fecha_consulta: str = "11/nov/2026"
 
 
 @dataclass(frozen=True)
@@ -56,12 +61,15 @@ class Agente:
 
 @dataclass(frozen=True)
 class Condicion:
+    """Ventana de uso. La humedad solo decide si humedad_decide es verdadera."""
+
     id: str
     temp_min: float
     temp_max: float
-    hum_min: float
-    hum_max: float
     descripcion: str
+    hum_min: float | None = None
+    hum_max: float | None = None
+    humedad_decide: bool = False
 
 
 @dataclass(frozen=True)
@@ -91,6 +99,7 @@ class Analisis:
     variable_respuesta: str
     condicion_experimental: str
     resultado: str
+    fuente_id: str
 
 
 @dataclass(frozen=True)
@@ -102,6 +111,7 @@ class Experimento:
     variable_respuesta: str
     condicion_experimental: str
     resultado: str
+    fuente_id: str
 
 
 @dataclass(frozen=True)
@@ -109,21 +119,19 @@ class Relacion:
     id: str
     plaga_id: str
     agente_id: str
-    condicion_id: str
     nivel: str
     fuente_principal_id: str
     fuentes_ids: tuple[str, ...]
-    restricciones_ids: tuple[str, ...]
     variable_respuesta: str
     resultado: str
     condicion_experimental: str
     criterio_nivel: str
+    condicion_id: str | None = None
+    restricciones_ids: tuple[str, ...] = ()
     analisis_ids: tuple[str, ...] = ()
     experimento_ids: tuple[str, ...] = ()
 
 
-# Alias aceptados por el resolvedor de la consulta, ya normalizados
-# (minúsculas, sin tildes ni puntos).
 ALIAS_PLAGA = {
     "d citri": "Diaphorina_citri",
     "psilido asiatico": "Diaphorina_citri",
@@ -136,28 +144,39 @@ ALIAS_PLAGA = {
 }
 
 PRACTICAS = (
-    ("aplicacion_piretroide", "Aplicación de insecticida piretroide"),
-    ("aplicacion_neonicotinoide", "Aplicación de neonicotinoide (p. ej. imidacloprid)"),
-    ("aplicacion_fungicida_cuprico", "Aplicación de fungicida cúprico"),
-    ("aplicacion_azufre", "Aplicación de azufre"),
+    (
+        "aplicacion_insecticida_botanico",
+        "Aplicación de insecticida botánico (Biodie o NeemPHC, F10)",
+    ),
+    (
+        "aplicacion_extractos_vegetales",
+        "Aplicación de extractos vegetales evaluados con Tamarixia (F06)",
+    ),
 )
 
 
 FUENTES: tuple[Fuente, ...] = (
     Fuente(
         id="F01",
-        autores="Bové, J. M.",
-        anio=2006,
-        titulo=(
-            "Huanglongbing: a destructive, newly-emerging, century-old disease of citrus"
+        autores="Arias-Ortega, P. L.; Restrepo-García, A. M.; Soto-Giraldo, A.",
+        anio=2016,
+        titulo="Primer registro de Diaphorencyrtus sp. (Hymenoptera: Encyrtidae) en Colombia",
+        tipo="Artículo científico (registro)",
+        iniciativa="Biocontroladores",
+        nivel="Alta",
+        naturaleza="Hecho (presencia); hipótesis (control)",
+        cita_corta="F01 - Arias-Ortega et al. (2016)",
+        informacion_extraida=(
+            "Primer registro en Colombia de Diaphorencyrtus sp., parasitoide de ninfas "
+            "de Diaphorina citri, capturado a mano en brotes de cítricos en Manizales."
         ),
-        tipo="articulo",
-        rol="contexto",
-        cita_corta="F01 - Bové (2006)",
-        notas=(
-            "Journal of Plant Pathology, 88(1), 7-37. Revisión del patosistema HLB. "
-            "No evalúa la eficacia de un agente de biocontrol."
+        alcance=(
+            "Documenta presencia. No mide parasitismo ni condiciones de uso; "
+            "el efecto de control queda como hipótesis."
         ),
+        acceso="Abierto · CC BY 4.0",
+        doi="10.17151/bccm.2016.20.1.12",
+        url="https://doi.org/10.17151/bccm.2016.20.1.12",
     ),
     Fuente(
         id="F02",
@@ -167,281 +186,419 @@ FUENTES: tuple[Fuente, ...] = (
             "Primer reporte de Tamarixia radiata (Waterston) (Hymenoptera: Eulophidae) "
             "en el departamento de Caldas, Colombia"
         ),
-        tipo="articulo",
-        rol="respalda_relacion",
+        tipo="Artículo científico (registro)",
+        iniciativa="Biocontroladores",
+        nivel="Alta",
+        naturaleza="Hecho documentado",
         cita_corta="F02 - Restrepo-García et al. (2016)",
-        notas=(
-            "Boletín Científico Centro de Museos Museo de Historia Natural, "
-            "Universidad de Caldas, 20(1), 204-210. Presencia y acción parasítica "
-            "de Tamarixia radiata sobre ninfas de Diaphorina citri en Caldas."
+        informacion_extraida=(
+            "Tamarixia radiata está presente en Caldas y parasita ninfas de Diaphorina citri "
+            "en brotes colectados entre enero y abril de 2016."
         ),
+        alcance=(
+            "Documenta presencia y parasitismo en Caldas. No reporta rangos agroclimáticos "
+            "ni dosis de liberación. Boletín Científico Centro de Museos, 20(1), 204-210."
+        ),
+        acceso="Abierto (licencia no verificada)",
         doi="10.17151/bccm.2016.20.1.15",
         url="https://doi.org/10.17151/bccm.2016.20.1.15",
     ),
     Fuente(
         id="F03",
-        autores="Chen, X.; Stansly, P. A.",
-        anio=2014,
+        autores="Soto G., A.; Ocampo S., A.",
+        anio=2011,
         titulo=(
-            "Biology of Tamarixia radiata (Hymenoptera: Eulophidae), parasitoid of "
-            "the citrus greening disease vector Diaphorina citri (Hemiptera: Psyllidae): "
-            "a mini review"
+            "Estudio preliminar de Trigonospila sp. (Diptera: Tachinidae), parasitoide "
+            "de Compsus viridilineatus (Coleoptera: Curculionidae)"
         ),
-        tipo="articulo",
-        rol="respalda_relacion",
-        cita_corta="F03 - Chen y Stansly (2014)",
-        notas="Florida Entomologist, 97(4), 1404-1412. Revisión biológica del parasitoide.",
+        tipo="Artículo científico (descripción)",
+        iniciativa="Biocontroladores",
+        nivel="Alta",
+        naturaleza="Hecho documentado",
+        cita_corta="F03 - Soto y Ocampo (2011)",
+        informacion_extraida=(
+            "Descripción morfológica de larvas, pupas y adultos de Trigonospila sp., "
+            "parasitoide de adultos del picudo. Adultos de Compsus recolectados en "
+            "Maltería, Manizales (2250 msnm)."
+        ),
+        alcance=(
+            "Estudio preliminar morfológico, sin eficacia de campo. "
+            "Volumen y páginas por completar al citar."
+        ),
+        acceso="Abierto (licencia no verificada)",
+        url="https://revistasojs.ucaldas.edu.co/index.php/boletincientifico/article/view/4434",
     ),
     Fuente(
         id="F04",
-        autores="McFarland, C. D.; Hoy, M. A.",
-        anio=2001,
+        autores="Vinasco, N.; Vallejo, L. F.; Soto, A.",
+        anio=2017,
         titulo=(
-            "Survival of Diaphorina citri, and its two parasitoids Tamarixia radiata "
-            "and Diaphorencyrtus aligarhensis, under different relative humidities "
-            "and temperature regimes"
+            "New species of the genus Trigonospila Pokorny (Diptera: Tachinidae) "
+            "parasitises adult Compsus sp. Schoenherr (Coleoptera: Curculionidae) in Colombia"
         ),
-        tipo="articulo",
-        rol="respalda_relacion",
-        cita_corta="F04 - McFarland y Hoy (2001)",
-        notas=(
-            "Florida Entomologist, 84(2), 227-233. Supervivencia adulta a 25 °C y 30 °C "
-            "con humedades relativas de 7 %, 33 %, 53 %, 75 % y 97 %."
+        tipo="Artículo científico (descripción de especie)",
+        iniciativa="Biocontroladores",
+        nivel="Alta",
+        naturaleza="Hecho documentado",
+        cita_corta="F04 - Vinasco et al. (2017)",
+        informacion_extraida=(
+            "Descripción de Trigonospila unicaldasi. Holotipo en la Granja Tesorito, "
+            "Valle de Maltería, Manizales (2280 m), sobre adultos de Compsus sp. en limón."
         ),
-        doi="10.2307/3496171",
-        url="https://doi.org/10.2307/3496171",
+        alcance=(
+            "Descripción taxonómica y registro de parasitismo. No ofrece condiciones "
+            "de uso ni protocolo de liberación. Boletín Científico Centro de Museos, 21(2), 207-219."
+        ),
+        acceso="Abierto (licencia no verificada)",
+        doi="10.17151/bccm.2017.21.2.14",
+        url="https://doi.org/10.17151/bccm.2017.21.2.14",
     ),
     Fuente(
         id="F05",
-        autores="Kondo, T.; Woolley, J. B.; Arciniegas, K. T.; Campos-Patiño, Y.",
-        anio=2022,
+        autores="Restrepo-García, A. M.; Soto-Giraldo, A.",
+        anio=2017,
         titulo=(
-            "First report in Colombia and diagnosis of Diaphorencyrtus aligarhensis "
-            "(Hymenoptera: Encyrtidae), a parasitoid wasp of Diaphorina citri"
+            "Control alternativo de Diaphorina citri Kuwayama (Hemiptera: Liviidae) "
+            "utilizando caldo sulfocálcico"
         ),
-        tipo="articulo",
-        rol="respalda_relacion",
-        cita_corta="F05 - Kondo et al. (2022)",
-        notas=(
-            "Caldasia, 44(3), 541-552. Primer reporte confirmado de la especie en Colombia "
-            "(Palmira). Parasitismo de 0,3 % a 1,0 %, frente a 1,5 %–24,2 % de Tamarixia "
-            "en el mismo estudio. Una aspersión de imidacloprid interrumpió el seguimiento."
+        tipo="Artículo científico (laboratorio)",
+        iniciativa="Biocontroladores",
+        nivel="Alta",
+        naturaleza="Hecho documentado (laboratorio)",
+        cita_corta="F05 - Restrepo-García y Soto-Giraldo (2017)",
+        informacion_extraida=(
+            "Toxicidad letal y subletal del caldo sulfocálcico sobre Diaphorina citri "
+            "en el Centro de Investigación y Cría de Enemigos Naturales de la Universidad de Caldas."
         ),
-        doi="10.15446/caldasia.v44n3.95918",
-        url="https://doi.org/10.15446/caldasia.v44n3.95918",
+        alcance=(
+            "Ensayo de laboratorio sobre la plaga. No se codifica como restricción de "
+            "enemigos naturales: el inventario pide verificar ese efecto antes de usarlo en R4. "
+            "Boletín Científico Centro de Museos, 21(2), 51-60."
+        ),
+        acceso="Abierto (licencia no verificada)",
+        doi="10.17151/bccm.2017.21.2.4",
+        url="https://doi.org/10.17151/bccm.2017.21.2.4",
     ),
     Fuente(
         id="F06",
-        autores="Alemán, J.; Baños, H.; Ravelo, J.",
-        anio=2007,
+        autores="Barros-Barrios, M. M.; Restrepo-García, A. M.; Narváez-Solarte, W.; Soto-Giraldo, A.",
+        anio=2024,
         titulo=(
-            "Diaphorina citri y la enfermedad huanglongbing: una combinación destructiva "
-            "para la producción citrícola"
+            "Efecto de extractos vegetales compuestos sobre Diaphorina citri "
+            "(Hemiptera: Liviidae) y su parasitoide Tamarixia radiata (Hymenoptera: Eulophidae)"
         ),
-        tipo="articulo",
-        rol="respalda_restriccion",
-        cita_corta="F06 - Alemán et al. (2007)",
-        notas=(
-            "Revista Protección Vegetal, 22(3), 154-165. Citado por Restrepo-García et al. "
-            "(2016) al señalar que el control químico puede eliminar enemigos naturales."
+        tipo="Artículo científico (laboratorio)",
+        iniciativa="Biocontroladores",
+        nivel="Alta",
+        naturaleza="Hecho documentado (laboratorio)",
+        cita_corta="F06 - Barros-Barrios et al. (2024)",
+        informacion_extraida=(
+            "Efecto de extractos de Murraya paniculata, Cocos nucifera, Syzygium aromaticum "
+            "y Psidium guajava sobre Diaphorina citri y Tamarixia radiata, en olfatometría."
         ),
+        alcance=(
+            "Condiciones controladas. Los valores cuantitativos por extracto no están en la ficha; "
+            "la restricción advierte la interacción, no una prohibición numérica. "
+            "Boletín Científico Centro de Museos, 28(1), 125-138."
+        ),
+        acceso="Abierto (licencia no verificada)",
+        doi="10.17151/bccm.2024.28.1.7",
+        url="https://doi.org/10.17151/bccm.2024.28.1.7",
     ),
     Fuente(
         id="F07",
-        autores="Pérez-González, O.; Gómez-Flores, R.; Tamez-Guerra, P.",
-        anio=2022,
-        titulo=(
-            "Insight into biological control potential of Hirsutella citriformis against "
-            "Asian citrus psyllid as a vector of citrus Huanglongbing disease in America"
-        ),
-        tipo="articulo",
-        rol="respalda_relacion",
-        cita_corta="F07 - Pérez-González et al. (2022)",
-        notas=(
-            "Journal of Fungi, 8(6), 573. Revisión: desarrollo óptimo cerca de 25 °C, "
-            "epizootias con humedad relativa superior al 80 % y precaución frente a "
-            "cobre, aceite y azufre a dosis altas. El papel de los exudados sigue poco caracterizado."
-        ),
-        doi="10.3390/jof8060573",
-        url="https://doi.org/10.3390/jof8060573",
-    ),
-    Fuente(
-        id="F08",
         autores="Restrepo-García, A. M.; Pérez-González, O.; Soto-Giraldo, A.",
         anio=2024,
         titulo=(
-            "Primer aislamiento de Hirsutella citriformis en Colombia y evaluación "
-            "de su patogenicidad"
+            "Primer aislamiento de Hirsutella citriformis en Colombia y evaluación de su patogenicidad"
         ),
-        tipo="articulo",
-        rol="respalda_relacion",
-        cita_corta="F08 - Restrepo-García et al. (2024)",
-        notas=(
-            "Boletín Científico Centro de Museos, 28(2), 181-190. Cepa de la Granja "
-            "Montelindo. Mortalidad acumulada de 98 % en bioensayo de contacto y 3 % "
-            "en el control; similitud del 98,86 % en el gen 28S."
+        tipo="Artículo científico (laboratorio)",
+        iniciativa="Biocontroladores",
+        nivel="Alta",
+        naturaleza="Hecho documentado (laboratorio)",
+        cita_corta="F07 - Restrepo-García et al. (2024)",
+        informacion_extraida=(
+            "Cepa de la Granja Montelindo: mortalidad acumulada de Diaphorina citri de 98 % "
+            "con conidios y 3 % en el control, en bioensayo de laboratorio."
         ),
+        alcance=(
+            "El artículo reporta incubación a 25 ± 20 °C, probable error tipográfico, y no "
+            "reporta humedad relativa. No se deriva un rango agroclimático ni hay ensayo de campo. "
+            "Boletín Científico Centro de Museos, 28(2), 181-190."
+        ),
+        acceso="Abierto (licencia no verificada)",
         doi="10.17151/bccm.2024.28.2.9",
         url="https://doi.org/10.17151/bccm.2024.28.2.9",
     ),
     Fuente(
-        id="F09",
-        autores=(
-            "Casique-Valdes, R.; Reyes-Martinez, A. Y.; Sanchez-Peña, S. R.; "
-            "Bidochka, M. J.; Lopez-Arroyo, J. I."
-        ),
-        anio=2011,
+        id="F08",
+        autores="Gómez-Torres, M. L.; Nava, D. E. et al.",
+        anio=2012,
         titulo=(
-            "Pathogenicity of Hirsutella citriformis to Diaphorina citri and "
-            "Bactericera cockerelli"
+            "Life table of Tamarixia radiata (Hymenoptera: Eulophidae) on Diaphorina citri "
+            "(Hemiptera: Psyllidae) at different temperatures"
         ),
-        tipo="articulo",
-        rol="respalda_relacion",
-        cita_corta="F09 - Casique-Valdes et al. (2011)",
-        notas="Florida Entomologist, 94(3), 703-705. Patogenicidad del hongo sobre el psílido.",
-        url="https://www.jstor.org/stable/41336460",
+        tipo="Artículo científico (laboratorio)",
+        iniciativa="Biocontroladores",
+        nivel="Alta",
+        naturaleza="Hecho documentado (laboratorio)",
+        cita_corta="F08 - Gómez-Torres et al. (2012)",
+        informacion_extraida=(
+            "Tabla de vida a 15, 20, 25, 30 y 35 °C, con 70 ± 10 % de humedad relativa. "
+            "Hubo desarrollo en todas esas temperaturas y la mayor viabilidad y tasa "
+            "reproductiva neta ocurrió a 25 °C."
+        ),
+        alcance=(
+            "Población brasileña en laboratorio. La viabilidad es de desarrollo, no de una "
+            "liberación en campo. La humedad es condición de ensayo, no un umbral de uso. "
+            "Journal of Economic Entomology, 105(2). Páginas por completar al citar."
+        ),
+        acceso="Resumen abierto; texto completo posiblemente restringido",
+        doi="10.1603/EC11280",
+        url="https://doi.org/10.1603/EC11280",
+    ),
+    Fuente(
+        id="F09",
+        autores="McCalla, K. A.; Keçeci, M.; Milosavljevic, I.; Ratkowsky, D. A.; Hoddle, M. S.",
+        anio=2019,
+        titulo=(
+            "The influence of temperature variation on life history parameters and thermal "
+            "performance curves of Tamarixia radiata, a parasitoid of the Asian citrus psyllid"
+        ),
+        tipo="Artículo científico (laboratorio)",
+        iniciativa="Biocontroladores",
+        nivel="Alta",
+        naturaleza="Hecho documentado (laboratorio)",
+        cita_corta="F09 - McCalla et al. (2019)",
+        informacion_extraida=(
+            "Temperaturas constantes y fluctuantes, con promedios de 12 a 38 °C, "
+            "afectan el desarrollo y la longevidad de Tamarixia radiata."
+        ),
+        alcance=(
+            "Población de Pakistán liberada en California, en laboratorio. Complementa a F08 "
+            "con un rango térmico más amplio, pero no fija un umbral de liberación. "
+            "Journal of Economic Entomology, 112(4), 1560-1574."
+        ),
+        acceso="Resumen abierto; texto completo posiblemente restringido",
+        doi="10.1093/jee/toz067",
+        url="https://doi.org/10.1093/jee/toz067",
     ),
     Fuente(
         id="F10",
-        autores="AgroSavia",
-        anio=None,
-        titulo="Rutas de acceso al parasitoide Tamarixia radiata",
-        tipo="recomendacion_tecnologica",
-        rol="respalda_relacion",
-        cita_corta="F10 - AgroSavia (s. f.)",
-        notas=(
-            "Oferta tecnológica: incremento in situ, traspatios y reservorios. "
-            "No es un artículo de eficacia y no aporta un porcentaje de control."
+        autores="Monsreal-Ceballos, R. J.; Ruíz-Sánchez, E.; Sánchez-Borja, M. et al.",
+        anio=2017,
+        titulo=(
+            "Efectos de insecticidas botánicos comerciales en Tamarixia radiata, "
+            "un ectoparasitoide de Diaphorina citri"
         ),
-        url=(
-            "https://www.agrosavia.co/productos-y-servicios/oferta-tecnologica/"
-            "linea-agricola/frutales/recomendaciones-protocolos-y-metodologias/"
-            "758-rutas-de-acceso-al-parasitoide-tamarixia-radiata"
+        tipo="Artículo científico (laboratorio)",
+        iniciativa="Biocontroladores",
+        nivel="Alta",
+        naturaleza="Hecho documentado (laboratorio)",
+        cita_corta="F10 - Monsreal-Ceballos et al. (2017)",
+        informacion_extraida=(
+            "Mortalidad de Tamarixia radiata por residualidad de 12,7 % (Biodie) y 12,3 % "
+            "(NeemPHC), y por ingestión de 33,3 % y 28,7 %. Bioensayo a 25 ± 5 °C y 60 ± 10 % HR."
         ),
+        alcance=(
+            "Evalúa insecticidas botánicos, no organofosforados como el clorpirifos. "
+            "Estudio hecho en México. La carencia de 21 días tras clorpirifos no tiene fuente "
+            "en este inventario. Ecosistemas y Recursos Agropecuarios, 4(12), 589-596."
+        ),
+        acceso="Abierto (Dialnet; licencia no verificada)",
+        url="https://dialnet.unirioja.es/descarga/articulo/6343377.pdf",
     ),
     Fuente(
         id="F11",
-        autores="Instituto Colombiano Agropecuario",
-        anio=2017,
+        autores="Cruz-Cruz, D.; Gómez-Ruiz, J.; Barrera, J. F.; Sánchez-Peña, S. R.; Valle-Mora, J. F.",
+        anio=2020,
         titulo=(
-            "Demostración de método: liberación de controladores biológicos "
-            "para Diaphorina citri"
+            "Pathogenicity of Beauveria bassiana against immature stages of Diaphorina citri "
+            "under laboratory conditions"
         ),
-        tipo="nota_institucional",
-        rol="contexto",
-        cita_corta="F11 - ICA (2017)",
-        notas=(
-            "Jornada de campo en el Atlántico, 6 de diciembre de 2017, con Tamarixia "
-            "y hongos entomopatógenos. No es un ensayo publicado."
+        tipo="Artículo científico (laboratorio)",
+        iniciativa="Biocontroladores",
+        nivel="Alta",
+        naturaleza="Hecho documentado (laboratorio)",
+        cita_corta="F11 - Cruz-Cruz et al. (2020)",
+        informacion_extraida=(
+            "Cepas de Beauveria bassiana a 1×10^8 conidios/mL: sin efecto sobre huevos; "
+            "mortalidad de ninfas entre 21 y 58 % según la cepa. CL50 en ninfas IV-V de "
+            "8,34×10^6 (Bb-Dc) y 1×10^7 (Bb-Rhy) conidios/mL."
         ),
-        url="https://www.ica.gov.co/noticias/agricola/el-ica-y-corpoica-realizaron-demostracion-de-metod",
+        alcance=(
+            "Cepas mexicanas en laboratorio. No valida una cepa local «UC10» ni aplica "
+            "directamente a Caldas. Southwestern Entomologist, 45(3), 609-620."
+        ),
+        acceso="Resumen abierto; texto completo por suscripción",
+        doi="10.3958/059.045.0303",
+        url="https://doi.org/10.3958/059.045.0303",
     ),
     Fuente(
         id="F12",
-        autores="Hernández Arredondo, C.; Rosero Álvarez, N. V.",
-        anio=2025,
+        autores="Imbachi, K.; Mesa, N. C.; Rodríguez, I. V. et al.",
+        anio=2012,
         titulo=(
-            "Aislamiento y multiplicación de cepas nativas de Hirsutella citriformis "
-            "Speare como controlador biológico de Diaphorina citri"
+            "Evaluación de estrategias de control biológico de Polyphagotarsonemus latus (Banks) "
+            "y Phyllocoptruta oleivora (Ashmead) en naranja Valencia"
         ),
-        tipo="tesis",
-        rol="respalda_relacion",
-        cita_corta="F12 - Hernández Arredondo y Rosero Álvarez (2025)",
-        notas=(
-            "Trabajo de grado, Ingeniería Agronómica, Universidad de Caldas. "
-            "Asesores: Alberto Soto Giraldo y Ana María Restrepo García. "
-            "Aislamiento y medios de cultivo; el propio trabajo pide validación de campo."
+        tipo="Artículo científico (campo)",
+        iniciativa="Biocontroladores",
+        nivel="Alta",
+        naturaleza="Hecho documentado (campo)",
+        cita_corta="F12 - Imbachi et al. (2012)",
+        informacion_extraida=(
+            "En naranja Valencia (Caicedonia, Valle del Cauca, 1150 msnm) la liberación de "
+            "Chrysoperla carnea redujo el daño de Phyllocoptruta oleivora a 10 % en el primer ciclo. "
+            "Los ácaros Phytoseiidae se dispersaron rápido de los frutos."
         ),
-        url="https://repositorio.ucaldas.edu.co/entities/publication/75c38aef-0b76-4171-8a69-e3a3f06c53f1",
+        alcance=(
+            "Las plagas objetivo son ácaros, no Diaphorina citri. No sustenta que Chrysoperla "
+            "controle al psílido. Región distinta a Caldas. Acta Agronómica, 61(4), 333-338."
+        ),
+        acceso="Abierto (licencia no verificada)",
+        url="https://revistas.unal.edu.co/index.php/acta_agronomica/article/download/38139/40315/169692",
     ),
     Fuente(
         id="F13",
-        autores="Universidad de Caldas",
-        anio=None,
-        titulo="Spin-off ClayOMICS de la Universidad de Caldas obtiene su registro de marca",
-        tipo="nota_institucional",
-        rol="interoperabilidad",
-        cita_corta="F13 - Universidad de Caldas (ClayOMICS)",
-        notas=(
-            "ClayOMICS ofrece análisis de datos químicos. La nota no reporta un ensayo "
-            "de biocontrol ni un perfil de Hirsutella."
+        autores="Autor por verificar en la ficha del repositorio",
+        anio=2025,
+        titulo=(
+            "Efecto del tratamiento magnético de semillas sobre un sistema productivo de "
+            "Solanum lycopersicum L., a escala comercial"
         ),
-        url="https://www.ucaldas.edu.co/portal/spin-off-clayomics-de-la-universidad-de-caldas-obtiene-su-registro-de-marca/",
+        tipo="Tesis de doctorado",
+        iniciativa="MAGNETIME",
+        nivel="Media",
+        naturaleza="Hecho documentado (tesis)",
+        cita_corta="F13 - Repositorio UCaldas (2025)",
+        informacion_extraida=(
+            "Tratamiento magnético de semillas de tomate a escala comercial: revisión sistemática, "
+            "optimización de parámetros, crecimiento, floración y rendimiento. El rendimiento "
+            "aumentó y la floración no cambió."
+        ),
+        alcance=(
+            "Tesis, no artículo revisado por pares. Cultivo: tomate. No hay validación en cítricos. "
+            "Es la evidencia que el caso integrador señala como faltante para trasladar MAGNETIME al cultivo."
+        ),
+        acceso="Abierto · CC BY-NC-ND 4.0",
+        url="https://repositorio.ucaldas.edu.co/handle/ucaldas/22551",
     ),
     Fuente(
         id="F14",
-        autores="Universidad de Caldas",
-        anio=2024,
+        autores="Torres-Osorio, J. I.; Aranzazu-Osorio, J. E.; Carbonell-Padrino, M. V.",
+        anio=2015,
         titulo=(
-            "Universidad de Caldas seleccionada en la convocatoria ALDEA del "
-            "Ministerio de Comercio, Industria y Turismo"
+            "Efecto del campo magnético estático homogéneo en la germinación y absorción "
+            "de agua en semillas de soja"
         ),
-        tipo="nota_institucional",
-        rol="interoperabilidad",
-        cita_corta="F14 - Universidad de Caldas (2024)",
-        notas=(
-            "Nota del 4 de abril de 2024. Nombra los emprendimientos de base tecnológica "
-            "Compocol, Clayomics, Biocontroladores y Magnetime."
+        tipo="Artículo científico (laboratorio)",
+        iniciativa="MAGNETIME",
+        nivel="Alta",
+        naturaleza="Hecho documentado (laboratorio)",
+        cita_corta="F14 - Torres-Osorio et al. (2015)",
+        informacion_extraida=(
+            "Soja expuesta a 125 y 300 mT durante 10, 20 y 60 min. El electroimán superó a los "
+            "imanes. 300 mT por 10 min redujo más el tiempo medio de germinación. La absorción "
+            "de agua no mostró diferencias significativas."
         ),
-        url="https://www.ucaldas.edu.co/portal/universidad-de-caldas-seleccionada-en-convocatoria-del-ministerio-de-comercio-industria-y-turismo-de-colombia/",
+        alcance="Especie: soja. No hay evidencia en cítricos ni en control de plagas. Tecno Lógicas, 18(35), 11-20.",
+        acceso="Abierto · CC BY",
+        url="https://www.redalyc.org/pdf/3442/344243102002.pdf",
     ),
     Fuente(
         id="F15",
-        autores="Universidad de Caldas",
-        anio=2024,
-        titulo="Semillero de Magnetobiología",
-        tipo="ficha_institucional",
-        rol="interoperabilidad",
-        cita_corta="F15 - Semillero de Magnetobiología UCaldas",
-        notas=(
-            "Grupo de Magnetobiología. Estudia campos electromagnéticos en sistemas "
-            "biológicos. Coordinación: Javier Ignacio Torres Osorio. Ficha publicada en 2024."
+        autores="Villa Carmona, E.; Torres Osorio, J. I.; Zamorano-Montañez, C.",
+        anio=2023,
+        titulo=(
+            "Análisis del desarrollo vegetativo de plantas de Solanum lycopersicum L. "
+            "generadas de semillas tratadas magnéticamente"
         ),
-        url="https://investigacionesyposgrados.ucaldas.edu.co/semilleros-de-investigacion/semillero-de-magnetobiologia/",
+        tipo="Tesis de pregrado",
+        iniciativa="MAGNETIME",
+        nivel="Media",
+        naturaleza="Hecho documentado (tesis)",
+        cita_corta="F15 - Villa Carmona et al. (2023)",
+        informacion_extraida=(
+            "Semillas de tomate tratadas con campo magnético estático no homogéneo: "
+            "plantas con 21 % más área foliar y 9 % más altura que el control."
+        ),
+        alcance="Trabajo de grado, sin revisión por pares. Cultivo: tomate. Ingeniería Agronómica, Universidad de Caldas.",
+        acceso="Abierto (openAccess)",
+        url="https://repositorio.ucaldas.edu.co/handle/ucaldas/19679",
     ),
     Fuente(
         id="F16",
         autores="Universidad de Caldas",
-        anio=None,
-        titulo="Biocontroladores, spin-off de la Universidad de Caldas",
-        tipo="nota_institucional",
-        rol="contexto",
-        cita_corta="F16 - Universidad de Caldas (Biocontroladores)",
-        notas=(
-            "La nota menciona a Tamarixia radiata entre los desarrollos del spin-off. "
-            "El prototipo no transcribe cifras de eficacia."
+        anio=2022,
+        titulo="Spin Off ClayOMICs de la Universidad de Caldas obtiene su registro de marca",
+        tipo="Noticia institucional",
+        iniciativa="ClayOMICS",
+        nivel="Media",
+        naturaleza="Contexto institucional",
+        cita_corta="F16 - Universidad de Caldas (2022)",
+        informacion_extraida=(
+            "ClayOMICS ofrece análisis de datos químicos mediante técnicas de medición, "
+            "separación e identificación. Surge del grupo de Cromatografía y Técnicas Afines "
+            "y obtuvo registro de marca ante la SIC en 2022."
         ),
-        url="https://www.ucaldas.edu.co/portal/biocontraladores-spin-off-de-la-universidad-de-caldas-en-pro-de-la-agricultura/",
+        alcance=(
+            "Sirve para la existencia y el alcance de los servicios, no como evidencia científica. "
+            "La fecha exacta de publicación de la nota queda por completar."
+        ),
+        acceso="Abierto (web institucional)",
+        url="https://www.ucaldas.edu.co/portal/spin-off-clayomics-de-la-universidad-de-caldas-obtiene-su-registro-de-marca/",
     ),
     Fuente(
         id="F17",
-        autores="Gómez, C.",
-        anio=2024,
-        titulo="Control biológico y microbiológico de plagas y enfermedades en cítricos",
-        tipo="documento_repositorio",
-        rol="contexto",
-        cita_corta="F17 - Gómez (2024)",
-        notas=(
-            "Registro del repositorio institucional de la Universidad de Caldas. "
-            "La ficha pública consultada no detalla resultados, así que no se transcriben."
+        autores="Betancourt Arango, J. P.; Patiño Ospina, A.; Taborda Ocampo, G.; Fiscal Ladino, J. A.",
+        anio=2020,
+        titulo=(
+            "Aplicaciones de la xenometabolómica para la identificación de biomarcadores "
+            "de toxicidad: una revisión del tema"
         ),
-        url="https://repositorio.ucaldas.edu.co/handle/ucaldas/19978",
+        tipo="Artículo de revisión",
+        iniciativa="ClayOMICS",
+        nivel="Alta",
+        naturaleza="Hecho documentado (revisión)",
+        cita_corta="F17 - Betancourt Arango et al. (2020)",
+        informacion_extraida=(
+            "Revisión de GC-MS, LC-MS, UHPLC-QTOF-MS, RMN e ICP-MS aplicadas a plaguicidas, "
+            "metales pesados, micotoxinas y otros analitos, en agua, tejidos, plantas y alimentos."
+        ),
+        alcance=(
+            "Revisión del grupo de Cromatografía de la Universidad de Caldas. No es un servicio "
+            "ni un resultado de ClayOMICS. Sirve de puente conceptual con residuos de plaguicidas. "
+            "Biosalud, 19(1), 7-30."
+        ),
+        acceso="Abierto (licencia no verificada)",
+        doi="10.17151/biosa.2020.19.1.1",
+        url="https://doi.org/10.17151/biosa.2020.19.1.1",
     ),
 )
 
 
 CULTIVOS: tuple[Cultivo, ...] = (
     Cultivo(
+        id="Citricos",
+        nombre_cientifico="Citrus spp.",
+        nombre_comun="cítricos",
+        descripcion=(
+            "Hospedero citado de forma genérica en los registros de Diaphorina citri "
+            "y sus parasitoides en Caldas (F01, F02). La ficha no fija la especie."
+        ),
+    ),
+    Cultivo(
+        id="Citrus_limon",
+        nombre_cientifico="Citrus limon",
+        nombre_comun="limón",
+        descripcion="Hospedero del holotipo de Trigonospila unicaldasi en la Granja Tesorito (F04).",
+    ),
+    Cultivo(
         id="Citrus_sinensis",
         nombre_cientifico="Citrus sinensis",
         nombre_comun="naranja dulce",
-        descripcion="Cultivo de cítricos usado como hospedero en el inventario semilla.",
-    ),
-    Cultivo(
-        id="Citrus_reticulata",
-        nombre_cientifico="Citrus reticulata",
-        nombre_comun="mandarina",
-        descripcion="Cultivo de cítricos usado como hospedero en el inventario semilla.",
+        descripcion="Naranja Valencia del ensayo de campo en Caicedonia sobre ácaros (F12).",
     ),
 )
 
@@ -452,32 +609,34 @@ PLAGAS: tuple[Plaga, ...] = (
         nombre_cientifico="Diaphorina citri",
         nombre_comun="psílido asiático de los cítricos",
         descripcion=(
-            "Vector del Huanglongbing (HLB). En Caldas se documentó a Tamarixia radiata "
-            "alimentándose y parasitando sus ninfas."
+            "Psílido de los cítricos. En el inventario tiene parasitoides, un hongo "
+            "entomopatógeno y un ensayo con Beauveria. El caldo sulfocálcico (F05) "
+            "se evaluó sobre la plaga, no como restricción de los enemigos naturales."
         ),
-        cultivos=("Citrus_sinensis", "Citrus_reticulata"),
-        contexto=("F01", "F02", "F11"),
+        cultivos=("Citricos",),
+        contexto=("F01", "F02", "F05"),
     ),
     Plaga(
         id="Compsus_sp",
         nombre_cientifico="Compsus sp.",
         nombre_comun="picudo de los cítricos",
         descripcion=(
-            "Picudo asociado a cítricos. Esta base no registra un enemigo natural. "
-            "La laguna es del inventario: no afirma que no existan controladores en la literatura."
+            "Picudo recolectado en Maltería y en limón de la Granja Tesorito. "
+            "F03 lo trata como Compsus viridilineatus y F04 como Compsus sp."
         ),
-        cultivos=("Citrus_sinensis", "Citrus_reticulata"),
+        cultivos=("Citrus_limon",),
+        contexto=("F03", "F04"),
     ),
     Plaga(
         id="Phyllocoptruta_oleivora",
         nombre_cientifico="Phyllocoptruta oleivora",
         nombre_comun="ácaro tostador de los cítricos",
         descripcion=(
-            "Ácaro eriófido que daña la epidermis del fruto. Hirsutella thompsonii se discute "
-            "en la literatura de ácaros, pero no se codifica en esta semilla. Por eso la "
-            "consulta dispara la laguna de conocimiento de la base."
+            "Ácaro eriófido evaluado en naranja Valencia junto con Polyphagotarsonemus latus (F12). "
+            "Esa fuente no autoriza a usar el mismo agente contra Diaphorina citri."
         ),
-        cultivos=("Citrus_sinensis", "Citrus_reticulata"),
+        cultivos=("Citrus_sinensis",),
+        contexto=("F12",),
     ),
 )
 
@@ -489,19 +648,18 @@ AGENTES: tuple[Agente, ...] = (
         nombre_comun="Tamarixia radiata",
         tipo="parasitoide",
         descripcion=(
-            "Ectoparasitoide de ninfas de Diaphorina citri. Es el enemigo natural "
-            "con evidencia convergente en este inventario."
+            "Ectoparasitoide de ninfas de Diaphorina citri. Presencia y parasitismo en Caldas (F02); "
+            "desarrollo entre 15 y 35 °C en laboratorio, con mejor viabilidad a 25 °C (F08)."
         ),
     ),
     Agente(
         id="Diaphorencyrtus_sp",
-        nombre_cientifico="Diaphorencyrtus aligarhensis",
-        nombre_comun="Diaphorencyrtus aligarhensis",
+        nombre_cientifico="Diaphorencyrtus sp.",
+        nombre_comun="Diaphorencyrtus sp.",
         tipo="parasitoide",
         descripcion=(
-            "Endoparasitoide de Diaphorina citri. El identificador conserva "
-            "Diaphorencyrtus_sp, como en reportes tempranos; Kondo et al. (2022) "
-            "asignan el registro colombiano a D. aligarhensis."
+            "Parasitoide de ninfas de Diaphorina citri. F01 es un registro de presencia en Manizales; "
+            "el control queda como hipótesis porque no mide parasitismo ni condiciones de uso."
         ),
     ),
     Agente(
@@ -510,8 +668,39 @@ AGENTES: tuple[Agente, ...] = (
         nombre_comun="Hirsutella citriformis",
         tipo="hongo_entomopatogeno",
         descripcion=(
-            "Hongo entomopatógeno aislado en la Granja Montelindo de la Universidad "
-            "de Caldas y patógeno de Diaphorina citri en bioensayo de laboratorio."
+            "Hongo entomopatógeno aislado en la Granja Montelindo. En laboratorio causó 98 % "
+            "de mortalidad acumulada de Diaphorina citri (F07). Es la cepa colombiana documentada; "
+            "el inventario no trae una cepa local de Beauveria llamada UC10."
+        ),
+    ),
+    Agente(
+        id="Beauveria_bassiana",
+        nombre_cientifico="Beauveria bassiana",
+        nombre_comun="Beauveria bassiana",
+        tipo="hongo_entomopatogeno",
+        descripcion=(
+            "Cepas mexicanas Bb-Dc y Bb-Rhy, patógenas de ninfas de Diaphorina citri en laboratorio (F11). "
+            "No corresponden a una cepa validada en la Universidad de Caldas."
+        ),
+    ),
+    Agente(
+        id="Trigonospila_unicaldasi",
+        nombre_cientifico="Trigonospila unicaldasi",
+        nombre_comun="Trigonospila unicaldasi",
+        tipo="parasitoide",
+        descripcion=(
+            "Parasitoide de adultos de Compsus. F03 describió el género en Maltería; "
+            "F04 describió la especie con holotipo en la Granja Tesorito."
+        ),
+    ),
+    Agente(
+        id="Chrysoperla_carnea",
+        nombre_cientifico="Chrysoperla carnea",
+        nombre_comun="Chrysoperla carnea",
+        tipo="depredador",
+        descripcion=(
+            "Depredador liberado contra ácaros en naranja Valencia (F12). "
+            "El inventario no lo documenta como controlador de Diaphorina citri."
         ),
     ),
 )
@@ -520,40 +709,17 @@ AGENTES: tuple[Agente, ...] = (
 CONDICIONES: tuple[Condicion, ...] = (
     Condicion(
         id="Condicion_Tamarixia",
-        temp_min=20,
-        temp_max=30,
+        temp_min=15,
+        temp_max=35,
         hum_min=60,
-        hum_max=85,
+        hum_max=80,
+        humedad_decide=False,
         descripcion=(
-            "Ventana operativa del prototipo. Cubre el óptimo de laboratorio cercano "
-            "a 25 °C y los regímenes de 25 °C y 30 °C de McFarland y Hoy (2001, F04). "
-            "La humedad 60-85 % excluye los extremos secos del ensayo (7 % y 33 %) "
-            "y la saturación (97 %). No es la tabla de un único experimento."
-        ),
-    ),
-    Condicion(
-        id="Condicion_Diaphorencyrtus",
-        temp_min=22,
-        temp_max=32,
-        hum_min=50,
-        hum_max=90,
-        descripcion=(
-            "Ventana operativa más amplia. McFarland y Hoy (2001, F04) compararon "
-            "supervivencia adulta a 25 °C y 30 °C; Kondo et al. (2022, F05) confirman "
-            "la especie en campo sin publicar una curva térmica propia."
-        ),
-    ),
-    Condicion(
-        id="Condicion_Hirsutella",
-        temp_min=23,
-        temp_max=28,
-        hum_min=80,
-        hum_max=98,
-        descripcion=(
-            "Ventana de la revisión de Pérez-González et al. (2022, F07): desarrollo "
-            "óptimo cerca de 25 °C y epizootias con humedad relativa superior al 80 %, "
-            "con registros de campo entre 25 °C y 28 °C. El bioensayo de 2024 (F08) "
-            "demuestra patogenicidad en laboratorio, no esta ventana en Caldas."
+            "Ventana térmica documentada por la tabla de vida de F08: desarrollo a 15, 20, 25, 30 "
+            "y 35 °C, con mayor viabilidad y tasa reproductiva neta a 25 °C. F09 estudia promedios "
+            "de 12 a 38 °C y no se usa como umbral de liberación. La humedad 70 ± 10 % (60-80 %) "
+            "es la condición de ensayo de F08; el inventario la marca como no equivalente a un "
+            "rango de viabilidad, así que no decide la recomendación."
         ),
     ),
 )
@@ -561,43 +727,26 @@ CONDICIONES: tuple[Condicion, ...] = (
 
 RESTRICCIONES: tuple[Restriccion, ...] = (
     Restriccion(
-        id="Restriccion_piretroide",
-        codigo_practica="aplicacion_piretroide",
-        etiqueta="Incompatibilidad con piretroides",
+        id="Restriccion_botanicos",
+        codigo_practica="aplicacion_insecticida_botanico",
+        etiqueta="Mortalidad por insecticidas botánicos",
         descripcion=(
-            "Un insecticida piretroide de amplio espectro en la ventana de liberación "
-            "deprime a los parasitoides. No conviene liberarlos mientras la práctica esté vigente."
+            "Biodie y NeemPHC causaron mortalidad de Tamarixia radiata por residualidad "
+            "(12,7 % y 12,3 %) y por ingestión (33,3 % y 28,7 %) en laboratorio (F10). "
+            "No hay fuente en el inventario para una carencia tras clorpirifos."
         ),
-        fuentes=("F06", "F02"),
+        fuentes=("F10",),
     ),
     Restriccion(
-        id="Restriccion_neonicotinoide",
-        codigo_practica="aplicacion_neonicotinoide",
-        etiqueta="Incompatibilidad con neonicotinoides",
+        id="Restriccion_extractos",
+        codigo_practica="aplicacion_extractos_vegetales",
+        etiqueta="Interacción con extractos vegetales",
         descripcion=(
-            "Los neonicotinoides, por ejemplo imidacloprid, interfieren con los parasitoides. "
-            "En Palmira una aspersión de imidacloprid interrumpió el seguimiento de parasitismo (F05)."
+            "F06 evaluó extractos de Murraya paniculata, cocotero, clavo y guayaba sobre "
+            "Diaphorina citri y Tamarixia radiata. La ficha no trae los valores por extracto; "
+            "la alerta pide revisarlos antes de liberar, no afirma una dosis incompatible."
         ),
-        fuentes=("F05", "F06"),
-    ),
-    Restriccion(
-        id="Restriccion_cuprico",
-        codigo_practica="aplicacion_fungicida_cuprico",
-        etiqueta="Incompatibilidad con fungicida cúprico",
-        descripcion=(
-            "Los fungicidas cúpricos comprometen a Hirsutella citriformis. "
-            "La revisión desaconseja aplicar cobre a dosis altas junto con el hongo (F07)."
-        ),
-        fuentes=("F07",),
-    ),
-    Restriccion(
-        id="Restriccion_azufre",
-        codigo_practica="aplicacion_azufre",
-        etiqueta="Incompatibilidad con azufre",
-        descripcion=(
-            "El azufre elemental a dosis altas afecta al hongo entomopatógeno (F07)."
-        ),
-        fuentes=("F07",),
+        fuentes=("F06",),
     ),
 )
 
@@ -608,8 +757,9 @@ PLATAFORMAS: tuple[Plataforma, ...] = (
         etiqueta="ClayOMICS",
         tipo="analisis_quimico",
         descripcion=(
-            "Spin-off de la Universidad de Caldas para análisis de datos químicos "
-            "mediante técnicas de medición, separación e identificación."
+            "Spin-off de la Universidad de Caldas para análisis de datos químicos. "
+            "La noticia F16 acredita el servicio; la revisión F17 es del grupo de Cromatografía "
+            "y no es un resultado del spin-off."
         ),
         url="https://www.ucaldas.edu.co/portal/spin-off-clayomics-de-la-universidad-de-caldas-obtiene-su-registro-de-marca/",
     ),
@@ -618,31 +768,28 @@ PLATAFORMAS: tuple[Plataforma, ...] = (
         etiqueta="MAGNETIME",
         tipo="magnetobiologia",
         descripcion=(
-            "Emprendimiento de base tecnológica de la Universidad de Caldas, "
-            "vinculado al grupo de Magnetobiología, sobre campos electromagnéticos "
-            "en sistemas biológicos."
+            "Línea de tratamiento magnético de semillas. Las fuentes del inventario son de "
+            "tomate y soja, no de cítricos ni de control de plagas."
         ),
-        url="https://www.ucaldas.edu.co/portal/universidad-de-caldas-seleccionada-en-convocatoria-del-ministerio-de-comercio-industria-y-turismo-de-colombia/",
+        url="https://repositorio.ucaldas.edu.co/handle/ucaldas/22551",
     ),
 )
 
 
 ANALISIS: tuple[Analisis, ...] = (
     Analisis(
-        id="Analisis_exudados_Hirsutella",
-        etiqueta="Perfil químico propuesto de exudados de Hirsutella citriformis",
+        id="Analisis_xenometabolomica",
+        etiqueta="Revisión de técnicas analíticas para biomarcadores de toxicidad",
         plataforma_id="ClayOMICS",
-        estado="propuesto",
-        variable_respuesta=(
-            "exudados con actividad biológica y compatibilidad de soportes de formulación"
-        ),
+        estado="contexto",
+        fuente_id="F17",
+        variable_respuesta="técnica analítica, analito y matriz",
         condicion_experimental=(
-            "No hay un protocolo ejecutado en este prototipo. La revisión F07 indica "
-            "que el papel de los exudados del hongo está poco caracterizado."
+            "Revisión del tema. No es un análisis encargado a ClayOMICS ni un perfil de una cepa."
         ),
         resultado=(
-            "Enlace de interoperabilidad propuesto con ClayOMICS (F13). "
-            "El prototipo no afirma un resultado medido por esa plataforma."
+            "F17 reseña GC-MS, LC-MS, UHPLC-QTOF-MS, RMN e ICP-MS frente a plaguicidas, metales "
+            "y micotoxinas. Sirve de puente conceptual con residuos; no es un resultado del spin-off (F16)."
         ),
     ),
 )
@@ -650,19 +797,41 @@ ANALISIS: tuple[Analisis, ...] = (
 
 EXPERIMENTOS: tuple[Experimento, ...] = (
     Experimento(
-        id="Experimento_campo_magnetico_conidios",
-        etiqueta="Germinación de conidios bajo campo electromagnético",
+        id="Experimento_magnetico_tomate_comercial",
+        etiqueta="Tratamiento magnético de semilla de tomate a escala comercial",
         plataforma_id="MAGNETIME",
-        estado="propuesto",
-        variable_respuesta="porcentaje de germinación de conidios",
-        condicion_experimental=(
-            "Conidios de H. citriformis en la ventana 23-28 °C y humedad relativa "
-            "superior al 80 %, con y sin campo electromagnético de baja intensidad. "
-            "Protocolo no ejecutado."
-        ),
+        estado="documentado",
+        fuente_id="F13",
+        variable_respuesta="rendimiento y floración de Solanum lycopersicum",
+        condicion_experimental="Sistema productivo comercial de tomate. Tesis de doctorado, autor por verificar en la ficha.",
         resultado=(
-            "Sin resultado medido. La pregunta se articula con MAGNETIME y con el "
-            "semillero de Magnetobiología (F14, F15). No es un experimento realizado."
+            "El rendimiento aumentó y la floración no cambió (F13, confiabilidad media). "
+            "No hay validación en cítricos."
+        ),
+    ),
+    Experimento(
+        id="Experimento_magnetico_soja",
+        etiqueta="Campo magnético estático en germinación de soja",
+        plataforma_id="MAGNETIME",
+        estado="documentado",
+        fuente_id="F14",
+        variable_respuesta="tiempo medio de germinación y absorción de agua",
+        condicion_experimental="Semillas de soja a 125 y 300 mT durante 10, 20 y 60 min.",
+        resultado=(
+            "300 mT por 10 min redujo más el tiempo medio de germinación. "
+            "La absorción de agua no cambió de forma significativa (F14). Especie: soja."
+        ),
+    ),
+    Experimento(
+        id="Experimento_magnetico_tomate_pregrado",
+        etiqueta="Desarrollo vegetativo de tomate tras tratamiento magnético de la semilla",
+        plataforma_id="MAGNETIME",
+        estado="documentado",
+        fuente_id="F15",
+        variable_respuesta="área foliar y altura",
+        condicion_experimental="Campo magnético estático no homogéneo sobre semillas de tomate.",
+        resultado=(
+            "21 % más área foliar y 9 % más altura que el control (F15, trabajo de grado). Cultivo: tomate."
         ),
     ),
 )
@@ -676,72 +845,105 @@ RELACIONES: tuple[Relacion, ...] = (
         condicion_id="Condicion_Tamarixia",
         nivel="Alta",
         fuente_principal_id="F02",
-        fuentes_ids=("F02", "F03", "F04", "F10", "F16"),
-        restricciones_ids=("Restriccion_piretroide", "Restriccion_neonicotinoide"),
-        variable_respuesta="parasitismo de ninfas de Diaphorina citri",
+        fuentes_ids=("F02", "F08", "F09"),
+        restricciones_ids=("Restriccion_botanicos", "Restriccion_extractos"),
+        variable_respuesta="parasitismo de ninfas y viabilidad del desarrollo de Tamarixia radiata",
         resultado=(
-            "Presencia y acción parasítica documentadas en Caldas (F02). "
-            "El inventario no codifica un porcentaje único de eficacia de campo."
+            "Presencia y parasitismo en Caldas (F02). En laboratorio hay desarrollo entre 15 y 35 °C "
+            "y la mayor viabilidad a 25 °C (F08). F09 amplía el estudio térmico a promedios de 12 a 38 °C."
         ),
         condicion_experimental=(
-            "Observación de momias y emergencia del parasitoide sobre brotes de cítricos "
-            "en el Centro de Investigación y Cría de Enemigos Naturales de la Universidad "
-            "de Caldas, entre enero y abril de 2016 (F02)."
+            "Colecta de brotes en Caldas, enero a abril de 2016 (F02). Tabla de vida a cinco "
+            "temperaturas constantes y 70 ± 10 % HR (F08)."
         ),
         criterio_nivel=(
-            "Alta por convergencia: reporte local de presencia y acción parasítica (F02), "
-            "revisión biológica (F03), supervivencia bajo regímenes de temperatura y humedad (F04) "
-            "y rutas de acceso en Colombia (F10). No es un metaanálisis de eficacia de campo."
+            "Alta porque F02, F08 y F09 documentan la relación. La ventana de decisión es 15-35 °C. "
+            "No se usa 20-30 °C ni 60-85 % HR como umbral: el inventario los marca como parcial o sin fuente."
         ),
     ),
     Relacion(
         id="Relacion_DC_Diaphorencyrtus",
         plaga_id="Diaphorina_citri",
         agente_id="Diaphorencyrtus_sp",
-        condicion_id="Condicion_Diaphorencyrtus",
         nivel="Media",
-        fuente_principal_id="F05",
-        fuentes_ids=("F05", "F04"),
-        restricciones_ids=("Restriccion_piretroide", "Restriccion_neonicotinoide"),
-        variable_respuesta="parasitismo de ninfas de Diaphorina citri",
-        resultado=(
-            "Parasitismo de 0,3 % a 1,0 % en Palmira, frente a 1,5 %–24,2 % de Tamarixia "
-            "en el mismo estudio (F05)."
-        ),
-        condicion_experimental=(
-            "Conteos de momias y emergencia de adultos en un huerto de Agrosavia, Palmira, "
-            "en 2020 y 2021 (F05)."
-        ),
+        fuente_principal_id="F01",
+        fuentes_ids=("F01",),
+        variable_respuesta="presencia del parasitoide sobre ninfas",
+        resultado="Primer registro en Colombia, en brotes de cítricos de Manizales (F01).",
+        condicion_experimental="Captura manual en brotes. Sin medición de parasitismo ni de clima de uso.",
         criterio_nivel=(
-            "Media: la especie está confirmada en Colombia, pero las tasas de campo son bajas "
-            "frente a Tamarixia (F05). La regla R2 agrega precaución."
+            "Media para el control: la fuente es de confiabilidad alta, pero solo prueba presencia. "
+            "El efecto sobre la plaga es una hipótesis y no hay ventana de uso."
         ),
     ),
     Relacion(
         id="Relacion_DC_Hirsutella",
         plaga_id="Diaphorina_citri",
         agente_id="Hirsutella_citriformis",
-        condicion_id="Condicion_Hirsutella",
-        nivel="Media",
-        fuente_principal_id="F08",
-        fuentes_ids=("F08", "F07", "F09", "F12"),
-        restricciones_ids=("Restriccion_cuprico", "Restriccion_azufre"),
-        variable_respuesta="mortalidad acumulada de adultos de Diaphorina citri",
-        resultado=(
-            "Mortalidad acumulada de 98 % con conidios de H. citriformis y 3 % en el control; "
-            "sinnemas a los 7 días post-mortem (F08)."
-        ),
+        nivel="Alta",
+        fuente_principal_id="F07",
+        fuentes_ids=("F07",),
+        variable_respuesta="mortalidad acumulada de Diaphorina citri",
+        resultado="98 % de mortalidad acumulada con conidios y 3 % en el control (F07).",
         condicion_experimental=(
-            "Bioensayo de contacto directo entre adultos de D. citri y cultivos esporulados; "
-            "caracterización morfológica, morfométrica y del gen ribosomal 28S (F08)."
+            "Bioensayo de laboratorio con la cepa de Montelindo. La incubación publicada "
+            "como 25 ± 20 °C no se convierte en rango de campo."
         ),
         criterio_nivel=(
-            "Media: hay patogenicidad alta en laboratorio (F08) y una ventana ambiental "
-            "descrita en la revisión (F07), pero el inventario no incluye un programa "
-            "comercial de campo. Por eso no se asigna Alta y, si la ventana se cumple, se activa R2."
+            "Alta para la patogenicidad de laboratorio. Sin ventana agroclimática ni ensayo de campo, "
+            "así que no compite con Tamarixia en la regla climática."
         ),
-        analisis_ids=("Analisis_exudados_Hirsutella",),
-        experimento_ids=("Experimento_campo_magnetico_conidios",),
+    ),
+    Relacion(
+        id="Relacion_DC_Beauveria",
+        plaga_id="Diaphorina_citri",
+        agente_id="Beauveria_bassiana",
+        nivel="Alta",
+        fuente_principal_id="F11",
+        fuentes_ids=("F11",),
+        variable_respuesta="mortalidad de ninfas de Diaphorina citri",
+        resultado=(
+            "Sin efecto sobre huevos. Mortalidad de ninfas entre 21 y 58 % según la cepa, "
+            "a 1×10^8 conidios/mL (F11)."
+        ),
+        condicion_experimental="Laboratorio, cepas mexicanas Bb-Dc y Bb-Rhy.",
+        criterio_nivel=(
+            "Alta para ese bioensayo. La limitación se anota aparte: no es una cepa de la "
+            "Universidad de Caldas y no se extrapola a Caldas."
+        ),
+    ),
+    Relacion(
+        id="Relacion_Compsus_Trigonospila",
+        plaga_id="Compsus_sp",
+        agente_id="Trigonospila_unicaldasi",
+        nivel="Alta",
+        fuente_principal_id="F04",
+        fuentes_ids=("F04", "F03"),
+        variable_respuesta="parasitismo de adultos de Compsus",
+        resultado=(
+            "Parasitismo de adultos en limón, con la especie descrita en 2017 (F04) "
+            "y un estudio morfológico previo del género (F03)."
+        ),
+        condicion_experimental="Colecta en Maltería (2250 msnm) y holotipo en la Granja Tesorito (2280 m).",
+        criterio_nivel=(
+            "Alta para el hecho del parasitismo. No hay condiciones de uso ni protocolo de liberación, "
+            "así que no se activa una recomendación climática."
+        ),
+    ),
+    Relacion(
+        id="Relacion_PO_Chrysoperla",
+        plaga_id="Phyllocoptruta_oleivora",
+        agente_id="Chrysoperla_carnea",
+        nivel="Alta",
+        fuente_principal_id="F12",
+        fuentes_ids=("F12",),
+        variable_respuesta="daño de Phyllocoptruta oleivora en fruto",
+        resultado="La liberación redujo el daño a 10 % en el primer ciclo, en naranja Valencia (F12).",
+        condicion_experimental="Campo en Caicedonia, Valle del Cauca, 1150 msnm. También se observó a Phytoseiidae.",
+        criterio_nivel=(
+            "Alta para el ensayo de campo contra el ácaro. No autoriza a recomendar Chrysoperla "
+            "contra Diaphorina citri ni trae una ventana numérica de temperatura."
+        ),
     ),
 )
 
@@ -758,17 +960,19 @@ def validar_semilla() -> None:
     analisis = {item.id for item in ANALISIS}
     experimentos = {item.id for item in EXPERIMENTOS}
     niveles = {"Alta", "Media", "Baja", "Insuficiente"}
+    estados = {"documentado", "contexto", "propuesto", "publicado"}
 
     if len(FUENTES) != 17:
         raise ValueError("El inventario debe conservar las fuentes F01 a F17.")
+    if any(item.nivel not in niveles for item in FUENTES):
+        raise ValueError("Hay una fuente con nivel de confiabilidad fuera de la escala.")
 
     for plaga in PLAGAS:
-        desconocidos = set(plaga.cultivos) - cultivos
-        if desconocidos or set(plaga.contexto) - fuentes:
+        if set(plaga.cultivos) - cultivos or set(plaga.contexto) - fuentes:
             raise ValueError(f"Referencias rotas en la plaga {plaga.id}")
 
-    for item in list(ANALISIS) + list(EXPERIMENTOS):
-        if item.plataforma_id not in plataformas or item.estado not in {"propuesto", "publicado"}:
+    for item in (*ANALISIS, *EXPERIMENTOS):
+        if item.plataforma_id not in plataformas or item.estado not in estados or item.fuente_id not in fuentes:
             raise ValueError(f"Enlace externo inválido en {item.id}")
 
     for restriccion in RESTRICCIONES:
@@ -778,16 +982,20 @@ def validar_semilla() -> None:
     for relacion in RELACIONES:
         if relacion.plaga_id not in plagas or relacion.agente_id not in agentes:
             raise ValueError(f"Extremos rotos en {relacion.id}")
-        if relacion.condicion_id not in condiciones or relacion.nivel not in niveles:
-            raise ValueError(f"Condición o nivel inválido en {relacion.id}")
+        if relacion.condicion_id is not None and relacion.condicion_id not in condiciones:
+            raise ValueError(f"Condición desconocida en {relacion.id}")
+        if relacion.nivel not in niveles:
+            raise ValueError(f"Nivel inválido en {relacion.id}")
         citados = {relacion.fuente_principal_id, *relacion.fuentes_ids}
         if citados - fuentes or relacion.fuente_principal_id not in relacion.fuentes_ids:
             raise ValueError(f"Fuentes inconsistentes en {relacion.id}")
         if set(relacion.restricciones_ids) - restricciones:
             raise ValueError(f"Restricción desconocida en {relacion.id}")
         if set(relacion.analisis_ids) - analisis or set(relacion.experimento_ids) - experimentos:
-            raise ValueError(f"Enlace ClayOMICS o MAGNETIME roto en {relacion.id}")
+            raise ValueError(f"Enlace externo roto en {relacion.id}")
 
     for condicion in CONDICIONES:
-        if condicion.temp_min > condicion.temp_max or condicion.hum_min > condicion.hum_max:
-            raise ValueError(f"Rango invertido en {condicion.id}")
+        if condicion.temp_min > condicion.temp_max:
+            raise ValueError(f"Rango térmico invertido en {condicion.id}")
+        if condicion.hum_min is not None and condicion.hum_max is not None and condicion.hum_min > condicion.hum_max:
+            raise ValueError(f"Rango de humedad invertido en {condicion.id}")

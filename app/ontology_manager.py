@@ -71,18 +71,12 @@ WHERE {
 """
 
 CONSULTA_CONEXIONES = PREFIJO + """
-SELECT ?plataforma ?etiqueta ?tipo ?pieza ?estado ?resultado ?relacion
+SELECT ?plataforma ?etiqueta ?tipo ?pieza ?estado ?resultado ?fuente
 WHERE {
-  {
-    ?relacion bio:verificadoPor ?pieza .
-  }
-  UNION
-  {
-    ?relacion bio:tieneExperimento ?pieza .
-  }
   ?pieza bio:articuladoCon ?plataforma ;
          bio:estadoEnlace ?estado ;
-         bio:resultado ?resultado .
+         bio:resultado ?resultado ;
+         bio:documentadoEn ?fuente .
   ?plataforma bio:etiqueta ?etiqueta ;
               bio:tipoPlataforma ?tipo .
 }
@@ -121,6 +115,13 @@ def _numero(valor: object) -> float:
     return float(_como_texto(valor))
 
 
+def _opcional_numero(valor: object) -> float | None:
+    texto = _como_texto(valor)
+    if texto == "":
+        return None
+    return float(texto)
+
+
 @dataclass
 class RestriccionVista:
     """Restricción de uso leída de la ontología."""
@@ -142,10 +143,11 @@ class RelacionVista:
     agente_nombre: str
     agente_cientifico: str
     nivel: str
-    temp_min: float
-    temp_max: float
-    hum_min: float
-    hum_max: float
+    temp_min: float | None
+    temp_max: float | None
+    hum_min: float | None
+    hum_max: float | None
+    humedad_decide: bool
     descripcion_condicion: str
     fuente_principal: str
     fuentes: list[str]
@@ -278,7 +280,7 @@ class OntologyManager:
                 "pieza": _local(fila.get("pieza", "")),
                 "estado": fila.get("estado", ""),
                 "resultado": fila.get("resultado", ""),
-                "relacion": _local(fila.get("relacion", "")),
+                "fuente": _local(fila.get("fuente", "")),
             })
         return filas
 
@@ -342,10 +344,13 @@ class OntologyManager:
                 "anio": _como_texto(fuente.anio),
                 "titulo": _como_texto(fuente.titulo),
                 "tipo": _como_texto(fuente.tipoFuente),
-                "rol": _como_texto(fuente.rolFuente),
+                "iniciativa": _como_texto(fuente.iniciativa),
+                "nivel": _como_texto(fuente.nivelConfiabilidad),
+                "naturaleza": _como_texto(fuente.naturaleza),
                 "doi": _como_texto(fuente.doi),
                 "url": _como_texto(fuente.url),
-                "notas": _como_texto(fuente.notas),
+                "acceso": _como_texto(fuente.acceso),
+                "alcance": _como_texto(fuente.alcance),
             })
         return sorted(fuentes, key=lambda item: item["codigo"])
 
@@ -368,6 +373,17 @@ class OntologyManager:
                     descripcion=_como_texto(restriccion.descripcion),
                     fuentes=[item.name for item in _como_lista(restriccion.justificadoPor)],
                 ))
+            if condicion is None:
+                temp_min = temp_max = hum_min = hum_max = None
+                humedad_decide = False
+                descripcion_condicion = ""
+            else:
+                temp_min = _opcional_numero(condicion.temperaturaMin)
+                temp_max = _opcional_numero(condicion.temperaturaMax)
+                hum_min = _opcional_numero(condicion.humedadMin)
+                hum_max = _opcional_numero(condicion.humedadMax)
+                humedad_decide = _como_texto(condicion.estadoVentanaHumedad) == "documentada"
+                descripcion_condicion = _como_texto(condicion.descripcionCondicion)
             vistas.append(RelacionVista(
                 id=relacion.name,
                 plaga_id=relacion.involucraPlaga.name,
@@ -375,11 +391,12 @@ class OntologyManager:
                 agente_nombre=_como_texto(agente.nombreComun),
                 agente_cientifico=_como_texto(agente.nombreCientifico),
                 nivel=_como_texto(relacion.tieneNivelEvidencia),
-                temp_min=_numero(condicion.temperaturaMin),
-                temp_max=_numero(condicion.temperaturaMax),
-                hum_min=_numero(condicion.humedadMin),
-                hum_max=_numero(condicion.humedadMax),
-                descripcion_condicion=_como_texto(condicion.descripcionCondicion),
+                temp_min=temp_min,
+                temp_max=temp_max,
+                hum_min=hum_min,
+                hum_max=hum_max,
+                humedad_decide=humedad_decide,
+                descripcion_condicion=descripcion_condicion,
                 fuente_principal=_como_texto(fuente.citaCorta),
                 fuentes=[item.name for item in _como_lista(relacion.respaldadoPor)],
                 restricciones=restricciones,

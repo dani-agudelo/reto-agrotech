@@ -2,7 +2,7 @@
 #
 # Sintaxis: cada regla empieza con su identificador y dos puntos en una línea.
 # El cuerpo usa la conjunción estándar "^" y los builtins "swrlb:greaterThanOrEqual"
-# y "swrlb:lessThanOrEqual". El constructor de la ontología traduce "^" a coma y
+# y "swrlb:lessThanOrEqual" sobre la temperatura documentada. El constructor traduce "^" a coma y
 # quita el prefijo swrlb: para cargarlas con Owlready2 (Imp.set_as_rule) y Pellet.
 #
 # Las reglas de recomendación leen un individuo Consulta que el motor crea en el
@@ -21,8 +21,10 @@
 # ---------------------------------------------------------------------------
 # R1. Aplicabilidad
 # Si la plaga P es controlada por A según la relación R, la consulta cae en la
-# ventana de temperatura y de humedad, y la evidencia es Alta, entonces A es
-# altamente recomendado para P.
+# ventana de temperatura documentada y la evidencia es Alta, entonces A es
+# altamente recomendado para P. La humedad no entra en esta regla: el inventario
+# no documenta un umbral de humedad relativa. El motor Python solo la usa como
+# filtro cuando la condición trae estadoVentanaHumedad "documentada".
 # ---------------------------------------------------------------------------
 R1_Aplicabilidad:
 Plaga(?p) ^ AgenteBiocontrol(?a) ^ RelacionBiocontrol(?r) ^ Consulta(?q) ^
@@ -30,16 +32,15 @@ esControladaPor(?p, ?a) ^ involucraPlaga(?r, ?p) ^ involucraAgente(?r, ?a) ^
 consultaPlaga(?q, ?p) ^ tieneCondicion(?r, ?c) ^
 temperaturaMin(?c, ?tmin) ^ temperaturaMax(?c, ?tmax) ^ temperaturaActual(?q, ?t) ^
 swrlb:greaterThanOrEqual(?t, ?tmin) ^ swrlb:lessThanOrEqual(?t, ?tmax) ^
-humedadMin(?c, ?hmin) ^ humedadMax(?c, ?hmax) ^ humedadActual(?q, ?h) ^
-swrlb:greaterThanOrEqual(?h, ?hmin) ^ swrlb:lessThanOrEqual(?h, ?hmax) ^
 tieneNivelEvidencia(?r, "Alta")
 -> altamenteRecomendadoPara(?a, ?p)
 
 # ---------------------------------------------------------------------------
 # R2. Precaución
-# La misma ventana, con evidencia Media o Baja, produce una recomendación
-# potencial y no una recomendación alta. La nota de precaución la redacta
-# el motor al explicar la regla.
+# La misma ventana de temperatura, con evidencia Media o Baja, produce una
+# recomendación potencial. Sin ventana documentada la regla no dispara: un
+# registro de presencia no hereda el rango de otro agente. La nota de
+# precaución la redacta el motor al explicar la regla.
 # ---------------------------------------------------------------------------
 R2_Precaucion_Media:
 Plaga(?p) ^ AgenteBiocontrol(?a) ^ RelacionBiocontrol(?r) ^ Consulta(?q) ^
@@ -47,8 +48,6 @@ esControladaPor(?p, ?a) ^ involucraPlaga(?r, ?p) ^ involucraAgente(?r, ?a) ^
 consultaPlaga(?q, ?p) ^ tieneCondicion(?r, ?c) ^
 temperaturaMin(?c, ?tmin) ^ temperaturaMax(?c, ?tmax) ^ temperaturaActual(?q, ?t) ^
 swrlb:greaterThanOrEqual(?t, ?tmin) ^ swrlb:lessThanOrEqual(?t, ?tmax) ^
-humedadMin(?c, ?hmin) ^ humedadMax(?c, ?hmax) ^ humedadActual(?q, ?h) ^
-swrlb:greaterThanOrEqual(?h, ?hmin) ^ swrlb:lessThanOrEqual(?h, ?hmax) ^
 tieneNivelEvidencia(?r, "Media")
 -> potencialmenteRecomendadoPara(?a, ?p)
 
@@ -58,8 +57,6 @@ esControladaPor(?p, ?a) ^ involucraPlaga(?r, ?p) ^ involucraAgente(?r, ?a) ^
 consultaPlaga(?q, ?p) ^ tieneCondicion(?r, ?c) ^
 temperaturaMin(?c, ?tmin) ^ temperaturaMax(?c, ?tmax) ^ temperaturaActual(?q, ?t) ^
 swrlb:greaterThanOrEqual(?t, ?tmin) ^ swrlb:lessThanOrEqual(?t, ?tmax) ^
-humedadMin(?c, ?hmin) ^ humedadMax(?c, ?hmax) ^ humedadActual(?q, ?h) ^
-swrlb:greaterThanOrEqual(?h, ?hmin) ^ swrlb:lessThanOrEqual(?h, ?hmax) ^
 tieneNivelEvidencia(?r, "Baja")
 -> potencialmenteRecomendadoPara(?a, ?p)
 

@@ -32,12 +32,13 @@ NOTA_R2 = (
     "una hipótesis de manejo y contrástela en campo antes de usarla."
 )
 LECTURA_CONEXIONES = (
-    "ClayOMICS y MAGNETIME son emprendimientos de base tecnológica de la "
-    "Universidad de Caldas. En esta ontología no aparecen como autores de un "
-    "resultado de biocontrol: ClayOMICS se enlaza, con estado «propuesto», al "
-    "análisis de exudados de Hirsutella citriformis, y MAGNETIME a una pregunta "
-    "experimental sobre germinación de conidios bajo campo electromagnético. "
-    "Ninguno de los dos enlaces afirma una medición ya hecha."
+    "MAGNETIME agrupa fuentes sobre tratamiento magnético de semillas de tomate "
+    "(F13, tesis, nivel medio; F15, trabajo de grado, nivel medio) y de soja "
+    "(F14, nivel alto). Ninguna está hecha en cítricos ni mide control de plagas: "
+    "el inventario las marca como la evidencia que falta para el caso integrador. "
+    "ClayOMICS aparece como noticia institucional de 2022 (F16, nivel medio) y "
+    "como puente conceptual con la revisión de xenometabolómica del grupo de "
+    "Cromatografía (F17, nivel alto). F17 no es un resultado del spin-off."
 )
 
 
@@ -69,6 +70,9 @@ def consultar(entrada: ConsultaEntrada, gestor: OntologyManager | None = None) -
         return _laguna(plaga.nombre_cientifico, plaga.cultivos, plaga.descripcion)
 
     evaluaciones = [_evaluar(relacion, entrada, practicas) for relacion in relaciones]
+    if not any(item.relacion.temp_min is not None for item in evaluaciones):
+        logger.info("Relaciones sin ventana de uso para %s.", plaga.id)
+        return _solo_documentados(plaga.nombre_cientifico, evaluaciones)
     elegibles = [item for item in evaluaciones if item.elegible]
     if not elegibles:
         logger.info("Sin ventana compatible para %s.", plaga.id)
@@ -82,7 +86,7 @@ def responder_competencia(gestor: OntologyManager | None = None) -> dict[str, ob
     """Reúne las cinco preguntas de competencia en una sola estructura."""
     gestor = gestor or obtener_gestor()
     ejemplo = consultar(
-        ConsultaEntrada(plaga="Compsus_sp", temperatura=25, humedad=70),
+        ConsultaEntrada(plaga="plaga_no_registrada", temperatura=25, humedad=70),
         gestor,
     )
     return {
@@ -131,7 +135,7 @@ def probar_pellet() -> dict[str, object]:
             "disponible": True,
             "aplicado": True,
             "r1_tamarixia": "Diaphorina_citri" in recomendados,
-            "r3_compsus": "Citrus_sinensis" in lagunas and "Citrus_reticulata" in lagunas,
+            "r3_sin_laguna_en_la_semilla": len(lagunas) == 0,
         }
     except (OwlReadyJavaError, OSError, Exception) as exc:
         motivo = _motivo_pellet(exc)
@@ -156,19 +160,34 @@ def _practicas_validas(practicas: list[str]) -> list[str]:
 
 
 def _evaluar(relacion: RelacionVista, entrada: ConsultaEntrada, practicas: list[str]) -> Evaluacion:
-    """Decide si la relación es aplicable y con qué prioridad."""
-    temperatura_ok = relacion.temp_min <= entrada.temperatura <= relacion.temp_max
-    humedad_ok = relacion.hum_min <= entrada.humedad <= relacion.hum_max
+    """Decide si la relación es aplicable y con qué prioridad.
+
+    Sin ventana térmica la relación queda documentada, pero no compite.
+    La humedad solo filtra cuando la fuente la marca como umbral.
+    """
+    sin_ventana = relacion.temp_min is None or relacion.temp_max is None
+    temperatura_ok = (
+        not sin_ventana and relacion.temp_min <= entrada.temperatura <= relacion.temp_max
+    )
+    if relacion.humedad_decide and relacion.hum_min is not None and relacion.hum_max is not None:
+        humedad_ok = relacion.hum_min <= entrada.humedad <= relacion.hum_max
+    else:
+        humedad_ok = True
     restricciones = [
         restriccion.etiqueta
         for restriccion in relacion.restricciones
         if restriccion.codigo in practicas
     ]
-    elegible = temperatura_ok and humedad_ok and relacion.nivel in {"Alta", "Media", "Baja"}
+    elegible = (not sin_ventana) and temperatura_ok and humedad_ok and relacion.nivel in {"Alta", "Media", "Baja"}
     puntaje = None
     if elegible:
         puntaje = float(PESO_NIVEL[relacion.nivel] - (1 if restricciones else 0))
-    ancho = (relacion.temp_max - relacion.temp_min) + (relacion.hum_max - relacion.hum_min)
+    if sin_ventana:
+        ancho = 10_000.0
+    elif relacion.humedad_decide and relacion.hum_min is not None and relacion.hum_max is not None:
+        ancho = (relacion.temp_max - relacion.temp_min) + (relacion.hum_max - relacion.hum_min)
+    else:
+        ancho = relacion.temp_max - relacion.temp_min
     return Evaluacion(
         relacion=relacion,
         temperatura_ok=temperatura_ok,
@@ -197,20 +216,17 @@ def _conclusion(
     temperatura = _numero(entrada.temperatura)
     humedad = _numero(entrada.humedad)
     if alta:
-        nucleo = (
-            f"La temperatura {temperatura} °C está en el rango "
-            f"[{_numero(relacion.temp_min)}, {_numero(relacion.temp_max)}] y la humedad "
-            f"{humedad} % está en el rango "
-            f"[{_numero(relacion.hum_min)}, {_numero(relacion.hum_max)}]. "
-            f"La evidencia es Alta, así que {relacion.agente_nombre} queda altamente "
+        nucleo = _frase_clima(relacion, temperatura, humedad)
+        nucleo += (
+            f" La evidencia es Alta, así que {relacion.agente_nombre} queda altamente "
             f"recomendado para la plaga consultada."
         )
         nota = None
         recomendacion = "AltamenteRecomendado"
     else:
-        nucleo = (
-            f"La temperatura {temperatura} °C y la humedad {humedad} % caen en la ventana "
-            f"de {relacion.agente_nombre}, pero la evidencia es {relacion.nivel}. "
+        nucleo = _frase_clima(relacion, temperatura, humedad)
+        nucleo += (
+            f" La evidencia es {relacion.nivel}. "
             f"Se activa R2: la recomendación es potencial, no alta."
         )
         nota = f"{NOTA_R2} {relacion.criterio_nivel}"
@@ -253,10 +269,7 @@ def _conclusion(
         recomendacion=recomendacion,
         agente=relacion.agente_nombre,
         nivel_evidencia=relacion.nivel,
-        condiciones={
-            "temperatura": [_numero(relacion.temp_min), _numero(relacion.temp_max)],
-            "humedad": [_numero(relacion.hum_min), _numero(relacion.hum_max)],
-        },
+        condiciones=_condiciones(relacion),
         fuente=relacion.fuente_principal,
         explicacion=Explicacion(
             reglas_activadas=activas,
@@ -277,6 +290,15 @@ def _conclusion(
 
 def _otra(evaluacion: Evaluacion, _distinta: bool) -> OtraRelacion:
     relacion = evaluacion.relacion
+    if relacion.temp_min is None:
+        return OtraRelacion(
+            relacion=relacion.id,
+            agente=relacion.agente_nombre,
+            nivel_evidencia=relacion.nivel,
+            aplicable=False,
+            reglas=[],
+            motivo="Documentado sin ventana de uso. " + relacion.criterio_nivel,
+        )
     if not evaluacion.temperatura_ok or not evaluacion.humedad_ok:
         motivo = _motivo_ventana(evaluacion)
         reglas: list[str] = []
@@ -299,8 +321,80 @@ def _otra(evaluacion: Evaluacion, _distinta: bool) -> OtraRelacion:
     )
 
 
+def _condiciones(relacion: RelacionVista) -> dict[str, list[float]]:
+    """Publica la temperatura que decide y, aparte, la humedad de ensayo."""
+    datos: dict[str, list[float]] = {
+        "temperatura": [_numero(relacion.temp_min), _numero(relacion.temp_max)],
+    }
+    if relacion.hum_min is None or relacion.hum_max is None:
+        return datos
+    clave = "humedad" if relacion.humedad_decide else "humedad_ensayo"
+    datos[clave] = [_numero(relacion.hum_min), _numero(relacion.hum_max)]
+    return datos
+
+
+def _frase_clima(relacion: RelacionVista, temperatura: float, humedad: float) -> str:
+    frase = (
+        f"La temperatura {temperatura} °C está en el rango "
+        f"[{_numero(relacion.temp_min)}, {_numero(relacion.temp_max)}]"
+    )
+    if relacion.humedad_decide and relacion.hum_min is not None and relacion.hum_max is not None:
+        frase += (
+            f" y la humedad {humedad} % está en el rango "
+            f"[{_numero(relacion.hum_min)}, {_numero(relacion.hum_max)}]"
+        )
+    elif relacion.hum_min is not None and relacion.hum_max is not None:
+        frase += (
+            f". La humedad consultada ({humedad} %) no decide: la fuente solo reporta "
+            f"una condición de ensayo ({_numero(relacion.hum_min)}–{_numero(relacion.hum_max)} % HR)"
+        )
+    return frase + "."
+
+
+def _solo_documentados(nombre_plaga: str, evaluaciones: list[Evaluacion]) -> ConsultaSalida:
+    """Muestra el hecho documentado cuando ninguna fuente trae ventana de uso."""
+    ordenadas = sorted(
+        evaluaciones,
+        key=lambda item: (-PESO_NIVEL[item.relacion.nivel], item.relacion.agente_nombre),
+    )
+    relacion = ordenadas[0].relacion
+    otras = [_otra(item, True) for item in ordenadas if item.relacion is not relacion]
+    justificacion = (
+        f"{nombre_plaga} tiene enemigos documentados, pero ninguna fuente trae una ventana "
+        f"de temperatura o humedad para decidir la aplicación. Se muestra {relacion.agente_nombre} "
+        f"({relacion.fuente_principal}) sin activar R1 ni R2. {relacion.criterio_nivel}"
+    )
+    logger.info("Consulta %s sin ventana de uso -> %s.", relacion.plaga_id, relacion.agente_nombre)
+    return ConsultaSalida(
+        recomendacion="Documentado sin ventana de uso",
+        agente=relacion.agente_nombre,
+        nivel_evidencia=relacion.nivel,
+        fuente=relacion.fuente_principal,
+        explicacion=Explicacion(
+            reglas_activadas=["R5"],
+            reglas_no_activadas=["R1", "R2", "R3", "R4"],
+            justificacion=justificacion,
+            arbol=_arbol(
+                activas={"R5"},
+                r1="No hay una ventana de temperatura documentada, así que R1 no dispara.",
+                r2="Sin ventana, una evidencia Media o Baja no se convierte en recomendación potencial.",
+                r3="La plaga sí tiene agentes documentados.",
+                r4="Sin recomendación climática, la incompatibilidad no cambia la conclusión.",
+                r5=f"La ficha cita {relacion.id} y {relacion.fuente_principal}.",
+            ),
+            otras_relaciones=otras,
+        ),
+        advertencia=ADVERTENCIA,
+        reglas_activadas=["R5"],
+        motor="python",
+        trazabilidad={"relacion": relacion.id, "fuente": relacion.fuente_principal},
+    )
+
+
 def _motivo_ventana(evaluacion: Evaluacion) -> str:
     relacion = evaluacion.relacion
+    if relacion.temp_min is None or relacion.temp_max is None:
+        return "Sin ventana de uso documentada."
     fallos = []
     if not evaluacion.temperatura_ok:
         fallos.append(

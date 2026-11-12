@@ -15,7 +15,7 @@ def test_salud_ontologia_y_reglas() -> None:
     assert cuerpo["estado"] == "ok"
     assert cuerpo["ontologia_cargada"] is True
     assert cuerpo["plagas"] == 3
-    assert cuerpo["relaciones"] == 3
+    assert cuerpo["relaciones"] == 6
     assert cuerpo["fuentes"] == 17
     assert cuerpo["reglas_swrl"] >= 5
 
@@ -54,8 +54,9 @@ def test_consultar_sin_agente() -> None:
             "humedad": 70,
         })
     cuerpo = respuesta.json()
-    assert cuerpo["recomendacion"] == "Evidencia insuficiente"
-    assert cuerpo["reglas_activadas"] == ["R3"]
+    assert cuerpo["recomendacion"] == "Documentado sin ventana de uso"
+    assert cuerpo["agente"] == "Trigonospila unicaldasi"
+    assert cuerpo["reglas_activadas"] == ["R5"]
 
 
 def test_competencia_en_un_endpoint() -> None:
@@ -63,7 +64,7 @@ def test_competencia_en_un_endpoint() -> None:
         respuesta = cliente.get("/competencia")
     assert respuesta.status_code == 200
     cuerpo = respuesta.json()
-    assert len(cuerpo["enemigos_de_diaphorina_citri"]) == 3
+    assert len(cuerpo["enemigos_de_diaphorina_citri"]) == 4
     assert cuerpo["conexiones"]
 
 

@@ -197,6 +197,7 @@ def tarjeta_resultado(resultado: ConsultaSalida) -> str:
         "PotencialmenteRecomendado": "Potencialmente recomendado",
         "Evidencia insuficiente": "Evidencia insuficiente",
         "Condiciones no satisfechas": "Condiciones no satisfechas",
+        "Documentado sin ventana de uso": "Documentado, sin ventana de uso",
     }.get(resultado.recomendacion, resultado.recomendacion)
     agente = f'<div class="bio-agente">{escape(resultado.agente)}</div>' if resultado.agente else ""
     nivel = (
@@ -208,13 +209,19 @@ def tarjeta_resultado(resultado: ConsultaSalida) -> str:
         f'<span class="bio-pill">{escape(resultado.fuente or "")}</span>' if resultado.fuente else ""
     )
     condiciones = ""
-    if resultado.condiciones:
+    if resultado.condiciones and "temperatura" in resultado.condiciones:
         temperatura = resultado.condiciones["temperatura"]
-        humedad = resultado.condiciones["humedad"]
         condiciones = (
             f'<span class="bio-pill">Temperatura {temperatura[0]}–{temperatura[1]} °C</span>'
-            f'<span class="bio-pill">Humedad {humedad[0]}–{humedad[1]} %</span>'
         )
+        if "humedad" in resultado.condiciones:
+            humedad = resultado.condiciones["humedad"]
+            condiciones += f'<span class="bio-pill">Humedad {humedad[0]}–{humedad[1]} %</span>'
+        elif "humedad_ensayo" in resultado.condiciones:
+            humedad = resultado.condiciones["humedad_ensayo"]
+            condiciones += (
+                f'<span class="bio-pill">HR de ensayo {humedad[0]}–{humedad[1]} % (no decide)</span>'
+            )
     alerta = ""
     if resultado.restricciones_activas:
         texto = "; ".join(resultado.restricciones_activas)
@@ -267,8 +274,8 @@ def pagina_consulta(gestor) -> None:
             key="practicas",
         )
         st.caption(
-            "Las ventanas de temperatura y humedad son parámetros operativos del prototipo, "
-            "anclados en las fuentes del inventario."
+            "La humedad de este control no es un umbral de liberación: F08 la usa como "
+            "condición de ensayo (70 ± 10 %). La ventana que decide es la temperatura documentada."
         )
         consultar_ahora = st.button(
             "🔍 Consultar",
@@ -387,7 +394,7 @@ def _texto_restricciones(filas: list[dict]) -> str:
 
 def _texto_conexiones(filas: list[dict]) -> str:
     return "\n".join(
-        f"• {fila['plataforma']} ({fila['estado']}) en {fila['relacion']}: {fila['resultado']}"
+        f"• {fila['plataforma']} ({fila['estado']}) · {fila['fuente']}: {fila['resultado']}"
         for fila in filas
     )
 
