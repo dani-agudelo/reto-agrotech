@@ -1,0 +1,1975 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://agrotech.ucaldas.edu.co/ontologias/biocontrol"
+         xmlns="http://agrotech.ucaldas.edu.co/ontologias/biocontrol#"
+         xmlns:swrl="http://www.w3.org/2003/11/swrl#">
+
+<owl:Ontology rdf:about="http://agrotech.ucaldas.edu.co/ontologias/biocontrol">
+  <rdfs:comment xml:lang="es">Ontología de biocontrol de plagas de cítricos. Prototipo académico AgroTech, Universidad de Caldas. No es una prescripción agronómica.</rdfs:comment>
+</owl:Ontology>
+
+<owl:ObjectProperty rdf:about="#afectaA">
+  <rdfs:domain rdf:resource="#Plaga"/>
+  <rdfs:range rdf:resource="#Cultivo"/>
+  <rdfs:label xml:lang="es">afectaA</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#contextualizadoPor">
+  <rdfs:domain rdf:resource="#Plaga"/>
+  <rdfs:range rdf:resource="#FuenteEvidencia"/>
+  <rdfs:label xml:lang="es">contextualizadoPor</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#esControladaPor">
+  <rdfs:domain rdf:resource="#Plaga"/>
+  <rdfs:range rdf:resource="#AgenteBiocontrol"/>
+  <rdfs:label xml:lang="es">esControladaPor</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#involucraPlaga">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
+  <rdfs:range rdf:resource="#Plaga"/>
+  <rdfs:label xml:lang="es">involucraPlaga</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#involucraAgente">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
+  <rdfs:range rdf:resource="#AgenteBiocontrol"/>
+  <rdfs:label xml:lang="es">involucraAgente</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#tieneCondicion">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
+  <rdfs:range rdf:resource="#CondicionUso"/>
+  <rdfs:label xml:lang="es">tieneCondicion</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#fuentePrincipal">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
+  <rdfs:range rdf:resource="#FuenteEvidencia"/>
+  <rdfs:label xml:lang="es">fuentePrincipal</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#respaldadoPor">
+  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
+  <rdfs:range rdf:resource="#FuenteEvidencia"/>
+  <rdfs:label xml:lang="es">respaldadoPor</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#justificadoPor">
+  <rdfs:domain rdf:resource="#Restriccion"/>
+  <rdfs:range rdf:resource="#FuenteEvidencia"/>
+  <rdfs:label xml:lang="es">justificadoPor</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#tieneRestriccion">
+  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
+  <rdfs:range rdf:resource="#Restriccion"/>
+  <rdfs:label xml:lang="es">tieneRestriccion</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#potencialmenteRecomendadoPara">
+  <rdfs:domain rdf:resource="#AgenteBiocontrol"/>
+  <rdfs:range rdf:resource="#Plaga"/>
+  <rdfs:label xml:lang="es">potencialmenteRecomendadoPara</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#articuladoCon">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="#PlataformaExterna"/>
+  <rdfs:label xml:lang="es">articuladoCon</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#verificadoPor">
+  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
+  <rdfs:range rdf:resource="#AnalisisQuimico"/>
+  <rdfs:label xml:lang="es">verificadoPor</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#tieneExperimento">
+  <rdfs:domain rdf:resource="#RelacionBiocontrol"/>
+  <rdfs:range rdf:resource="#Experimento"/>
+  <rdfs:label xml:lang="es">tieneExperimento</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#trazadoPor">
+  <rdfs:range rdf:resource="#FuenteEvidencia"/>
+  <rdfs:label xml:lang="es">trazadoPor</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#consultaPlaga">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Consulta"/>
+  <rdfs:range rdf:resource="#Plaga"/>
+  <rdfs:label xml:lang="es">consultaPlaga</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#altamenteRecomendadoPara">
+  <rdfs:domain rdf:resource="#AgenteBiocontrol"/>
+  <rdfs:range rdf:resource="#Plaga"/>
+  <rdfs:label xml:lang="es">altamenteRecomendadoPara</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#tieneLagunaEn">
+  <rdfs:domain rdf:resource="#Plaga"/>
+  <rdfs:range rdf:resource="#Cultivo"/>
+  <rdfs:label xml:lang="es">tieneLagunaEn</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:about="#humedadMax">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:label xml:lang="es">humedadMax</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tipoAgente">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">tipoAgente</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#rangoMin">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:label xml:lang="es">rangoMin</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#humedadMin">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:label xml:lang="es">humedadMin</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#humedadActual">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:label xml:lang="es">humedadActual</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tipoPlataforma">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">tipoPlataforma</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tipoFuente">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">tipoFuente</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#rangoValido">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">rangoValido</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#tieneNivelEvidencia">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  <rdfs:label xml:lang="es">tieneNivelEvidencia</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#rolFuente">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">rolFuente</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#nombreComun">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">nombreComun</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#variableRespuesta">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">variableRespuesta</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#autores">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">autores</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#temperaturaActual">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:label xml:lang="es">temperaturaActual</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#citaCorta">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">citaCorta</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#titulo">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">titulo</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#anio">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  <rdfs:label xml:lang="es">anio</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#temperaturaMin">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:label xml:lang="es">temperaturaMin</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#resultado">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">resultado</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#rangoMax">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:label xml:lang="es">rangoMax</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#descripcion">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">descripcion</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#temperaturaMax">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <rdfs:label xml:lang="es">temperaturaMax</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#notas">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">notas</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#descripcionCondicion">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">descripcionCondicion</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#url">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">url</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#estadoEnlace">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  <rdfs:label xml:lang="es">estadoEnlace</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#nombreCientifico">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">nombreCientifico</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#condicionExperimental">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">condicionExperimental</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#doi">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">doi</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#declaraPractica">
+  <rdfs:label xml:lang="es">declaraPractica</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#etiqueta">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">etiqueta</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#codigoPractica">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">codigoPractica</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#criterioNivel">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:label xml:lang="es">criterioNivel</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:Class rdf:about="#FuenteEvidencia">
+  <rdfs:label xml:lang="es">FuenteEvidencia</rdfs:label>
+  <rdfs:comment xml:lang="es">Publicación, tesis o nota que respalda o contextualiza un hecho.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#RelacionBiocontrol">
+  <rdfs:label xml:lang="es">RelacionBiocontrol</rdfs:label>
+  <rdfs:comment xml:lang="es">Relación reificada entre plaga, agente, condición, evidencia y restricciones.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Plaga">
+  <rdfs:label xml:lang="es">Plaga</rdfs:label>
+  <rdfs:comment xml:lang="es">Organismo que afecta al menos un cultivo del inventario.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#AgenteBiocontrol">
+  <rdfs:label xml:lang="es">AgenteBiocontrol</rdfs:label>
+  <rdfs:comment xml:lang="es">Enemigo natural o microorganismo de control documentado.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#CondicionUso">
+  <rdfs:label xml:lang="es">CondicionUso</rdfs:label>
+  <rdfs:comment xml:lang="es">Ventana operativa de temperatura y humedad de una relación.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Restriccion">
+  <rdfs:label xml:lang="es">Restriccion</rdfs:label>
+  <rdfs:comment xml:lang="es">Práctica agronómica que compromete el uso de un agente.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#AnalisisQuimico">
+  <rdfs:label xml:lang="es">AnalisisQuimico</rdfs:label>
+  <rdfs:comment xml:lang="es">Análisis químico, medido o propuesto, articulado con una plataforma.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Experimento">
+  <rdfs:label xml:lang="es">Experimento</rdfs:label>
+  <rdfs:comment xml:lang="es">Experimento, medido o propuesto, articulado con una plataforma.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Consulta">
+  <rdfs:label xml:lang="es">Consulta</rdfs:label>
+  <rdfs:comment xml:lang="es">Hechos temporales de una pregunta: plaga, clima y prácticas.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#PlagaSinAgenteDocumentado">
+  <rdfs:subClassOf rdf:resource="#Plaga"/>
+  <rdfs:label xml:lang="es">PlagaSinAgenteDocumentado</rdfs:label>
+  <rdfs:comment xml:lang="es">Cierre de mundo local: la plaga no tiene agente en esta base.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Cultivo">
+  <rdfs:label xml:lang="es">Cultivo</rdfs:label>
+  <rdfs:comment xml:lang="es">Cultivo de cítricos hospedero de la plaga.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#RestriccionActiva">
+  <rdfs:label xml:lang="es">RestriccionActiva</rdfs:label>
+  <rdfs:comment xml:lang="es">Estado inferido cuando una práctica de la consulta coincide con una restricción.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#PlataformaExterna">
+  <rdfs:label xml:lang="es">PlataformaExterna</rdfs:label>
+  <rdfs:comment xml:lang="es">Plataforma de la Universidad de Caldas enlazada por interoperabilidad.</rdfs:comment>
+</owl:Class>
+
+<FuenteEvidencia rdf:about="#F13">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F13 - Universidad de Caldas (ClayOMICS)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F13 - Universidad de Caldas (ClayOMICS)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Universidad de Caldas</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Spin-off ClayOMICS de la Universidad de Caldas obtiene su registro de marca</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nota_institucional</tipoFuente>
+  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">interoperabilidad</rolFuente>
+  <notas xml:lang="es">ClayOMICS ofrece análisis de datos químicos. La nota no reporta un ensayo de biocontrol ni un perfil de Hirsutella.</notas>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.ucaldas.edu.co/portal/spin-off-clayomics-de-la-universidad-de-caldas-obtiene-su-registro-de-marca/</url>
+</FuenteEvidencia>
+
+<RelacionBiocontrol rdf:about="#Relacion_DC_Diaphorencyrtus">
+  <involucraPlaga rdf:resource="#Diaphorina_citri"/>
+  <involucraAgente rdf:resource="#Diaphorencyrtus_sp"/>
+  <tieneCondicion rdf:resource="#Condicion_Diaphorencyrtus"/>
+  <fuentePrincipal rdf:resource="#F05"/>
+  <respaldadoPor rdf:resource="#F05"/>
+  <respaldadoPor rdf:resource="#F04"/>
+  <tieneRestriccion rdf:resource="#Restriccion_piretroide"/>
+  <tieneRestriccion rdf:resource="#Restriccion_neonicotinoide"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relacion_DC_Diaphorencyrtus</rdfs:label>
+  <tieneNivelEvidencia rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Media</tieneNivelEvidencia>
+  <variableRespuesta xml:lang="es">parasitismo de ninfas de Diaphorina citri</variableRespuesta>
+  <resultado xml:lang="es">Parasitismo de 0,3 % a 1,0 % en Palmira, frente a 1,5 %–24,2 % de Tamarixia en el mismo estudio (F05).</resultado>
+  <condicionExperimental xml:lang="es">Conteos de momias y emergencia de adultos en un huerto de Agrosavia, Palmira, en 2020 y 2021 (F05).</condicionExperimental>
+  <criterioNivel xml:lang="es">Media: la especie está confirmada en Colombia, pero las tasas de campo son bajas frente a Tamarixia (F05). La regla R2 agrega precaución.</criterioNivel>
+</RelacionBiocontrol>
+
+<Plaga rdf:about="#Diaphorina_citri">
+  <afectaA rdf:resource="#Citrus_sinensis"/>
+  <afectaA rdf:resource="#Citrus_reticulata"/>
+  <contextualizadoPor rdf:resource="#F01"/>
+  <contextualizadoPor rdf:resource="#F02"/>
+  <contextualizadoPor rdf:resource="#F11"/>
+  <esControladaPor rdf:resource="#Tamarixia_radiata"/>
+  <esControladaPor rdf:resource="#Diaphorencyrtus_sp"/>
+  <esControladaPor rdf:resource="#Hirsutella_citriformis"/>
+  <rdfs:label xml:lang="es">psílido asiático de los cítricos</rdfs:label>
+  <nombreComun xml:lang="es">psílido asiático de los cítricos</nombreComun>
+  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Diaphorina citri</nombreCientifico>
+  <descripcion xml:lang="es">Vector del Huanglongbing (HLB). En Caldas se documentó a Tamarixia radiata alimentándose y parasitando sus ninfas.</descripcion>
+</Plaga>
+
+<Cultivo rdf:about="#Citrus_sinensis">
+  <rdfs:label xml:lang="es">naranja dulce</rdfs:label>
+  <nombreComun xml:lang="es">naranja dulce</nombreComun>
+  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Citrus sinensis</nombreCientifico>
+  <descripcion xml:lang="es">Cultivo de cítricos usado como hospedero en el inventario semilla.</descripcion>
+</Cultivo>
+
+<Cultivo rdf:about="#Citrus_reticulata">
+  <rdfs:label xml:lang="es">mandarina</rdfs:label>
+  <nombreComun xml:lang="es">mandarina</nombreComun>
+  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Citrus reticulata</nombreCientifico>
+  <descripcion xml:lang="es">Cultivo de cítricos usado como hospedero en el inventario semilla.</descripcion>
+</Cultivo>
+
+<FuenteEvidencia rdf:about="#F01">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F01 - Bové (2006)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F01 - Bové (2006)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bové, J. M.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Huanglongbing: a destructive, newly-emerging, century-old disease of citrus</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">articulo</tipoFuente>
+  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">contexto</rolFuente>
+  <notas xml:lang="es">Journal of Plant Pathology, 88(1), 7-37. Revisión del patosistema HLB. No evalúa la eficacia de un agente de biocontrol.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2006</anio>
+</FuenteEvidencia>
+
+<FuenteEvidencia rdf:about="#F02">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F02 - Restrepo-García et al. (2016)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F02 - Restrepo-García et al. (2016)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Restrepo-García, A. M.; Arias-Ortega, P. L.; Soto-Giraldo, A.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Primer reporte de Tamarixia radiata (Waterston) (Hymenoptera: Eulophidae) en el departamento de Caldas, Colombia</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">articulo</tipoFuente>
+  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_relacion</rolFuente>
+  <notas xml:lang="es">Boletín Científico Centro de Museos Museo de Historia Natural, Universidad de Caldas, 20(1), 204-210. Presencia y acción parasítica de Tamarixia radiata sobre ninfas de Diaphorina citri en Caldas.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2016</anio>
+  <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.17151/bccm.2016.20.1.15</doi>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.17151/bccm.2016.20.1.15</url>
+</FuenteEvidencia>
+
+<FuenteEvidencia rdf:about="#F11">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F11 - ICA (2017)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F11 - ICA (2017)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Instituto Colombiano Agropecuario</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Demostración de método: liberación de controladores biológicos para Diaphorina citri</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nota_institucional</tipoFuente>
+  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">contexto</rolFuente>
+  <notas xml:lang="es">Jornada de campo en el Atlántico, 6 de diciembre de 2017, con Tamarixia y hongos entomopatógenos. No es un ensayo publicado.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2017</anio>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.ica.gov.co/noticias/agricola/el-ica-y-corpoica-realizaron-demostracion-de-metod</url>
+</FuenteEvidencia>
+
+<AgenteBiocontrol rdf:about="#Tamarixia_radiata">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tamarixia radiata</rdfs:label>
+  <nombreComun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tamarixia radiata</nombreComun>
+  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tamarixia radiata</nombreCientifico>
+  <tipoAgente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">parasitoide</tipoAgente>
+  <descripcion xml:lang="es">Ectoparasitoide de ninfas de Diaphorina citri. Es el enemigo natural con evidencia convergente en este inventario.</descripcion>
+</AgenteBiocontrol>
+
+<AgenteBiocontrol rdf:about="#Diaphorencyrtus_sp">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Diaphorencyrtus aligarhensis</rdfs:label>
+  <nombreComun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Diaphorencyrtus aligarhensis</nombreComun>
+  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Diaphorencyrtus aligarhensis</nombreCientifico>
+  <tipoAgente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">parasitoide</tipoAgente>
+  <descripcion xml:lang="es">Endoparasitoide de Diaphorina citri. El identificador conserva Diaphorencyrtus_sp, como en reportes tempranos; Kondo et al. (2022) asignan el registro colombiano a D. aligarhensis.</descripcion>
+</AgenteBiocontrol>
+
+<AgenteBiocontrol rdf:about="#Hirsutella_citriformis">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hirsutella citriformis</rdfs:label>
+  <nombreComun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hirsutella citriformis</nombreComun>
+  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hirsutella citriformis</nombreCientifico>
+  <tipoAgente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hongo_entomopatogeno</tipoAgente>
+  <descripcion xml:lang="es">Hongo entomopatógeno aislado en la Granja Montelindo de la Universidad de Caldas y patógeno de Diaphorina citri en bioensayo de laboratorio.</descripcion>
+</AgenteBiocontrol>
+
+<CondicionUso rdf:about="#Condicion_Diaphorencyrtus">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">22–32 °C; 50–90 % HR</rdfs:label>
+  <temperaturaMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">22.0</temperaturaMin>
+  <temperaturaMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">32.0</temperaturaMax>
+  <humedadMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">50.0</humedadMin>
+  <humedadMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">90.0</humedadMax>
+  <rangoMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">22.0</rangoMin>
+  <rangoMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">32.0</rangoMax>
+  <rangoValido rdf:datatype="http://www.w3.org/2001/XMLSchema#string">22–32 °C; 50–90 % HR</rangoValido>
+  <descripcionCondicion xml:lang="es">Ventana operativa más amplia. McFarland y Hoy (2001, F04) compararon supervivencia adulta a 25 °C y 30 °C; Kondo et al. (2022, F05) confirman la especie en campo sin publicar una curva térmica propia.</descripcionCondicion>
+</CondicionUso>
+
+<FuenteEvidencia rdf:about="#F05">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F05 - Kondo et al. (2022)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F05 - Kondo et al. (2022)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Kondo, T.; Woolley, J. B.; Arciniegas, K. T.; Campos-Patiño, Y.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">First report in Colombia and diagnosis of Diaphorencyrtus aligarhensis (Hymenoptera: Encyrtidae), a parasitoid wasp of Diaphorina citri</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">articulo</tipoFuente>
+  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_relacion</rolFuente>
+  <notas xml:lang="es">Caldasia, 44(3), 541-552. Primer reporte confirmado de la especie en Colombia (Palmira). Parasitismo de 0,3 % a 1,0 %, frente a 1,5 %–24,2 % de Tamarixia en el mismo estudio. Una aspersión de imidacloprid interrumpió el seguimiento.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2022</anio>
+  <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.15446/caldasia.v44n3.95918</doi>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.15446/caldasia.v44n3.95918</url>
+</FuenteEvidencia>
+
+<FuenteEvidencia rdf:about="#F04">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F04 - McFarland y Hoy (2001)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F04 - McFarland y Hoy (2001)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">McFarland, C. D.; Hoy, M. A.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Survival of Diaphorina citri, and its two parasitoids Tamarixia radiata and Diaphorencyrtus aligarhensis, under different relative humidities and temperature regimes</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">articulo</tipoFuente>
+  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_relacion</rolFuente>
+  <notas xml:lang="es">Florida Entomologist, 84(2), 227-233. Supervivencia adulta a 25 °C y 30 °C con humedades relativas de 7 %, 33 %, 53 %, 75 % y 97 %.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2001</anio>
+  <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.2307/3496171</doi>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.2307/3496171</url>
+</FuenteEvidencia>
+
+<Restriccion rdf:about="#Restriccion_piretroide">
+  <justificadoPor rdf:resource="#F06"/>
+  <justificadoPor rdf:resource="#F02"/>
+  <rdfs:label xml:lang="es">Incompatibilidad con piretroides</rdfs:label>
+  <etiqueta xml:lang="es">Incompatibilidad con piretroides</etiqueta>
+  <codigoPractica rdf:datatype="http://www.w3.org/2001/XMLSchema#string">aplicacion_piretroide</codigoPractica>
+  <descripcion xml:lang="es">Un insecticida piretroide de amplio espectro en la ventana de liberación deprime a los parasitoides. No conviene liberarlos mientras la práctica esté vigente.</descripcion>
+</Restriccion>
+
+<FuenteEvidencia rdf:about="#F06">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F06 - Alemán et al. (2007)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F06 - Alemán et al. (2007)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alemán, J.; Baños, H.; Ravelo, J.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Diaphorina citri y la enfermedad huanglongbing: una combinación destructiva para la producción citrícola</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">articulo</tipoFuente>
+  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_restriccion</rolFuente>
+  <notas xml:lang="es">Revista Protección Vegetal, 22(3), 154-165. Citado por Restrepo-García et al. (2016) al señalar que el control químico puede eliminar enemigos naturales.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2007</anio>
+</FuenteEvidencia>
+
+<Restriccion rdf:about="#Restriccion_neonicotinoide">
+  <justificadoPor rdf:resource="#F05"/>
+  <justificadoPor rdf:resource="#F06"/>
+  <rdfs:label xml:lang="es">Incompatibilidad con neonicotinoides</rdfs:label>
+  <etiqueta xml:lang="es">Incompatibilidad con neonicotinoides</etiqueta>
+  <codigoPractica rdf:datatype="http://www.w3.org/2001/XMLSchema#string">aplicacion_neonicotinoide</codigoPractica>
+  <descripcion xml:lang="es">Los neonicotinoides, por ejemplo imidacloprid, interfieren con los parasitoides. En Palmira una aspersión de imidacloprid interrumpió el seguimiento de parasitismo (F05).</descripcion>
+</Restriccion>
+
+<RelacionBiocontrol rdf:about="#Relacion_DC_Tamarixia">
+  <involucraPlaga rdf:resource="#Diaphorina_citri"/>
+  <involucraAgente rdf:resource="#Tamarixia_radiata"/>
+  <tieneCondicion rdf:resource="#Condicion_Tamarixia"/>
+  <fuentePrincipal rdf:resource="#F02"/>
+  <respaldadoPor rdf:resource="#F02"/>
+  <respaldadoPor rdf:resource="#F03"/>
+  <respaldadoPor rdf:resource="#F04"/>
+  <respaldadoPor rdf:resource="#F10"/>
+  <respaldadoPor rdf:resource="#F16"/>
+  <tieneRestriccion rdf:resource="#Restriccion_piretroide"/>
+  <tieneRestriccion rdf:resource="#Restriccion_neonicotinoide"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relacion_DC_Tamarixia</rdfs:label>
+  <tieneNivelEvidencia rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</tieneNivelEvidencia>
+  <variableRespuesta xml:lang="es">parasitismo de ninfas de Diaphorina citri</variableRespuesta>
+  <resultado xml:lang="es">Presencia y acción parasítica documentadas en Caldas (F02). El inventario no codifica un porcentaje único de eficacia de campo.</resultado>
+  <condicionExperimental xml:lang="es">Observación de momias y emergencia del parasitoide sobre brotes de cítricos en el Centro de Investigación y Cría de Enemigos Naturales de la Universidad de Caldas, entre enero y abril de 2016 (F02).</condicionExperimental>
+  <criterioNivel xml:lang="es">Alta por convergencia: reporte local de presencia y acción parasítica (F02), revisión biológica (F03), supervivencia bajo regímenes de temperatura y humedad (F04) y rutas de acceso en Colombia (F10). No es un metaanálisis de eficacia de campo.</criterioNivel>
+</RelacionBiocontrol>
+
+<CondicionUso rdf:about="#Condicion_Tamarixia">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">20–30 °C; 60–85 % HR</rdfs:label>
+  <temperaturaMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">20.0</temperaturaMin>
+  <temperaturaMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">30.0</temperaturaMax>
+  <humedadMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">60.0</humedadMin>
+  <humedadMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">85.0</humedadMax>
+  <rangoMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">20.0</rangoMin>
+  <rangoMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">30.0</rangoMax>
+  <rangoValido rdf:datatype="http://www.w3.org/2001/XMLSchema#string">20–30 °C; 60–85 % HR</rangoValido>
+  <descripcionCondicion xml:lang="es">Ventana operativa del prototipo. Cubre el óptimo de laboratorio cercano a 25 °C y los regímenes de 25 °C y 30 °C de McFarland y Hoy (2001, F04). La humedad 60-85 % excluye los extremos secos del ensayo (7 % y 33 %) y la saturación (97 %). No es la tabla de un único experimento.</descripcionCondicion>
+</CondicionUso>
+
+<FuenteEvidencia rdf:about="#F03">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F03 - Chen y Stansly (2014)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F03 - Chen y Stansly (2014)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Chen, X.; Stansly, P. A.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biology of Tamarixia radiata (Hymenoptera: Eulophidae), parasitoid of the citrus greening disease vector Diaphorina citri (Hemiptera: Psyllidae): a mini review</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">articulo</tipoFuente>
+  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_relacion</rolFuente>
+  <notas xml:lang="es">Florida Entomologist, 97(4), 1404-1412. Revisión biológica del parasitoide.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2014</anio>
+</FuenteEvidencia>
+
+<FuenteEvidencia rdf:about="#F10">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F10 - AgroSavia (s. f.)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F10 - AgroSavia (s. f.)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AgroSavia</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rutas de acceso al parasitoide Tamarixia radiata</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">recomendacion_tecnologica</tipoFuente>
+  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_relacion</rolFuente>
+  <notas xml:lang="es">Oferta tecnológica: incremento in situ, traspatios y reservorios. No es un artículo de eficacia y no aporta un porcentaje de control.</notas>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.agrosavia.co/productos-y-servicios/oferta-tecnologica/linea-agricola/frutales/recomendaciones-protocolos-y-metodologias/758-rutas-de-acceso-al-parasitoide-tamarixia-radiata</url>
+</FuenteEvidencia>
+
+<FuenteEvidencia rdf:about="#F16">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F16 - Universidad de Caldas (Biocontroladores)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F16 - Universidad de Caldas (Biocontroladores)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Universidad de Caldas</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biocontroladores, spin-off de la Universidad de Caldas</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nota_institucional</tipoFuente>
+  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">contexto</rolFuente>
+  <notas xml:lang="es">La nota menciona a Tamarixia radiata entre los desarrollos del spin-off. El prototipo no transcribe cifras de eficacia.</notas>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.ucaldas.edu.co/portal/biocontraladores-spin-off-de-la-universidad-de-caldas-en-pro-de-la-agricultura/</url>
+</FuenteEvidencia>
+
+<RelacionBiocontrol rdf:about="#Relacion_DC_Hirsutella">
+  <involucraPlaga rdf:resource="#Diaphorina_citri"/>
+  <involucraAgente rdf:resource="#Hirsutella_citriformis"/>
+  <tieneCondicion rdf:resource="#Condicion_Hirsutella"/>
+  <fuentePrincipal rdf:resource="#F08"/>
+  <respaldadoPor rdf:resource="#F08"/>
+  <respaldadoPor rdf:resource="#F07"/>
+  <respaldadoPor rdf:resource="#F09"/>
+  <respaldadoPor rdf:resource="#F12"/>
+  <tieneRestriccion rdf:resource="#Restriccion_cuprico"/>
+  <tieneRestriccion rdf:resource="#Restriccion_azufre"/>
+  <verificadoPor rdf:resource="#Analisis_exudados_Hirsutella"/>
+  <tieneExperimento rdf:resource="#Experimento_campo_magnetico_conidios"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relacion_DC_Hirsutella</rdfs:label>
+  <tieneNivelEvidencia rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Media</tieneNivelEvidencia>
+  <variableRespuesta xml:lang="es">mortalidad acumulada de adultos de Diaphorina citri</variableRespuesta>
+  <resultado xml:lang="es">Mortalidad acumulada de 98 % con conidios de H. citriformis y 3 % en el control; sinnemas a los 7 días post-mortem (F08).</resultado>
+  <condicionExperimental xml:lang="es">Bioensayo de contacto directo entre adultos de D. citri y cultivos esporulados; caracterización morfológica, morfométrica y del gen ribosomal 28S (F08).</condicionExperimental>
+  <criterioNivel xml:lang="es">Media: hay patogenicidad alta en laboratorio (F08) y una ventana ambiental descrita en la revisión (F07), pero el inventario no incluye un programa comercial de campo. Por eso no se asigna Alta y, si la ventana se cumple, se activa R2.</criterioNivel>
+</RelacionBiocontrol>
+
+<CondicionUso rdf:about="#Condicion_Hirsutella">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">23–28 °C; 80–98 % HR</rdfs:label>
+  <temperaturaMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">23.0</temperaturaMin>
+  <temperaturaMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">28.0</temperaturaMax>
+  <humedadMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">80.0</humedadMin>
+  <humedadMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">98.0</humedadMax>
+  <rangoMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">23.0</rangoMin>
+  <rangoMax rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">28.0</rangoMax>
+  <rangoValido rdf:datatype="http://www.w3.org/2001/XMLSchema#string">23–28 °C; 80–98 % HR</rangoValido>
+  <descripcionCondicion xml:lang="es">Ventana de la revisión de Pérez-González et al. (2022, F07): desarrollo óptimo cerca de 25 °C y epizootias con humedad relativa superior al 80 %, con registros de campo entre 25 °C y 28 °C. El bioensayo de 2024 (F08) demuestra patogenicidad en laboratorio, no esta ventana en Caldas.</descripcionCondicion>
+</CondicionUso>
+
+<FuenteEvidencia rdf:about="#F08">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F08 - Restrepo-García et al. (2024)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F08 - Restrepo-García et al. (2024)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Restrepo-García, A. M.; Pérez-González, O.; Soto-Giraldo, A.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Primer aislamiento de Hirsutella citriformis en Colombia y evaluación de su patogenicidad</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">articulo</tipoFuente>
+  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_relacion</rolFuente>
+  <notas xml:lang="es">Boletín Científico Centro de Museos, 28(2), 181-190. Cepa de la Granja Montelindo. Mortalidad acumulada de 98 % en bioensayo de contacto y 3 % en el control; similitud del 98,86 % en el gen 28S.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2024</anio>
+  <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.17151/bccm.2024.28.2.9</doi>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.17151/bccm.2024.28.2.9</url>
+</FuenteEvidencia>
+
+<FuenteEvidencia rdf:about="#F07">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F07 - Pérez-González et al. (2022)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F07 - Pérez-González et al. (2022)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pérez-González, O.; Gómez-Flores, R.; Tamez-Guerra, P.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Insight into biological control potential of Hirsutella citriformis against Asian citrus psyllid as a vector of citrus Huanglongbing disease in America</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">articulo</tipoFuente>
+  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_relacion</rolFuente>
+  <notas xml:lang="es">Journal of Fungi, 8(6), 573. Revisión: desarrollo óptimo cerca de 25 °C, epizootias con humedad relativa superior al 80 % y precaución frente a cobre, aceite y azufre a dosis altas. El papel de los exudados sigue poco caracterizado.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2022</anio>
+  <doi rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.3390/jof8060573</doi>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://doi.org/10.3390/jof8060573</url>
+</FuenteEvidencia>
+
+<FuenteEvidencia rdf:about="#F09">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F09 - Casique-Valdes et al. (2011)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F09 - Casique-Valdes et al. (2011)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Casique-Valdes, R.; Reyes-Martinez, A. Y.; Sanchez-Peña, S. R.; Bidochka, M. J.; Lopez-Arroyo, J. I.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pathogenicity of Hirsutella citriformis to Diaphorina citri and Bactericera cockerelli</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">articulo</tipoFuente>
+  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_relacion</rolFuente>
+  <notas xml:lang="es">Florida Entomologist, 94(3), 703-705. Patogenicidad del hongo sobre el psílido.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2011</anio>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.jstor.org/stable/41336460</url>
+</FuenteEvidencia>
+
+<FuenteEvidencia rdf:about="#F12">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F12 - Hernández Arredondo y Rosero Álvarez (2025)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F12 - Hernández Arredondo y Rosero Álvarez (2025)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hernández Arredondo, C.; Rosero Álvarez, N. V.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Aislamiento y multiplicación de cepas nativas de Hirsutella citriformis Speare como controlador biológico de Diaphorina citri</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">tesis</tipoFuente>
+  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">respalda_relacion</rolFuente>
+  <notas xml:lang="es">Trabajo de grado, Ingeniería Agronómica, Universidad de Caldas. Asesores: Alberto Soto Giraldo y Ana María Restrepo García. Aislamiento y medios de cultivo; el propio trabajo pide validación de campo.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2025</anio>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://repositorio.ucaldas.edu.co/entities/publication/75c38aef-0b76-4171-8a69-e3a3f06c53f1</url>
+</FuenteEvidencia>
+
+<Restriccion rdf:about="#Restriccion_cuprico">
+  <justificadoPor rdf:resource="#F07"/>
+  <rdfs:label xml:lang="es">Incompatibilidad con fungicida cúprico</rdfs:label>
+  <etiqueta xml:lang="es">Incompatibilidad con fungicida cúprico</etiqueta>
+  <codigoPractica rdf:datatype="http://www.w3.org/2001/XMLSchema#string">aplicacion_fungicida_cuprico</codigoPractica>
+  <descripcion xml:lang="es">Los fungicidas cúpricos comprometen a Hirsutella citriformis. La revisión desaconseja aplicar cobre a dosis altas junto con el hongo (F07).</descripcion>
+</Restriccion>
+
+<Restriccion rdf:about="#Restriccion_azufre">
+  <justificadoPor rdf:resource="#F07"/>
+  <rdfs:label xml:lang="es">Incompatibilidad con azufre</rdfs:label>
+  <etiqueta xml:lang="es">Incompatibilidad con azufre</etiqueta>
+  <codigoPractica rdf:datatype="http://www.w3.org/2001/XMLSchema#string">aplicacion_azufre</codigoPractica>
+  <descripcion xml:lang="es">El azufre elemental a dosis altas afecta al hongo entomopatógeno (F07).</descripcion>
+</Restriccion>
+
+<AnalisisQuimico rdf:about="#Analisis_exudados_Hirsutella">
+  <articuladoCon rdf:resource="#ClayOMICS"/>
+  <rdfs:label xml:lang="es">Perfil químico propuesto de exudados de Hirsutella citriformis</rdfs:label>
+  <etiqueta xml:lang="es">Perfil químico propuesto de exudados de Hirsutella citriformis</etiqueta>
+  <estadoEnlace rdf:datatype="http://www.w3.org/2001/XMLSchema#string">propuesto</estadoEnlace>
+  <variableRespuesta xml:lang="es">exudados con actividad biológica y compatibilidad de soportes de formulación</variableRespuesta>
+  <condicionExperimental xml:lang="es">No hay un protocolo ejecutado en este prototipo. La revisión F07 indica que el papel de los exudados del hongo está poco caracterizado.</condicionExperimental>
+  <resultado xml:lang="es">Enlace de interoperabilidad propuesto con ClayOMICS (F13). El prototipo no afirma un resultado medido por esa plataforma.</resultado>
+</AnalisisQuimico>
+
+<PlataformaExterna rdf:about="#ClayOMICS">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ClayOMICS</rdfs:label>
+  <etiqueta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ClayOMICS</etiqueta>
+  <tipoPlataforma rdf:datatype="http://www.w3.org/2001/XMLSchema#string">analisis_quimico</tipoPlataforma>
+  <descripcion xml:lang="es">Spin-off de la Universidad de Caldas para análisis de datos químicos mediante técnicas de medición, separación e identificación.</descripcion>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.ucaldas.edu.co/portal/spin-off-clayomics-de-la-universidad-de-caldas-obtiene-su-registro-de-marca/</url>
+</PlataformaExterna>
+
+<Experimento rdf:about="#Experimento_campo_magnetico_conidios">
+  <articuladoCon rdf:resource="#MAGNETIME"/>
+  <rdfs:label xml:lang="es">Germinación de conidios bajo campo electromagnético</rdfs:label>
+  <etiqueta xml:lang="es">Germinación de conidios bajo campo electromagnético</etiqueta>
+  <estadoEnlace rdf:datatype="http://www.w3.org/2001/XMLSchema#string">propuesto</estadoEnlace>
+  <variableRespuesta xml:lang="es">porcentaje de germinación de conidios</variableRespuesta>
+  <condicionExperimental xml:lang="es">Conidios de H. citriformis en la ventana 23-28 °C y humedad relativa superior al 80 %, con y sin campo electromagnético de baja intensidad. Protocolo no ejecutado.</condicionExperimental>
+  <resultado xml:lang="es">Sin resultado medido. La pregunta se articula con MAGNETIME y con el semillero de Magnetobiología (F14, F15). No es un experimento realizado.</resultado>
+</Experimento>
+
+<PlataformaExterna rdf:about="#MAGNETIME">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MAGNETIME</rdfs:label>
+  <etiqueta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MAGNETIME</etiqueta>
+  <tipoPlataforma rdf:datatype="http://www.w3.org/2001/XMLSchema#string">magnetobiologia</tipoPlataforma>
+  <descripcion xml:lang="es">Emprendimiento de base tecnológica de la Universidad de Caldas, vinculado al grupo de Magnetobiología, sobre campos electromagnéticos en sistemas biológicos.</descripcion>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.ucaldas.edu.co/portal/universidad-de-caldas-seleccionada-en-convocatoria-del-ministerio-de-comercio-industria-y-turismo-de-colombia/</url>
+</PlataformaExterna>
+
+<FuenteEvidencia rdf:about="#F15">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F15 - Semillero de Magnetobiología UCaldas</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F15 - Semillero de Magnetobiología UCaldas</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Universidad de Caldas</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Semillero de Magnetobiología</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ficha_institucional</tipoFuente>
+  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">interoperabilidad</rolFuente>
+  <notas xml:lang="es">Grupo de Magnetobiología. Estudia campos electromagnéticos en sistemas biológicos. Coordinación: Javier Ignacio Torres Osorio. Ficha publicada en 2024.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2024</anio>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://investigacionesyposgrados.ucaldas.edu.co/semilleros-de-investigacion/semillero-de-magnetobiologia/</url>
+</FuenteEvidencia>
+
+<Plaga rdf:about="#Phyllocoptruta_oleivora">
+  <rdf:type rdf:resource="#PlagaSinAgenteDocumentado"/>
+  <afectaA rdf:resource="#Citrus_sinensis"/>
+  <afectaA rdf:resource="#Citrus_reticulata"/>
+  <rdfs:label xml:lang="es">ácaro tostador de los cítricos</rdfs:label>
+  <nombreComun xml:lang="es">ácaro tostador de los cítricos</nombreComun>
+  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phyllocoptruta oleivora</nombreCientifico>
+  <descripcion xml:lang="es">Ácaro eriófido que daña la epidermis del fruto. Hirsutella thompsonii se discute en la literatura de ácaros, pero no se codifica en esta semilla. Por eso la consulta dispara la laguna de conocimiento de la base.</descripcion>
+</Plaga>
+
+<Plaga rdf:about="#Compsus_sp">
+  <rdf:type rdf:resource="#PlagaSinAgenteDocumentado"/>
+  <afectaA rdf:resource="#Citrus_sinensis"/>
+  <afectaA rdf:resource="#Citrus_reticulata"/>
+  <rdfs:label xml:lang="es">picudo de los cítricos</rdfs:label>
+  <nombreComun xml:lang="es">picudo de los cítricos</nombreComun>
+  <nombreCientifico rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Compsus sp.</nombreCientifico>
+  <descripcion xml:lang="es">Picudo asociado a cítricos. Esta base no registra un enemigo natural. La laguna es del inventario: no afirma que no existan controladores en la literatura.</descripcion>
+</Plaga>
+
+<FuenteEvidencia rdf:about="#F17">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F17 - Gómez (2024)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F17 - Gómez (2024)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gómez, C.</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Control biológico y microbiológico de plagas y enfermedades en cítricos</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">documento_repositorio</tipoFuente>
+  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">contexto</rolFuente>
+  <notas xml:lang="es">Registro del repositorio institucional de la Universidad de Caldas. La ficha pública consultada no detalla resultados, así que no se transcriben.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2024</anio>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://repositorio.ucaldas.edu.co/handle/ucaldas/19978</url>
+</FuenteEvidencia>
+
+<FuenteEvidencia rdf:about="#F14">
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F14 - Universidad de Caldas (2024)</rdfs:label>
+  <citaCorta rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F14 - Universidad de Caldas (2024)</citaCorta>
+  <autores rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Universidad de Caldas</autores>
+  <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Universidad de Caldas seleccionada en la convocatoria ALDEA del Ministerio de Comercio, Industria y Turismo</titulo>
+  <tipoFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nota_institucional</tipoFuente>
+  <rolFuente rdf:datatype="http://www.w3.org/2001/XMLSchema#string">interoperabilidad</rolFuente>
+  <notas xml:lang="es">Nota del 4 de abril de 2024. Nombra los emprendimientos de base tecnológica Compocol, Clayomics, Biocontroladores y Magnetime.</notas>
+  <anio rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2024</anio>
+  <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://www.ucaldas.edu.co/portal/universidad-de-caldas-seleccionada-en-convocatoria-del-ministerio-de-comercio-industria-y-turismo-de-colombia/</url>
+</FuenteEvidencia>
+
+<swrl:Variable rdf:about="urn:swrl#p"/>
+
+<swrl:Variable rdf:about="urn:swrl#a"/>
+
+<swrl:Variable rdf:about="urn:swrl#r"/>
+
+<swrl:Variable rdf:about="urn:swrl#q"/>
+
+<swrl:Variable rdf:about="urn:swrl#c"/>
+
+<swrl:Variable rdf:about="urn:swrl#tmin"/>
+
+<swrl:Variable rdf:about="urn:swrl#tmax"/>
+
+<swrl:Variable rdf:about="urn:swrl#t"/>
+
+<swrl:Variable rdf:about="urn:swrl#hmin"/>
+
+<swrl:Variable rdf:about="urn:swrl#hmax"/>
+
+<swrl:Variable rdf:about="urn:swrl#h"/>
+
+<swrl:Variable rdf:about="urn:swrl#res"/>
+
+<swrl:Variable rdf:about="urn:swrl#cod"/>
+
+<swrl:Variable rdf:about="urn:swrl#f"/>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#RelacionBiocontrol"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:ClassAtom>
+              <swrl:classPredicate rdf:resource="#FuenteEvidencia"/>
+              <swrl:argument1 rdf:resource="urn:swrl#f"/>
+            </swrl:ClassAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:ClassAtom>
+                  <swrl:classPredicate rdf:resource="#AgenteBiocontrol"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#a"/>
+                </swrl:ClassAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:ClassAtom>
+                      <swrl:classPredicate rdf:resource="#Plaga"/>
+                      <swrl:argument1 rdf:resource="urn:swrl#p"/>
+                    </swrl:ClassAtom>
+                  </rdf:first>
+                  <rdf:rest>
+                    <rdf:Description>
+                      <rdf:first>
+                        <swrl:IndividualPropertyAtom>
+                          <swrl:propertyPredicate rdf:resource="#fuentePrincipal"/>
+                          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                          <swrl:argument2 rdf:resource="urn:swrl#f"/>
+                        </swrl:IndividualPropertyAtom>
+                      </rdf:first>
+                      <rdf:rest>
+                        <rdf:Description>
+                          <rdf:first>
+                            <swrl:IndividualPropertyAtom>
+                              <swrl:propertyPredicate rdf:resource="#involucraAgente"/>
+                              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                              <swrl:argument2 rdf:resource="urn:swrl#a"/>
+                            </swrl:IndividualPropertyAtom>
+                          </rdf:first>
+                          <rdf:rest>
+                            <rdf:Description>
+                              <rdf:first>
+                                <swrl:IndividualPropertyAtom>
+                                  <swrl:propertyPredicate rdf:resource="#involucraPlaga"/>
+                                  <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                                  <swrl:argument2 rdf:resource="urn:swrl#p"/>
+                                </swrl:IndividualPropertyAtom>
+                              </rdf:first>
+                              <rdf:rest>
+                                <rdf:Description>
+                                  <rdf:first>
+                                    <swrl:IndividualPropertyAtom>
+                                      <swrl:propertyPredicate rdf:resource="#potencialmenteRecomendadoPara"/>
+                                      <swrl:argument1 rdf:resource="urn:swrl#a"/>
+                                      <swrl:argument2 rdf:resource="urn:swrl#p"/>
+                                    </swrl:IndividualPropertyAtom>
+                                  </rdf:first>
+                                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                </rdf:Description>
+                              </rdf:rest>
+                            </rdf:Description>
+                          </rdf:rest>
+                        </rdf:Description>
+                      </rdf:rest>
+                    </rdf:Description>
+                  </rdf:rest>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:IndividualPropertyAtom>
+          <swrl:propertyPredicate rdf:resource="#trazadoPor"/>
+          <swrl:argument1 rdf:resource="urn:swrl#a"/>
+          <swrl:argument2 rdf:resource="urn:swrl#f"/>
+        </swrl:IndividualPropertyAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#RelacionBiocontrol"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:ClassAtom>
+              <swrl:classPredicate rdf:resource="#FuenteEvidencia"/>
+              <swrl:argument1 rdf:resource="urn:swrl#f"/>
+            </swrl:ClassAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:ClassAtom>
+                  <swrl:classPredicate rdf:resource="#AgenteBiocontrol"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#a"/>
+                </swrl:ClassAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:ClassAtom>
+                      <swrl:classPredicate rdf:resource="#Plaga"/>
+                      <swrl:argument1 rdf:resource="urn:swrl#p"/>
+                    </swrl:ClassAtom>
+                  </rdf:first>
+                  <rdf:rest>
+                    <rdf:Description>
+                      <rdf:first>
+                        <swrl:IndividualPropertyAtom>
+                          <swrl:propertyPredicate rdf:resource="#fuentePrincipal"/>
+                          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                          <swrl:argument2 rdf:resource="urn:swrl#f"/>
+                        </swrl:IndividualPropertyAtom>
+                      </rdf:first>
+                      <rdf:rest>
+                        <rdf:Description>
+                          <rdf:first>
+                            <swrl:IndividualPropertyAtom>
+                              <swrl:propertyPredicate rdf:resource="#involucraAgente"/>
+                              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                              <swrl:argument2 rdf:resource="urn:swrl#a"/>
+                            </swrl:IndividualPropertyAtom>
+                          </rdf:first>
+                          <rdf:rest>
+                            <rdf:Description>
+                              <rdf:first>
+                                <swrl:IndividualPropertyAtom>
+                                  <swrl:propertyPredicate rdf:resource="#involucraPlaga"/>
+                                  <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                                  <swrl:argument2 rdf:resource="urn:swrl#p"/>
+                                </swrl:IndividualPropertyAtom>
+                              </rdf:first>
+                              <rdf:rest>
+                                <rdf:Description>
+                                  <rdf:first>
+                                    <swrl:IndividualPropertyAtom>
+                                      <swrl:propertyPredicate rdf:resource="#altamenteRecomendadoPara"/>
+                                      <swrl:argument1 rdf:resource="urn:swrl#a"/>
+                                      <swrl:argument2 rdf:resource="urn:swrl#p"/>
+                                    </swrl:IndividualPropertyAtom>
+                                  </rdf:first>
+                                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                </rdf:Description>
+                              </rdf:rest>
+                            </rdf:Description>
+                          </rdf:rest>
+                        </rdf:Description>
+                      </rdf:rest>
+                    </rdf:Description>
+                  </rdf:rest>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:IndividualPropertyAtom>
+          <swrl:propertyPredicate rdf:resource="#trazadoPor"/>
+          <swrl:argument1 rdf:resource="urn:swrl#a"/>
+          <swrl:argument2 rdf:resource="urn:swrl#f"/>
+        </swrl:IndividualPropertyAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#RelacionBiocontrol"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:ClassAtom>
+              <swrl:classPredicate rdf:resource="#Restriccion"/>
+              <swrl:argument1 rdf:resource="urn:swrl#res"/>
+            </swrl:ClassAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:ClassAtom>
+                  <swrl:classPredicate rdf:resource="#Consulta"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#q"/>
+                </swrl:ClassAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:IndividualPropertyAtom>
+                      <swrl:propertyPredicate rdf:resource="#tieneRestriccion"/>
+                      <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                      <swrl:argument2 rdf:resource="urn:swrl#res"/>
+                    </swrl:IndividualPropertyAtom>
+                  </rdf:first>
+                  <rdf:rest>
+                    <rdf:Description>
+                      <rdf:first>
+                        <swrl:DatavaluedPropertyAtom>
+                          <swrl:propertyPredicate rdf:resource="#codigoPractica"/>
+                          <swrl:argument1 rdf:resource="urn:swrl#res"/>
+                          <swrl:argument2 rdf:resource="urn:swrl#cod"/>
+                        </swrl:DatavaluedPropertyAtom>
+                      </rdf:first>
+                      <rdf:rest>
+                        <rdf:Description>
+                          <rdf:first>
+                            <swrl:DatavaluedPropertyAtom>
+                              <swrl:propertyPredicate rdf:resource="#declaraPractica"/>
+                              <swrl:argument1 rdf:resource="urn:swrl#q"/>
+                              <swrl:argument2 rdf:resource="urn:swrl#cod"/>
+                            </swrl:DatavaluedPropertyAtom>
+                          </rdf:first>
+                          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                        </rdf:Description>
+                      </rdf:rest>
+                    </rdf:Description>
+                  </rdf:rest>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#RestriccionActiva"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#Plaga"/>
+          <swrl:argument1 rdf:resource="urn:swrl#p"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:ClassAtom>
+              <swrl:classPredicate rdf:resource="#Cultivo"/>
+              <swrl:argument1 rdf:resource="urn:swrl#c"/>
+            </swrl:ClassAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:IndividualPropertyAtom>
+                  <swrl:propertyPredicate rdf:resource="#afectaA"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#p"/>
+                  <swrl:argument2 rdf:resource="urn:swrl#c"/>
+                </swrl:IndividualPropertyAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:ClassAtom>
+                      <swrl:classPredicate rdf:resource="#PlagaSinAgenteDocumentado"/>
+                      <swrl:argument1 rdf:resource="urn:swrl#p"/>
+                    </swrl:ClassAtom>
+                  </rdf:first>
+                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:IndividualPropertyAtom>
+          <swrl:propertyPredicate rdf:resource="#tieneLagunaEn"/>
+          <swrl:argument1 rdf:resource="urn:swrl#p"/>
+          <swrl:argument2 rdf:resource="urn:swrl#c"/>
+        </swrl:IndividualPropertyAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#Plaga"/>
+          <swrl:argument1 rdf:resource="urn:swrl#p"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:ClassAtom>
+              <swrl:classPredicate rdf:resource="#AgenteBiocontrol"/>
+              <swrl:argument1 rdf:resource="urn:swrl#a"/>
+            </swrl:ClassAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:ClassAtom>
+                  <swrl:classPredicate rdf:resource="#RelacionBiocontrol"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                </swrl:ClassAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:ClassAtom>
+                      <swrl:classPredicate rdf:resource="#Consulta"/>
+                      <swrl:argument1 rdf:resource="urn:swrl#q"/>
+                    </swrl:ClassAtom>
+                  </rdf:first>
+                  <rdf:rest>
+                    <rdf:Description>
+                      <rdf:first>
+                        <swrl:IndividualPropertyAtom>
+                          <swrl:propertyPredicate rdf:resource="#esControladaPor"/>
+                          <swrl:argument1 rdf:resource="urn:swrl#p"/>
+                          <swrl:argument2 rdf:resource="urn:swrl#a"/>
+                        </swrl:IndividualPropertyAtom>
+                      </rdf:first>
+                      <rdf:rest>
+                        <rdf:Description>
+                          <rdf:first>
+                            <swrl:IndividualPropertyAtom>
+                              <swrl:propertyPredicate rdf:resource="#involucraPlaga"/>
+                              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                              <swrl:argument2 rdf:resource="urn:swrl#p"/>
+                            </swrl:IndividualPropertyAtom>
+                          </rdf:first>
+                          <rdf:rest>
+                            <rdf:Description>
+                              <rdf:first>
+                                <swrl:IndividualPropertyAtom>
+                                  <swrl:propertyPredicate rdf:resource="#involucraAgente"/>
+                                  <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                                  <swrl:argument2 rdf:resource="urn:swrl#a"/>
+                                </swrl:IndividualPropertyAtom>
+                              </rdf:first>
+                              <rdf:rest>
+                                <rdf:Description>
+                                  <rdf:first>
+                                    <swrl:IndividualPropertyAtom>
+                                      <swrl:propertyPredicate rdf:resource="#consultaPlaga"/>
+                                      <swrl:argument1 rdf:resource="urn:swrl#q"/>
+                                      <swrl:argument2 rdf:resource="urn:swrl#p"/>
+                                    </swrl:IndividualPropertyAtom>
+                                  </rdf:first>
+                                  <rdf:rest>
+                                    <rdf:Description>
+                                      <rdf:first>
+                                        <swrl:IndividualPropertyAtom>
+                                          <swrl:propertyPredicate rdf:resource="#tieneCondicion"/>
+                                          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                                          <swrl:argument2 rdf:resource="urn:swrl#c"/>
+                                        </swrl:IndividualPropertyAtom>
+                                      </rdf:first>
+                                      <rdf:rest>
+                                        <rdf:Description>
+                                          <rdf:first>
+                                            <swrl:DatavaluedPropertyAtom>
+                                              <swrl:propertyPredicate rdf:resource="#temperaturaMin"/>
+                                              <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                                              <swrl:argument2 rdf:resource="urn:swrl#tmin"/>
+                                            </swrl:DatavaluedPropertyAtom>
+                                          </rdf:first>
+                                          <rdf:rest>
+                                            <rdf:Description>
+                                              <rdf:first>
+                                                <swrl:DatavaluedPropertyAtom>
+                                                  <swrl:propertyPredicate rdf:resource="#temperaturaMax"/>
+                                                  <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                                                  <swrl:argument2 rdf:resource="urn:swrl#tmax"/>
+                                                </swrl:DatavaluedPropertyAtom>
+                                              </rdf:first>
+                                              <rdf:rest>
+                                                <rdf:Description>
+                                                  <rdf:first>
+                                                    <swrl:DatavaluedPropertyAtom>
+                                                      <swrl:propertyPredicate rdf:resource="#temperaturaActual"/>
+                                                      <swrl:argument1 rdf:resource="urn:swrl#q"/>
+                                                      <swrl:argument2 rdf:resource="urn:swrl#t"/>
+                                                    </swrl:DatavaluedPropertyAtom>
+                                                  </rdf:first>
+                                                  <rdf:rest>
+                                                    <rdf:Description>
+                                                      <rdf:first>
+                                                        <swrl:BuiltinAtom>
+                                                          <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual"/>
+                                                          <swrl:arguments>
+                                                            <rdf:Description>
+                                                              <rdf:first rdf:resource="urn:swrl#t"/>
+                                                              <rdf:rest>
+                                                                <rdf:Description>
+                                                                  <rdf:first rdf:resource="urn:swrl#tmin"/>
+                                                                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                </rdf:Description>
+                                                              </rdf:rest>
+                                                            </rdf:Description>
+                                                          </swrl:arguments>
+                                                        </swrl:BuiltinAtom>
+                                                      </rdf:first>
+                                                      <rdf:rest>
+                                                        <rdf:Description>
+                                                          <rdf:first>
+                                                            <swrl:BuiltinAtom>
+                                                              <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThanOrEqual"/>
+                                                              <swrl:arguments>
+                                                                <rdf:Description>
+                                                                  <rdf:first rdf:resource="urn:swrl#t"/>
+                                                                  <rdf:rest>
+                                                                    <rdf:Description>
+                                                                      <rdf:first rdf:resource="urn:swrl#tmax"/>
+                                                                      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                    </rdf:Description>
+                                                                  </rdf:rest>
+                                                                </rdf:Description>
+                                                              </swrl:arguments>
+                                                            </swrl:BuiltinAtom>
+                                                          </rdf:first>
+                                                          <rdf:rest>
+                                                            <rdf:Description>
+                                                              <rdf:first>
+                                                                <swrl:DatavaluedPropertyAtom>
+                                                                  <swrl:propertyPredicate rdf:resource="#humedadMin"/>
+                                                                  <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                                                                  <swrl:argument2 rdf:resource="urn:swrl#hmin"/>
+                                                                </swrl:DatavaluedPropertyAtom>
+                                                              </rdf:first>
+                                                              <rdf:rest>
+                                                                <rdf:Description>
+                                                                  <rdf:first>
+                                                                    <swrl:DatavaluedPropertyAtom>
+                                                                      <swrl:propertyPredicate rdf:resource="#humedadMax"/>
+                                                                      <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                                                                      <swrl:argument2 rdf:resource="urn:swrl#hmax"/>
+                                                                    </swrl:DatavaluedPropertyAtom>
+                                                                  </rdf:first>
+                                                                  <rdf:rest>
+                                                                    <rdf:Description>
+                                                                      <rdf:first>
+                                                                        <swrl:DatavaluedPropertyAtom>
+                                                                          <swrl:propertyPredicate rdf:resource="#humedadActual"/>
+                                                                          <swrl:argument1 rdf:resource="urn:swrl#q"/>
+                                                                          <swrl:argument2 rdf:resource="urn:swrl#h"/>
+                                                                        </swrl:DatavaluedPropertyAtom>
+                                                                      </rdf:first>
+                                                                      <rdf:rest>
+                                                                        <rdf:Description>
+                                                                          <rdf:first>
+                                                                            <swrl:BuiltinAtom>
+                                                                              <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual"/>
+                                                                              <swrl:arguments>
+                                                                                <rdf:Description>
+                                                                                  <rdf:first rdf:resource="urn:swrl#h"/>
+                                                                                  <rdf:rest>
+                                                                                    <rdf:Description>
+                                                                                      <rdf:first rdf:resource="urn:swrl#hmin"/>
+                                                                                      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                                    </rdf:Description>
+                                                                                  </rdf:rest>
+                                                                                </rdf:Description>
+                                                                              </swrl:arguments>
+                                                                            </swrl:BuiltinAtom>
+                                                                          </rdf:first>
+                                                                          <rdf:rest>
+                                                                            <rdf:Description>
+                                                                              <rdf:first>
+                                                                                <swrl:BuiltinAtom>
+                                                                                  <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThanOrEqual"/>
+                                                                                  <swrl:arguments>
+                                                                                    <rdf:Description>
+                                                                                      <rdf:first rdf:resource="urn:swrl#h"/>
+                                                                                      <rdf:rest>
+                                                                                        <rdf:Description>
+                                                                                          <rdf:first rdf:resource="urn:swrl#hmax"/>
+                                                                                          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                                        </rdf:Description>
+                                                                                      </rdf:rest>
+                                                                                    </rdf:Description>
+                                                                                  </swrl:arguments>
+                                                                                </swrl:BuiltinAtom>
+                                                                              </rdf:first>
+                                                                              <rdf:rest>
+                                                                                <rdf:Description>
+                                                                                  <rdf:first>
+                                                                                    <swrl:DatavaluedPropertyAtom>
+                                                                                      <swrl:propertyPredicate rdf:resource="#tieneNivelEvidencia"/>
+                                                                                      <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                                                                                      <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Baja</swrl:argument2>
+                                                                                    </swrl:DatavaluedPropertyAtom>
+                                                                                  </rdf:first>
+                                                                                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                                </rdf:Description>
+                                                                              </rdf:rest>
+                                                                            </rdf:Description>
+                                                                          </rdf:rest>
+                                                                        </rdf:Description>
+                                                                      </rdf:rest>
+                                                                    </rdf:Description>
+                                                                  </rdf:rest>
+                                                                </rdf:Description>
+                                                              </rdf:rest>
+                                                            </rdf:Description>
+                                                          </rdf:rest>
+                                                        </rdf:Description>
+                                                      </rdf:rest>
+                                                    </rdf:Description>
+                                                  </rdf:rest>
+                                                </rdf:Description>
+                                              </rdf:rest>
+                                            </rdf:Description>
+                                          </rdf:rest>
+                                        </rdf:Description>
+                                      </rdf:rest>
+                                    </rdf:Description>
+                                  </rdf:rest>
+                                </rdf:Description>
+                              </rdf:rest>
+                            </rdf:Description>
+                          </rdf:rest>
+                        </rdf:Description>
+                      </rdf:rest>
+                    </rdf:Description>
+                  </rdf:rest>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:IndividualPropertyAtom>
+          <swrl:propertyPredicate rdf:resource="#potencialmenteRecomendadoPara"/>
+          <swrl:argument1 rdf:resource="urn:swrl#a"/>
+          <swrl:argument2 rdf:resource="urn:swrl#p"/>
+        </swrl:IndividualPropertyAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#Plaga"/>
+          <swrl:argument1 rdf:resource="urn:swrl#p"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:ClassAtom>
+              <swrl:classPredicate rdf:resource="#AgenteBiocontrol"/>
+              <swrl:argument1 rdf:resource="urn:swrl#a"/>
+            </swrl:ClassAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:ClassAtom>
+                  <swrl:classPredicate rdf:resource="#RelacionBiocontrol"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                </swrl:ClassAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:ClassAtom>
+                      <swrl:classPredicate rdf:resource="#Consulta"/>
+                      <swrl:argument1 rdf:resource="urn:swrl#q"/>
+                    </swrl:ClassAtom>
+                  </rdf:first>
+                  <rdf:rest>
+                    <rdf:Description>
+                      <rdf:first>
+                        <swrl:IndividualPropertyAtom>
+                          <swrl:propertyPredicate rdf:resource="#esControladaPor"/>
+                          <swrl:argument1 rdf:resource="urn:swrl#p"/>
+                          <swrl:argument2 rdf:resource="urn:swrl#a"/>
+                        </swrl:IndividualPropertyAtom>
+                      </rdf:first>
+                      <rdf:rest>
+                        <rdf:Description>
+                          <rdf:first>
+                            <swrl:IndividualPropertyAtom>
+                              <swrl:propertyPredicate rdf:resource="#involucraPlaga"/>
+                              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                              <swrl:argument2 rdf:resource="urn:swrl#p"/>
+                            </swrl:IndividualPropertyAtom>
+                          </rdf:first>
+                          <rdf:rest>
+                            <rdf:Description>
+                              <rdf:first>
+                                <swrl:IndividualPropertyAtom>
+                                  <swrl:propertyPredicate rdf:resource="#involucraAgente"/>
+                                  <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                                  <swrl:argument2 rdf:resource="urn:swrl#a"/>
+                                </swrl:IndividualPropertyAtom>
+                              </rdf:first>
+                              <rdf:rest>
+                                <rdf:Description>
+                                  <rdf:first>
+                                    <swrl:IndividualPropertyAtom>
+                                      <swrl:propertyPredicate rdf:resource="#consultaPlaga"/>
+                                      <swrl:argument1 rdf:resource="urn:swrl#q"/>
+                                      <swrl:argument2 rdf:resource="urn:swrl#p"/>
+                                    </swrl:IndividualPropertyAtom>
+                                  </rdf:first>
+                                  <rdf:rest>
+                                    <rdf:Description>
+                                      <rdf:first>
+                                        <swrl:IndividualPropertyAtom>
+                                          <swrl:propertyPredicate rdf:resource="#tieneCondicion"/>
+                                          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                                          <swrl:argument2 rdf:resource="urn:swrl#c"/>
+                                        </swrl:IndividualPropertyAtom>
+                                      </rdf:first>
+                                      <rdf:rest>
+                                        <rdf:Description>
+                                          <rdf:first>
+                                            <swrl:DatavaluedPropertyAtom>
+                                              <swrl:propertyPredicate rdf:resource="#temperaturaMin"/>
+                                              <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                                              <swrl:argument2 rdf:resource="urn:swrl#tmin"/>
+                                            </swrl:DatavaluedPropertyAtom>
+                                          </rdf:first>
+                                          <rdf:rest>
+                                            <rdf:Description>
+                                              <rdf:first>
+                                                <swrl:DatavaluedPropertyAtom>
+                                                  <swrl:propertyPredicate rdf:resource="#temperaturaMax"/>
+                                                  <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                                                  <swrl:argument2 rdf:resource="urn:swrl#tmax"/>
+                                                </swrl:DatavaluedPropertyAtom>
+                                              </rdf:first>
+                                              <rdf:rest>
+                                                <rdf:Description>
+                                                  <rdf:first>
+                                                    <swrl:DatavaluedPropertyAtom>
+                                                      <swrl:propertyPredicate rdf:resource="#temperaturaActual"/>
+                                                      <swrl:argument1 rdf:resource="urn:swrl#q"/>
+                                                      <swrl:argument2 rdf:resource="urn:swrl#t"/>
+                                                    </swrl:DatavaluedPropertyAtom>
+                                                  </rdf:first>
+                                                  <rdf:rest>
+                                                    <rdf:Description>
+                                                      <rdf:first>
+                                                        <swrl:BuiltinAtom>
+                                                          <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual"/>
+                                                          <swrl:arguments>
+                                                            <rdf:Description>
+                                                              <rdf:first rdf:resource="urn:swrl#t"/>
+                                                              <rdf:rest>
+                                                                <rdf:Description>
+                                                                  <rdf:first rdf:resource="urn:swrl#tmin"/>
+                                                                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                </rdf:Description>
+                                                              </rdf:rest>
+                                                            </rdf:Description>
+                                                          </swrl:arguments>
+                                                        </swrl:BuiltinAtom>
+                                                      </rdf:first>
+                                                      <rdf:rest>
+                                                        <rdf:Description>
+                                                          <rdf:first>
+                                                            <swrl:BuiltinAtom>
+                                                              <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThanOrEqual"/>
+                                                              <swrl:arguments>
+                                                                <rdf:Description>
+                                                                  <rdf:first rdf:resource="urn:swrl#t"/>
+                                                                  <rdf:rest>
+                                                                    <rdf:Description>
+                                                                      <rdf:first rdf:resource="urn:swrl#tmax"/>
+                                                                      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                    </rdf:Description>
+                                                                  </rdf:rest>
+                                                                </rdf:Description>
+                                                              </swrl:arguments>
+                                                            </swrl:BuiltinAtom>
+                                                          </rdf:first>
+                                                          <rdf:rest>
+                                                            <rdf:Description>
+                                                              <rdf:first>
+                                                                <swrl:DatavaluedPropertyAtom>
+                                                                  <swrl:propertyPredicate rdf:resource="#humedadMin"/>
+                                                                  <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                                                                  <swrl:argument2 rdf:resource="urn:swrl#hmin"/>
+                                                                </swrl:DatavaluedPropertyAtom>
+                                                              </rdf:first>
+                                                              <rdf:rest>
+                                                                <rdf:Description>
+                                                                  <rdf:first>
+                                                                    <swrl:DatavaluedPropertyAtom>
+                                                                      <swrl:propertyPredicate rdf:resource="#humedadMax"/>
+                                                                      <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                                                                      <swrl:argument2 rdf:resource="urn:swrl#hmax"/>
+                                                                    </swrl:DatavaluedPropertyAtom>
+                                                                  </rdf:first>
+                                                                  <rdf:rest>
+                                                                    <rdf:Description>
+                                                                      <rdf:first>
+                                                                        <swrl:DatavaluedPropertyAtom>
+                                                                          <swrl:propertyPredicate rdf:resource="#humedadActual"/>
+                                                                          <swrl:argument1 rdf:resource="urn:swrl#q"/>
+                                                                          <swrl:argument2 rdf:resource="urn:swrl#h"/>
+                                                                        </swrl:DatavaluedPropertyAtom>
+                                                                      </rdf:first>
+                                                                      <rdf:rest>
+                                                                        <rdf:Description>
+                                                                          <rdf:first>
+                                                                            <swrl:BuiltinAtom>
+                                                                              <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual"/>
+                                                                              <swrl:arguments>
+                                                                                <rdf:Description>
+                                                                                  <rdf:first rdf:resource="urn:swrl#h"/>
+                                                                                  <rdf:rest>
+                                                                                    <rdf:Description>
+                                                                                      <rdf:first rdf:resource="urn:swrl#hmin"/>
+                                                                                      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                                    </rdf:Description>
+                                                                                  </rdf:rest>
+                                                                                </rdf:Description>
+                                                                              </swrl:arguments>
+                                                                            </swrl:BuiltinAtom>
+                                                                          </rdf:first>
+                                                                          <rdf:rest>
+                                                                            <rdf:Description>
+                                                                              <rdf:first>
+                                                                                <swrl:BuiltinAtom>
+                                                                                  <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThanOrEqual"/>
+                                                                                  <swrl:arguments>
+                                                                                    <rdf:Description>
+                                                                                      <rdf:first rdf:resource="urn:swrl#h"/>
+                                                                                      <rdf:rest>
+                                                                                        <rdf:Description>
+                                                                                          <rdf:first rdf:resource="urn:swrl#hmax"/>
+                                                                                          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                                        </rdf:Description>
+                                                                                      </rdf:rest>
+                                                                                    </rdf:Description>
+                                                                                  </swrl:arguments>
+                                                                                </swrl:BuiltinAtom>
+                                                                              </rdf:first>
+                                                                              <rdf:rest>
+                                                                                <rdf:Description>
+                                                                                  <rdf:first>
+                                                                                    <swrl:DatavaluedPropertyAtom>
+                                                                                      <swrl:propertyPredicate rdf:resource="#tieneNivelEvidencia"/>
+                                                                                      <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                                                                                      <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Media</swrl:argument2>
+                                                                                    </swrl:DatavaluedPropertyAtom>
+                                                                                  </rdf:first>
+                                                                                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                                </rdf:Description>
+                                                                              </rdf:rest>
+                                                                            </rdf:Description>
+                                                                          </rdf:rest>
+                                                                        </rdf:Description>
+                                                                      </rdf:rest>
+                                                                    </rdf:Description>
+                                                                  </rdf:rest>
+                                                                </rdf:Description>
+                                                              </rdf:rest>
+                                                            </rdf:Description>
+                                                          </rdf:rest>
+                                                        </rdf:Description>
+                                                      </rdf:rest>
+                                                    </rdf:Description>
+                                                  </rdf:rest>
+                                                </rdf:Description>
+                                              </rdf:rest>
+                                            </rdf:Description>
+                                          </rdf:rest>
+                                        </rdf:Description>
+                                      </rdf:rest>
+                                    </rdf:Description>
+                                  </rdf:rest>
+                                </rdf:Description>
+                              </rdf:rest>
+                            </rdf:Description>
+                          </rdf:rest>
+                        </rdf:Description>
+                      </rdf:rest>
+                    </rdf:Description>
+                  </rdf:rest>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:IndividualPropertyAtom>
+          <swrl:propertyPredicate rdf:resource="#potencialmenteRecomendadoPara"/>
+          <swrl:argument1 rdf:resource="urn:swrl#a"/>
+          <swrl:argument2 rdf:resource="urn:swrl#p"/>
+        </swrl:IndividualPropertyAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#Plaga"/>
+          <swrl:argument1 rdf:resource="urn:swrl#p"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:ClassAtom>
+              <swrl:classPredicate rdf:resource="#AgenteBiocontrol"/>
+              <swrl:argument1 rdf:resource="urn:swrl#a"/>
+            </swrl:ClassAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:ClassAtom>
+                  <swrl:classPredicate rdf:resource="#RelacionBiocontrol"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                </swrl:ClassAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:ClassAtom>
+                      <swrl:classPredicate rdf:resource="#Consulta"/>
+                      <swrl:argument1 rdf:resource="urn:swrl#q"/>
+                    </swrl:ClassAtom>
+                  </rdf:first>
+                  <rdf:rest>
+                    <rdf:Description>
+                      <rdf:first>
+                        <swrl:IndividualPropertyAtom>
+                          <swrl:propertyPredicate rdf:resource="#esControladaPor"/>
+                          <swrl:argument1 rdf:resource="urn:swrl#p"/>
+                          <swrl:argument2 rdf:resource="urn:swrl#a"/>
+                        </swrl:IndividualPropertyAtom>
+                      </rdf:first>
+                      <rdf:rest>
+                        <rdf:Description>
+                          <rdf:first>
+                            <swrl:IndividualPropertyAtom>
+                              <swrl:propertyPredicate rdf:resource="#involucraPlaga"/>
+                              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                              <swrl:argument2 rdf:resource="urn:swrl#p"/>
+                            </swrl:IndividualPropertyAtom>
+                          </rdf:first>
+                          <rdf:rest>
+                            <rdf:Description>
+                              <rdf:first>
+                                <swrl:IndividualPropertyAtom>
+                                  <swrl:propertyPredicate rdf:resource="#involucraAgente"/>
+                                  <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                                  <swrl:argument2 rdf:resource="urn:swrl#a"/>
+                                </swrl:IndividualPropertyAtom>
+                              </rdf:first>
+                              <rdf:rest>
+                                <rdf:Description>
+                                  <rdf:first>
+                                    <swrl:IndividualPropertyAtom>
+                                      <swrl:propertyPredicate rdf:resource="#consultaPlaga"/>
+                                      <swrl:argument1 rdf:resource="urn:swrl#q"/>
+                                      <swrl:argument2 rdf:resource="urn:swrl#p"/>
+                                    </swrl:IndividualPropertyAtom>
+                                  </rdf:first>
+                                  <rdf:rest>
+                                    <rdf:Description>
+                                      <rdf:first>
+                                        <swrl:IndividualPropertyAtom>
+                                          <swrl:propertyPredicate rdf:resource="#tieneCondicion"/>
+                                          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                                          <swrl:argument2 rdf:resource="urn:swrl#c"/>
+                                        </swrl:IndividualPropertyAtom>
+                                      </rdf:first>
+                                      <rdf:rest>
+                                        <rdf:Description>
+                                          <rdf:first>
+                                            <swrl:DatavaluedPropertyAtom>
+                                              <swrl:propertyPredicate rdf:resource="#temperaturaMin"/>
+                                              <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                                              <swrl:argument2 rdf:resource="urn:swrl#tmin"/>
+                                            </swrl:DatavaluedPropertyAtom>
+                                          </rdf:first>
+                                          <rdf:rest>
+                                            <rdf:Description>
+                                              <rdf:first>
+                                                <swrl:DatavaluedPropertyAtom>
+                                                  <swrl:propertyPredicate rdf:resource="#temperaturaMax"/>
+                                                  <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                                                  <swrl:argument2 rdf:resource="urn:swrl#tmax"/>
+                                                </swrl:DatavaluedPropertyAtom>
+                                              </rdf:first>
+                                              <rdf:rest>
+                                                <rdf:Description>
+                                                  <rdf:first>
+                                                    <swrl:DatavaluedPropertyAtom>
+                                                      <swrl:propertyPredicate rdf:resource="#temperaturaActual"/>
+                                                      <swrl:argument1 rdf:resource="urn:swrl#q"/>
+                                                      <swrl:argument2 rdf:resource="urn:swrl#t"/>
+                                                    </swrl:DatavaluedPropertyAtom>
+                                                  </rdf:first>
+                                                  <rdf:rest>
+                                                    <rdf:Description>
+                                                      <rdf:first>
+                                                        <swrl:BuiltinAtom>
+                                                          <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual"/>
+                                                          <swrl:arguments>
+                                                            <rdf:Description>
+                                                              <rdf:first rdf:resource="urn:swrl#t"/>
+                                                              <rdf:rest>
+                                                                <rdf:Description>
+                                                                  <rdf:first rdf:resource="urn:swrl#tmin"/>
+                                                                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                </rdf:Description>
+                                                              </rdf:rest>
+                                                            </rdf:Description>
+                                                          </swrl:arguments>
+                                                        </swrl:BuiltinAtom>
+                                                      </rdf:first>
+                                                      <rdf:rest>
+                                                        <rdf:Description>
+                                                          <rdf:first>
+                                                            <swrl:BuiltinAtom>
+                                                              <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThanOrEqual"/>
+                                                              <swrl:arguments>
+                                                                <rdf:Description>
+                                                                  <rdf:first rdf:resource="urn:swrl#t"/>
+                                                                  <rdf:rest>
+                                                                    <rdf:Description>
+                                                                      <rdf:first rdf:resource="urn:swrl#tmax"/>
+                                                                      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                    </rdf:Description>
+                                                                  </rdf:rest>
+                                                                </rdf:Description>
+                                                              </swrl:arguments>
+                                                            </swrl:BuiltinAtom>
+                                                          </rdf:first>
+                                                          <rdf:rest>
+                                                            <rdf:Description>
+                                                              <rdf:first>
+                                                                <swrl:DatavaluedPropertyAtom>
+                                                                  <swrl:propertyPredicate rdf:resource="#humedadMin"/>
+                                                                  <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                                                                  <swrl:argument2 rdf:resource="urn:swrl#hmin"/>
+                                                                </swrl:DatavaluedPropertyAtom>
+                                                              </rdf:first>
+                                                              <rdf:rest>
+                                                                <rdf:Description>
+                                                                  <rdf:first>
+                                                                    <swrl:DatavaluedPropertyAtom>
+                                                                      <swrl:propertyPredicate rdf:resource="#humedadMax"/>
+                                                                      <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                                                                      <swrl:argument2 rdf:resource="urn:swrl#hmax"/>
+                                                                    </swrl:DatavaluedPropertyAtom>
+                                                                  </rdf:first>
+                                                                  <rdf:rest>
+                                                                    <rdf:Description>
+                                                                      <rdf:first>
+                                                                        <swrl:DatavaluedPropertyAtom>
+                                                                          <swrl:propertyPredicate rdf:resource="#humedadActual"/>
+                                                                          <swrl:argument1 rdf:resource="urn:swrl#q"/>
+                                                                          <swrl:argument2 rdf:resource="urn:swrl#h"/>
+                                                                        </swrl:DatavaluedPropertyAtom>
+                                                                      </rdf:first>
+                                                                      <rdf:rest>
+                                                                        <rdf:Description>
+                                                                          <rdf:first>
+                                                                            <swrl:BuiltinAtom>
+                                                                              <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual"/>
+                                                                              <swrl:arguments>
+                                                                                <rdf:Description>
+                                                                                  <rdf:first rdf:resource="urn:swrl#h"/>
+                                                                                  <rdf:rest>
+                                                                                    <rdf:Description>
+                                                                                      <rdf:first rdf:resource="urn:swrl#hmin"/>
+                                                                                      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                                    </rdf:Description>
+                                                                                  </rdf:rest>
+                                                                                </rdf:Description>
+                                                                              </swrl:arguments>
+                                                                            </swrl:BuiltinAtom>
+                                                                          </rdf:first>
+                                                                          <rdf:rest>
+                                                                            <rdf:Description>
+                                                                              <rdf:first>
+                                                                                <swrl:BuiltinAtom>
+                                                                                  <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThanOrEqual"/>
+                                                                                  <swrl:arguments>
+                                                                                    <rdf:Description>
+                                                                                      <rdf:first rdf:resource="urn:swrl#h"/>
+                                                                                      <rdf:rest>
+                                                                                        <rdf:Description>
+                                                                                          <rdf:first rdf:resource="urn:swrl#hmax"/>
+                                                                                          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                                        </rdf:Description>
+                                                                                      </rdf:rest>
+                                                                                    </rdf:Description>
+                                                                                  </swrl:arguments>
+                                                                                </swrl:BuiltinAtom>
+                                                                              </rdf:first>
+                                                                              <rdf:rest>
+                                                                                <rdf:Description>
+                                                                                  <rdf:first>
+                                                                                    <swrl:DatavaluedPropertyAtom>
+                                                                                      <swrl:propertyPredicate rdf:resource="#tieneNivelEvidencia"/>
+                                                                                      <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                                                                                      <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alta</swrl:argument2>
+                                                                                    </swrl:DatavaluedPropertyAtom>
+                                                                                  </rdf:first>
+                                                                                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                                </rdf:Description>
+                                                                              </rdf:rest>
+                                                                            </rdf:Description>
+                                                                          </rdf:rest>
+                                                                        </rdf:Description>
+                                                                      </rdf:rest>
+                                                                    </rdf:Description>
+                                                                  </rdf:rest>
+                                                                </rdf:Description>
+                                                              </rdf:rest>
+                                                            </rdf:Description>
+                                                          </rdf:rest>
+                                                        </rdf:Description>
+                                                      </rdf:rest>
+                                                    </rdf:Description>
+                                                  </rdf:rest>
+                                                </rdf:Description>
+                                              </rdf:rest>
+                                            </rdf:Description>
+                                          </rdf:rest>
+                                        </rdf:Description>
+                                      </rdf:rest>
+                                    </rdf:Description>
+                                  </rdf:rest>
+                                </rdf:Description>
+                              </rdf:rest>
+                            </rdf:Description>
+                          </rdf:rest>
+                        </rdf:Description>
+                      </rdf:rest>
+                    </rdf:Description>
+                  </rdf:rest>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:IndividualPropertyAtom>
+          <swrl:propertyPredicate rdf:resource="#altamenteRecomendadoPara"/>
+          <swrl:argument1 rdf:resource="urn:swrl#a"/>
+          <swrl:argument2 rdf:resource="urn:swrl#p"/>
+        </swrl:IndividualPropertyAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+
+</rdf:RDF>

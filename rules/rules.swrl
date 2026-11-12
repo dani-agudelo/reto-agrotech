@@ -1,0 +1,102 @@
+# Reglas SWRL del Sistema Experto de Biocontrol (AgroTech UCaldas)
+#
+# Sintaxis: cada regla empieza con su identificador y dos puntos en una línea.
+# El cuerpo usa la conjunción estándar "^" y los builtins "swrlb:greaterThanOrEqual"
+# y "swrlb:lessThanOrEqual". El constructor de la ontología traduce "^" a coma y
+# quita el prefijo swrlb: para cargarlas con Owlready2 (Imp.set_as_rule) y Pellet.
+#
+# Las reglas de recomendación leen un individuo Consulta que el motor crea en el
+# momento de la pregunta (temperaturaActual, humedadActual, consultaPlaga,
+# declaraPractica). No forman parte de la semilla estática.
+#
+# R3 no puede expresarse en OWL/SWRL puro porque el mundo abierto no permite
+# concluir "no existe un agente". La regla dispara solo si el axioma de cierre
+# PlagaSinAgenteDocumentado está afirmado. El motor Python, además, cuenta las
+# relaciones en la base (mundo cerrado local) y lo explica en la respuesta.
+#
+# R2 se parte en dos implicaciones porque SWRL no tiene disyunción en el antecedente.
+# R5 se parte igual, una por cada tipo de recomendación. En ambos casos el
+# identificador lógico sigue siendo R2 o R5.
+
+# ---------------------------------------------------------------------------
+# R1. Aplicabilidad
+# Si la plaga P es controlada por A según la relación R, la consulta cae en la
+# ventana de temperatura y de humedad, y la evidencia es Alta, entonces A es
+# altamente recomendado para P.
+# ---------------------------------------------------------------------------
+R1_Aplicabilidad:
+Plaga(?p) ^ AgenteBiocontrol(?a) ^ RelacionBiocontrol(?r) ^ Consulta(?q) ^
+esControladaPor(?p, ?a) ^ involucraPlaga(?r, ?p) ^ involucraAgente(?r, ?a) ^
+consultaPlaga(?q, ?p) ^ tieneCondicion(?r, ?c) ^
+temperaturaMin(?c, ?tmin) ^ temperaturaMax(?c, ?tmax) ^ temperaturaActual(?q, ?t) ^
+swrlb:greaterThanOrEqual(?t, ?tmin) ^ swrlb:lessThanOrEqual(?t, ?tmax) ^
+humedadMin(?c, ?hmin) ^ humedadMax(?c, ?hmax) ^ humedadActual(?q, ?h) ^
+swrlb:greaterThanOrEqual(?h, ?hmin) ^ swrlb:lessThanOrEqual(?h, ?hmax) ^
+tieneNivelEvidencia(?r, "Alta")
+-> altamenteRecomendadoPara(?a, ?p)
+
+# ---------------------------------------------------------------------------
+# R2. Precaución
+# La misma ventana, con evidencia Media o Baja, produce una recomendación
+# potencial y no una recomendación alta. La nota de precaución la redacta
+# el motor al explicar la regla.
+# ---------------------------------------------------------------------------
+R2_Precaucion_Media:
+Plaga(?p) ^ AgenteBiocontrol(?a) ^ RelacionBiocontrol(?r) ^ Consulta(?q) ^
+esControladaPor(?p, ?a) ^ involucraPlaga(?r, ?p) ^ involucraAgente(?r, ?a) ^
+consultaPlaga(?q, ?p) ^ tieneCondicion(?r, ?c) ^
+temperaturaMin(?c, ?tmin) ^ temperaturaMax(?c, ?tmax) ^ temperaturaActual(?q, ?t) ^
+swrlb:greaterThanOrEqual(?t, ?tmin) ^ swrlb:lessThanOrEqual(?t, ?tmax) ^
+humedadMin(?c, ?hmin) ^ humedadMax(?c, ?hmax) ^ humedadActual(?q, ?h) ^
+swrlb:greaterThanOrEqual(?h, ?hmin) ^ swrlb:lessThanOrEqual(?h, ?hmax) ^
+tieneNivelEvidencia(?r, "Media")
+-> potencialmenteRecomendadoPara(?a, ?p)
+
+R2_Precaucion_Baja:
+Plaga(?p) ^ AgenteBiocontrol(?a) ^ RelacionBiocontrol(?r) ^ Consulta(?q) ^
+esControladaPor(?p, ?a) ^ involucraPlaga(?r, ?p) ^ involucraAgente(?r, ?a) ^
+consultaPlaga(?q, ?p) ^ tieneCondicion(?r, ?c) ^
+temperaturaMin(?c, ?tmin) ^ temperaturaMax(?c, ?tmax) ^ temperaturaActual(?q, ?t) ^
+swrlb:greaterThanOrEqual(?t, ?tmin) ^ swrlb:lessThanOrEqual(?t, ?tmax) ^
+humedadMin(?c, ?hmin) ^ humedadMax(?c, ?hmax) ^ humedadActual(?q, ?h) ^
+swrlb:greaterThanOrEqual(?h, ?hmin) ^ swrlb:lessThanOrEqual(?h, ?hmax) ^
+tieneNivelEvidencia(?r, "Baja")
+-> potencialmenteRecomendadoPara(?a, ?p)
+
+# ---------------------------------------------------------------------------
+# R3. Laguna de conocimiento
+# Requiere el axioma de cierre PlagaSinAgenteDocumentado, calculado al construir
+# la ontología para las plagas que no tienen ninguna RelacionBiocontrol.
+# ---------------------------------------------------------------------------
+R3_LagunaConocimiento:
+Plaga(?p) ^ Cultivo(?c) ^ afectaA(?p, ?c) ^ PlagaSinAgenteDocumentado(?p)
+-> tieneLagunaEn(?p, ?c)
+
+# ---------------------------------------------------------------------------
+# R4. Incompatibilidad
+# Si una restricción de R tiene el mismo código de práctica que la consulta,
+# la relación queda marcada como RestriccionActiva. No borra la evidencia:
+# advierte que la práctica declarada compromete el uso.
+# ---------------------------------------------------------------------------
+R4_Incompatibilidad:
+RelacionBiocontrol(?r) ^ Restriccion(?res) ^ Consulta(?q) ^
+tieneRestriccion(?r, ?res) ^ codigoPractica(?res, ?cod) ^ declaraPractica(?q, ?cod)
+-> RestriccionActiva(?r)
+
+# ---------------------------------------------------------------------------
+# R5. Trazabilidad
+# Toda recomendación inferida arrastra la fuente principal de su relación.
+# Se usa trazadoPor, sin dominio, para no reclasificar al agente como relación.
+# En la API, ese mismo enlace es el campo "fuente" de la conclusión.
+# ---------------------------------------------------------------------------
+R5_Trazabilidad_Alta:
+RelacionBiocontrol(?r) ^ FuenteEvidencia(?f) ^ AgenteBiocontrol(?a) ^ Plaga(?p) ^
+fuentePrincipal(?r, ?f) ^ involucraAgente(?r, ?a) ^ involucraPlaga(?r, ?p) ^
+altamenteRecomendadoPara(?a, ?p)
+-> trazadoPor(?a, ?f)
+
+R5_Trazabilidad_Potencial:
+RelacionBiocontrol(?r) ^ FuenteEvidencia(?f) ^ AgenteBiocontrol(?a) ^ Plaga(?p) ^
+fuentePrincipal(?r, ?f) ^ involucraAgente(?r, ?a) ^ involucraPlaga(?r, ?p) ^
+potencialmenteRecomendadoPara(?a, ?p)
+-> trazadoPor(?a, ?f)
